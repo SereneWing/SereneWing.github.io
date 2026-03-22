@@ -3,41 +3,78 @@
 ## 1. 项目概述
 
 ### 1.1 项目名称
-SereneWing GitHub Pages
+AI编码项目 (AI Coding Project)
 
 ### 1.2 项目类型
 个人网站（GitHub Pages）
 
 ### 1.3 核心功能
 - **游戏模块** (`content/games/`)：西游记主题的交互式HTML5游戏
-- **博客模块** (`content/blog/`)：文章和写作内容（计划中）
+- **博客模块** (`content/blog/`)：使用Markdown渲染的文章展示
+- **在线工具** (`content/tools/`)：实用的在线开发工具
+- **百科** (`content/wiki/`)：AI编码知识库
 
 ### 1.4 目标用户
-西游记爱好者、休闲游戏玩家
+AI编程爱好者、前端开发者、学习者
 
 ---
 
-## 2. 主题规范
+## 2. 主题规范 - GitHub 浅色风格
 
 ### 2.1 颜色规范
 
 | 颜色 | 色值 | 用途 |
 |------|------|------|
-| 主色 | `#FFD700` | 金色，用于强调和边框 |
-| 背景色 | `#0a0a2e` | 深蓝背景 |
-| 次级背景 | `#1a1a4e` | 次级区域背景 |
-| 文字色 | `#ffffff` | 白色文字 |
-| 边框色 | `#FFD700` | 金色边框 |
+| 背景色 | `#ffffff` | 白色主背景 |
+| 次级背景 | `#f6f8fa` | 浅灰背景 |
+| 边框色 | `#d0d7de` | 灰边框 |
+| 文字色 | `#1f2328` | 深灰文字 |
+| 次要文字 | `#656d76` | 中灰文字 |
+| 链接色 | `#0969da` | 蓝色链接 |
+| 强调色 | `#0969da` | 蓝色强调 |
 
 ### 2.2 CSS变量（必需）
 
 ```css
 :root {
-    --color-primary: #FFD700;       /* 金色 */
-    --color-bg: #0a0a2e;           /* 深蓝背景 */
-    --color-bg-secondary: #1a1a4e; /* 次级背景 */
-    --color-text: #ffffff;         /* 白色文字 */
-    --color-border: #FFD700;       /* 金色边框 */
+    /* Colors */
+    --color-canvas-default: #ffffff;
+    --color-canvas-subtle: #f6f8fa;
+    --color-canvas-inset: #f6f8fa;
+    --color-border-default: #d0d7de;
+    --color-border-muted: #d8dee4;
+    --color-fg-default: #1f2328;
+    --color-fg-muted: #656d76;
+    --color-fg-subtle: #8c959f;
+    --color-accent-fg: #0969da;
+    --color-accent-emphasis: #0969da;
+    --color-accent-muted: #ddf4ff;
+    
+    /* Typography */
+    --font-sm: 12px;
+    --font-md: 14px;
+    --font-lg: 16px;
+    --font-xl: 20px;
+    --font-2xl: 24px;
+    --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 24px;
+    --space-2xl: 32px;
+    --space-3xl: 48px;
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 0 rgba(31, 35, 40, 0.04);
+    --shadow-md: 0 3px 6px rgba(140, 149, 159, 0.15);
 }
 ```
 
@@ -56,31 +93,46 @@ serenewing.github.io/
 ├── AI_START.md                    # AI入口点
 ├── SPEC.md                        # 本文件 - 项目规格说明
 ├── README.md                      # 人类可读文档
-├── index.html                     # 首页（重定向）
+├── index.html                     # 首页
 ├── CNAME                          # 自定义域名
+│
+├── css/
+│   └── style.css                  # 统一基础样式（GitHub风格）
 │
 ├── ai_skills/                     # AI技能目录
 │   ├── README.md
 │   ├── skill-01-*.md
-│   ├── skill-02-*.md
 │   └── ...
 │
 └── content/                       # 内容目录
+    │
     ├── index.html                 # 主内容页
     │
-    ├── games/                     # 🎮 游戏模块
-    │   ├── SPEC.md                # 游戏模块规格
+    ├── games/                     # 游戏模块
+    │   ├── SPEC.md
+    │   ├── README.md
+    │   ├── index.html
     │   ├── sun-wukong-heaven/
-    │   │   ├── SPEC.md            # 详细规格
-    │   │   ├── README.md
-    │   │   └── index.html
     │   └── journey-to-heaven/
-    │       ├── SPEC.md            # 详细规格
-    │       ├── README.md
-    │       └── index.html
     │
-    └── blog/                      # 📝 博客模块
-        └── SPEC.md                # 博客模块规格
+    ├── blog/                      # 博客模块
+    │   ├── SPEC.md
+    │   ├── README.md
+    │   ├── index.html
+    │   ├── blog.css
+    │   └── articles/
+    │
+    ├── tools/                     # 在线工具模块
+    │   ├── SPEC.md
+    │   ├── README.md
+    │   ├── index.html
+    │   ├── json-formatter/
+    │   └── encoder/
+    │
+    └── wiki/                      # 百科模块
+        ├── SPEC.md
+        ├── README.md
+        └── index.html
 ```
 
 ---
@@ -90,26 +142,51 @@ serenewing.github.io/
 | 模块 | 状态 | 最后更新 | 备注 |
 |------|------|----------|------|
 | `content/games/` | 🟢 活跃 | 2026-03-22 | 2个游戏开发中 |
-| `content/blog/` | 🟡 计划中 | - | 未开始 |
+| `content/blog/` | 🟢 活跃 | 2026-03-23 | Markdown渲染文章 |
+| `content/tools/` | 🟢 活跃 | 2026-03-23 | 2个工具可用 |
+| `content/wiki/` | 🟡 计划中 | 2026-03-23 | 百科内容建设中 |
 
 ---
 
 ## 5. 游戏模块
 
-### 5.1 游戏项目
-
-| 游戏 | 状态 | 描述 |
-|------|------|------|
-| `sun-wukong-heaven/` | 🟢 活跃 | 孙悟空在南天门自由飞翔 |
-| `journey-to-heaven/` | 🟢 活跃 | 穿越天宫，躲避敌人 |
-
-> **规格说明**：详见各子目录的 `SPEC.md`
+> **规格说明**：详见 `content/games/SPEC.md`
 
 ---
 
-## 6. 开发规范
+## 6. 在线工具模块
 
-### 6.1 命名规范
+> **规格说明**：详见 `content/tools/SPEC.md`
+
+### 6.1 工具列表
+
+| 工具 | 状态 | 描述 |
+|------|------|------|
+| JSON格式化 | 🟢 可用 | JSON解析、验证、格式化 |
+| 编解码器 | 🟢 可用 | Base64、URL编码等 |
+
+---
+
+## 7. 博客模块
+
+> **规格说明**：详见 `content/blog/SPEC.md`
+
+### 7.1 技术方案
+- 使用 **marked.js** 渲染 Markdown
+- 使用 **highlight.js** 代码高亮
+- 文章内嵌于 HTML 中
+
+---
+
+## 8. 百科模块
+
+> **规格说明**：详见 `content/wiki/SPEC.md`
+
+---
+
+## 9. 开发规范
+
+### 9.1 命名规范
 
 | 类型 | 规范 | 示例 |
 |------|------|------|
@@ -118,23 +195,30 @@ serenewing.github.io/
 | ID | camelCase | `gameContainer` |
 | 变量/函数 | camelCase | `initGame()`, `scoreValue` |
 
-### 6.2 HTML要求
+### 9.2 HTML要求
 
-- 语义标签：`<main>`, `<nav>`, `<section>`, `<article>`
+- 语义标签：`<main>`, `<nav>`, `<section>`, `<article>`, `<header>`, `<footer>`
 - 必需meta标签：
   ```html
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   ```
 
-### 6.3 JavaScript标准
+### 9.3 统一样式
+
+所有页面必须使用统一的 CSS：
+```html
+<link rel="stylesheet" href="../../css/style.css">
+```
+
+### 9.4 JavaScript标准
 
 - 优先使用原生JS
-- 外部库仅通过CDN引入
+- 外部库通过CDN引入
 - 动画使用 `requestAnimationFrame`
 - 减少全局变量污染
 
-### 6.4 资源管理
+### 9.5 资源管理
 
 - **图片**：压缩，优先使用WebP
 - **音频**：单个文件最大5MB
@@ -143,9 +227,9 @@ serenewing.github.io/
 
 ---
 
-## 7. SPEC文件规范
+## 10. SPEC文件规范
 
-### 7.1 层级结构
+### 10.1 层级结构
 
 | 文件 | 用途 |
 |------|------|
@@ -154,7 +238,7 @@ serenewing.github.io/
 | `{module}/SPEC.md` | 模块规格说明 |
 | `{submodule}/SPEC.md` | 详细规格说明 |
 
-### 7.2 编写规则
+### 10.2 编写规则
 
 - **SPEC.md标题使用中文**，内容使用中文
 - **SPEC.md定义功能规格**，AI编码时必须遵循
@@ -162,14 +246,14 @@ serenewing.github.io/
 
 ---
 
-## 8. 验证清单
+## 11. 验证清单
 
 代码修改后验证：
 
 - [ ] README.md已同步更新
 - [ ] SPEC.md已更新（如有功能变化）
 - [ ] 所有资源路径正确
-- [ ] CSS使用CSS变量（无硬编码颜色）
+- [ ] CSS使用统一的基础样式
 - [ ] 无断链或缺失资源
 - [ ] HTML语义化
 - [ ] 中文内容使用 `lang="zh-CN"`
@@ -177,9 +261,10 @@ serenewing.github.io/
 
 ---
 
-## 9. 核心原则
+## 12. 核心原则
 
-1. **文档同步**：任何代码变更 → 必须更新README.md
-2. **SPEC遵循**：编码时遵循SPEC.md以确保满足需求
-3. **简洁性**：AI文件保持简洁，详细说明放在README.md
-4. **自包含**：每个模块独立运行（无跨目录引用）
+1. **统一风格**：所有页面使用相同的CSS基础样式
+2. **文档同步**：任何代码变更 → 必须更新README.md
+3. **SPEC遵循**：编码时遵循SPEC.md以确保满足需求
+4. **简洁性**：AI文件保持简洁，详细说明放在README.md
+5. **自包含**：每个模块独立运行

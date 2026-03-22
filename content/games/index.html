@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏 - AI编码项目</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="../../" class="site-logo">
+                <span>⚡</span>
+                <span>AI编码项目</span>
+            </a>
+            <nav class="nav">
+                <a href="./" class="nav-link active">
+                    <span class="nav-icon">🎮</span>
+                    <span>游戏</span>
+                </a>
+                <a href="../blog/" class="nav-link">
+                    <span class="nav-icon">📝</span>
+                    <span>博客</span>
+                </a>
+                <a href="../tools/" class="nav-link">
+                    <span class="nav-icon">🔧</span>
+                    <span>工具</span>
+                </a>
+                <a href="../wiki/" class="nav-link">
+                    <span class="nav-icon">📖</span>
+                    <span>百科</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="page-title">🎮 游戏</h1>
+                <p class="page-description">西游记主题的 HTML5 小游戏</p>
+            </header>
+
+            <div class="card-grid">
+                <a href="./sun-wukong-heaven/" class="card">
+                    <div class="card-icon">🐒</div>
+                    <h2 class="card-title">孙悟空大闹天宫</h2>
+                    <p class="card-description">
+                        孙悟空在南天门前自由飞翔，点击互动触发"哎呀"音效和乾坤圈光标效果。
+                    </p>
+                    <div class="card-meta">
+                        <span class="status-badge status-new">NEW</span>
+                    </div>
+                </a>
+
+                <a href="./journey-to-heaven/" class="card">
+                    <div class="card-icon">🏯</div>
+                    <h2 class="card-title">Journey to Heaven</h2>
+                    <p class="card-description">
+                        控制孙悟空躲避天兵天将的攻击，穿越天宫到达目的地。
+                    </p>
+                    <div class="card-meta">
+                        <span>经典大闹天宫玩法</span>
+                    </div>
+                </a>
+            </div>
+
+            <section class="mt-3xl">
+                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">游戏说明</h2>
+                <div class="code-block">
+                    <p class="text-muted">所有游戏均为纯 HTML5 + JavaScript 开发，无需安装任何插件。</p>
+                    <p class="text-muted mt-md">直接在浏览器中打开即可游玩，支持桌面和移动设备。</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>
+                <a href="../../">AI编码项目</a> · 
+                由 <a href="https://github.com/SereneWing" target="_blank">SereneWing</a> 构建
+            </p>
+        </div>
+    </footer>
+
+    <style>
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 9999px;
+            background-color: var(--color-canvas-inset);
+            color: var(--color-fg-muted);
+        }
+        .status-new {
+            background-color: #dcfce7;
+            color: #15803d;
+        }
+    </style>
+</body>
+</html>

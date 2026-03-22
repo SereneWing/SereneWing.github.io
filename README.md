@@ -1,66 +1,40 @@
-# SereneWing GitHub Pages
+# AI编码项目
 
-A personal website hosted on GitHub Pages.
+一个探索 AI 辅助开发的实践项目，采用 SPEC 驱动开发模式，AI 可以直接参与项目开发。
 
-## 🎯 Project Goals
+## 项目模块
 
-- AI-assisted development for efficient solo work
-- Sustainable and maintainable codebase
-- Clean architecture with good separation of concerns
-- Consistent styling across all pages
+| 模块 | 说明 | 链接 |
+|------|------|------|
+| 游戏 | 西游记主题的 HTML5 小游戏 | [进入](content/games/) |
+| 博客 | AI编程、项目开发和个人思考 | [进入](content/blog/) |
+| 工具 | JSON格式化、编解码等在线工具 | [进入](content/tools/) |
+| 百科 | AI编码知识库 | [进入](content/wiki/) |
 
-## 📚 Project Structure
+## 项目特点
 
-```
-serenewing.github.io/
-├── index.html           # Homepage
-├── AI_START.md          # AI entry point (START HERE for AI)
-├── AI_GUIDE.md          # Project overview (for AI)
-├── README.md            # Human-readable docs
-├── CNAME                # Custom domain config
-│
-├── games/               # 🎮 Game projects
-│   ├── AI_GUIDE.md      # Game development guide
-│   ├── sun-wukong-heaven/
-│   │   └── README.md
-│   └── journey-to-heaven/
-│       └── README.md
-│
-└── blog/                # 📝 Blog (planned)
-    └── AI_GUIDE.md      # Blog writing guide
-```
+- 🤝 **AI 友好** - 专为 AI 参与项目开发而设计
+- 📋 **SPEC 驱动** - 分层规格说明文档
+- ⚡ **实用工具** - 无需安装即可使用
+- 📚 **知识积累** - 持续积累 AI 编程知识
 
-## 🎨 Design Philosophy
+## 技术栈
 
-- **Theme**: Dark background with gold accents (神秘深蓝 + 金色点缀)
-- **Consistency**: Shared visual language across all pages
-- **Modularity**: Each game is self-contained
-- **Performance**: Lightweight, fast loading
+- **前端**: HTML5, CSS3, JavaScript
+- **样式**: GitHub 浅色风格 (CSS Variables)
+- **Markdown**: marked.js
+- **代码高亮**: highlight.js
 
-## 🚀 Development
+## 快速开始
 
-### Adding a New Game
+1. 克隆项目
+2. 直接在浏览器中打开 `index.html`
+3. 或部署到 GitHub Pages
 
-1. Create a new directory under `games/`
-2. Add `index.html` as the game entry point
-3. Create `README.md` with game description
-4. Follow the conventions in `AI_GUIDE.md`
+## AI 入口
 
-### Documentation Sync
+AI 参与者请阅读 [AI_START.md](AI_START.md) 了解项目规范。
 
-This project uses a dual-documentation strategy:
-- **README.md**: Detailed explanations for humans
-- **AI_GUIDE.md**: Concise instructions for AI assistants
+## 许可证
 
-Both documents must be updated whenever code changes.
-
-## 🎮 Current Projects
-
-### Journey to Heaven (大闹天宫)
-A Journey to the West themed mini-game where Sun Wukong storms the Heavenly Palace.
-
-**Status**: 🟢 Playable
-
-## 📝 License
-
-MIT License 
+[MIT License](LICENSE)

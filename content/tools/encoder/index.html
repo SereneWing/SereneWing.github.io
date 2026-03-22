@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编解码器 - AI编码项目</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="../../../" class="site-logo">
+                <span>⚡</span>
+                <span>AI编码项目</span>
+            </a>
+            <nav class="nav">
+                <a href="../../games/" class="nav-link">
+                    <span class="nav-icon">🎮</span>
+                    <span>游戏</span>
+                </a>
+                <a href="../../blog/" class="nav-link">
+                    <span class="nav-icon">📝</span>
+                    <span>博客</span>
+                </a>
+                <a href="../" class="nav-link active">
+                    <span class="nav-icon">🔧</span>
+                    <span>工具</span>
+                </a>
+                <a href="../../wiki/" class="nav-link">
+                    <span class="nav-icon">📖</span>
+                    <span>百科</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="page-title">编解码器</h1>
+                <p class="page-description">Base64、URL编码等多种编码格式的转换工具</p>
+            </header>
+
+            <div class="form-group">
+                <label class="form-label">编码类型</label>
+                <select id="encoderType" class="form-select" style="max-width: 300px;" onchange="processEncoding()">
+                    <option value="base64">Base64</option>
+                    <option value="url">URL编码</option>
+                    <option value="html">HTML实体</option>
+                    <option value="unicode">Unicode转义</option>
+                </select>
+            </div>
+
+            <div class="tool-container">
+                <div class="tool-input">
+                    <div class="tool-label">
+                        <span>输入</span>
+                        <button class="btn btn-sm" onclick="pasteFromClipboard()">📋 粘贴</button>
+                    </div>
+                    <textarea 
+                        id="encoderInput" 
+                        class="form-textarea" 
+                        placeholder="在此输入需要编码/解码的文本..."
+                        oninput="processEncoding()"
+                    ></textarea>
+                </div>
+
+                <div class="tool-output">
+                    <div class="tool-label">
+                        <span>输出</span>
+                        <button class="btn btn-sm" onclick="copyOutput()">📋 复制</button>
+                    </div>
+                    <textarea 
+                        id="encoderOutput" 
+                        class="form-textarea" 
+                        style="min-height: 300px; flex-grow: 1; background-color: var(--color-canvas-inset);"
+                        readonly
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="tool-actions" style="margin-top: var(--space-xl);">
+                <button class="btn btn-primary" onclick="encode()">🔒 编码</button>
+                <button class="btn btn-primary" onclick="decode()">🔓 解码</button>
+                <button class="btn" onclick="clearAll()">🗑️ 清空</button>
+                <button class="btn" onclick="swapInputOutput()">🔄 交换</button>
+            </div>
+
+            <div id="errorMessage" class="mt-lg" style="display: none;">
+                <div class="code-block" style="border-color: var(--color-danger-fg); background-color: #ffebe9;">
+                    <span style="color: var(--color-danger-fg);">❌ 错误: </span>
+                    <span id="errorText"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>
+                <a href="../../">AI编码项目</a> · 
+                由 <a href="https://github.com/SereneWing" target="_blank">SereneWing</a> 构建
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function getEncoderType() {
+            return document.getElementById('encoderType').value;
+        }
+
+        function encode() {
+            const input = document.getElementById('encoderInput').value;
+            const type = getEncoderType();
+            const output = document.getElementById('encoderOutput');
+            const errorDiv = document.getElementById('errorMessage');
+
+            errorDiv.style.display = 'none';
+
+            try {
+                switch (type) {
+                    case 'base64':
+                        output.value = btoa(unescape(encodeURIComponent(input)));
+                        break;
+                    case 'url':
+                        output.value = encodeURIComponent(input);
+                        break;
+                    case 'html':
+                        output.value = input
+                            .replace(/&/g, '&')
+                            .replace(/</g, '<')
+                            .replace(/>/g, '>')
+                            .replace(/"/g, '"')
+                            .replace(/'/g, '&#039;');
+                        break;
+                    case 'unicode':
+                        output.value = input.split('').map(c => 
+                            c.charCodeAt(0) > 127 ? '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0') : c
+                        ).join('');
+                        break;
+                }
+            } catch (e) {
+                document.getElementById('errorText').textContent = e.message;
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        function decode() {
+            const input = document.getElementById('encoderInput').value;
+            const type = getEncoderType();
+            const output = document.getElementById('encoderOutput');
+            const errorDiv = document.getElementById('errorMessage');
+
+            errorDiv.style.display = 'none';
+
+            try {
+                switch (type) {
+                    case 'base64':
+                        output.value = decodeURIComponent(escape(atob(input)));
+                        break;
+                    case 'url':
+                        output.value = decodeURIComponent(input);
+                        break;
+                    case 'html':
+                        output.value = input
+                            .replace(/&/g, '&')
+                            .replace(/</g, '<')
+                            .replace(/>/g, '>')
+                            .replace(/"/g, '"')
+                            .replace(/&#039;/g, "'");
+                        break;
+                    case 'unicode':
+                        output.value = input.replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => 
+                            String.fromCharCode(parseInt(hex, 16))
+                        );
+                        break;
+                }
+            } catch (e) {
+                document.getElementById('errorText').textContent = e.message;
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        function processEncoding() {
+            // Auto-encode on input change (optional)
+        }
+
+        function clearAll() {
+            document.getElementById('encoderInput').value = '';
+            document.getElementById('encoderOutput').value = '';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function swapInputOutput() {
+            const input = document.getElementById('encoderInput');
+            const output = document.getElementById('encoderOutput');
+            const temp = input.value;
+            input.value = output.value;
+            output.value = temp;
+        }
+
+        async function copyOutput() {
+            const output = document.getElementById('encoderOutput');
+            try {
+                await navigator.clipboard.writeText(output.value);
+                alert('已复制到剪贴板！');
+            } catch (e) {
+                alert('复制失败');
+            }
+        }
+
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('encoderInput').value = text;
+            } catch (e) {
+                alert('粘贴失败');
+            }
+        }
+    </script>
+</body>
+</html>
