@@ -8,18 +8,17 @@
 
 When you start working on this project, read this file first. This is the entry point that guides your workflow. The document hierarchy is:
 
-AI_START.md (entry point) -> AI_GUIDE.md (root project overview) -> {module}/AI_GUIDE.md (module-specific guide)
+AI_START.md (entry point) -> SPEC.md (root project specifications) -> {module}/SPEC.md (module specifications) -> {submodule}/SPEC.md (detailed specifications)
 
 Follow the numbered sections below in order. Begin with Section 1 (Quick Navigation) to understand the project structure, then Section 2 (Core Rules) to understand the fundamental principles, and finally Section 3 (SKILL SELECTION) to determine which skill to follow based on your task.
-
 
 ---
 
 ## 1. Quick Navigation
 
-- AI_GUIDE.md : Project overview, modules, progress
-- content/games/AI_GUIDE.md : Games module guide
-- content/blog/AI_GUIDE.md : Blog module guide
+- SPEC.md : Project specifications, modules, progress
+- content/games/SPEC.md : Games module specifications
+- content/blog/SPEC.md : Blog module specifications
 - README.md : Human-readable documentation
 - ai_skills/ : AI skills directory (detailed guidance for each scenario)
 
@@ -30,15 +29,16 @@ Follow the numbered sections below in order. Begin with Section 1 (Quick Navigat
 The fundamental principles for this project are organized into four categories:
 
 ### 2.1 File Conventions
-2.1.1 **English Content**: AI file content (AI_START.md, AI_GUIDE.md, ai_skills/*.md) must use English names (excluding quoted content)  
+2.1.1 **English Content**: AI file content (AI_START.md, SPEC.md, ai_skills/*.md) must use English names (excluding quoted content)  
 2.1.2 **English Names**: All filenames and file paths must use English names; when creating new files, also use English names (applies to all file types)
 
 ### 2.2 Documentation Rules
 2.2.1 **Documentation Sync**: Any code change MUST update README.md  
 2.2.2 **Concise AI Files**: Detailed content goes in README.md  
+2.2.3 **SPEC Files**: SPEC.md files define functional specifications. AI must follow SPEC.md when coding. If a subdirectory has its own SPEC.md, the parent SPEC.md should reference "详见xxx/SPEC.md"
 
 ### 2.3 Structure Rules
-2.3.1 **Layered Structure**: AI_START -> AI_GUIDE -> Module AI_GUIDE  
+2.3.1 **Layered Structure**: AI_START -> SPEC.md -> Module SPEC.md -> Submodule SPEC.md  
 2.3.2 **Self-Contained**: Each module/project operates independently  
 
 ### 2.4 Formatting Rules

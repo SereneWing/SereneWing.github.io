@@ -153,8 +153,3 @@ sun-wukong-heaven/
 ├── README.md       # 用户文档
 └── AI_GUIDE.md     # AI开发指南
 ```
-
----
-
-*规格版本: 1.0*
-*最后更新: 2026-03-23*

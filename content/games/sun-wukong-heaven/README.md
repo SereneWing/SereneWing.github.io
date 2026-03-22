@@ -1,70 +1,70 @@
-# 孙悟空大闹天宫 - 南天门
+# Sun Wukong at the Heavenly Gate
 
-一个精美的西游记主题互动小游戏。
+An exquisite interactive game inspired by the classic Chinese novel "Journey to the West".
 
-## 🎮 游戏介绍
+## 🎮 Game Introduction
 
-在游戏中，孙悟空（🐒）会在南天门前自由飞翔，玩家可以点击孙悟空触发有趣的互动效果。
+In this game, Sun Wukong (🐒) flies freely in front of the Heavenly Gate. Players can click on Sun Wukong to trigger various interactive effects.
 
-## 🕹️ 如何游玩
+## 🕹️ How to Play
 
-1. 打开游戏即可看到孙悟空在南天门前飞来飞去
-2. 点击 **"背景音乐"** 按钮开启大闹天宫风格背景音乐
-3. **点击孙悟空** 触发以下效果：
-   - 发出"哎呀！"的可爱叫声
-   - 显示受伤表情动画
-   - 鼠标光标变成金光闪闪的乾坤圈（持续3秒）
-   - 孙悟空会跳到新位置继续飞翔
-   - 周围出现魔法光环效果
+1. Open the game to see Sun Wukong flying in front of the Heavenly Gate
+2. Click **"Background Music"** button to enable Journey to the West style background music
+3. **Click on Sun Wukong** to trigger the following effects:
+   - Play a cute "Ouch!" sound
+   - Show hurt expression animation
+   - Cursor changes to a golden Qiankun Ring (persists for 3 seconds)
+   - Sun Wukong jumps to a new position and continues flying
+   - Magic aura effects appear around him
 
-## ✨ 特色功能
+## ✨ Features
 
-- **自由飞翔**：孙悟空会随机在南天门前的天空中自由飞行
-- **精美场景**：包含南天门、灯笼、云彩、星星、仙鹤等元素
-- **动态效果**：
-  - 闪烁的星星
-  - 飘动的云彩
-  - 摇曳的灯笼
-  - 飞舞的萤火虫
-  - 飞过的仙鹤
-- **互动反馈**：
-  - 点击音效
-  - 表情气泡
-  - 魔法光环
-  - 乾坤圈光标
+- **Free Flight**: Sun Wukong randomly flies in the sky in front of the Heavenly Gate
+- **Beautiful Scene**: Includes Heavenly Gate, lanterns, clouds, stars, and cranes
+- **Dynamic Effects**:
+  - Twinkling stars
+  - Drifting clouds
+  - Swinging lanterns
+  - Dancing fireflies
+  - Flying cranes
+- **Interactive Feedback**:
+  - Click sound effects
+  - Expression bubbles
+  - Magic aura
+  - Qiankun Ring cursor
 
-## 🎨 视觉设计
+## 🎨 Visual Design
 
-- **主题色**：金色 (#FFD700) + 深紫色天空
-- **风格**：中国古典神话风格
-- **动画**：流畅的飞行、闪烁、飘动效果
+- **Theme Colors**: Gold (#FFD700) + Dark purple sky
+- **Style**: Classical Chinese mythology style
+- **Animations**: Smooth flight, twinkling, and drifting effects
 
-## 🔊 音频
+## 🔊 Audio
 
-- 背景音乐：大闹天宫风格中国风音乐
-- 点击音效："哎呀"叫声
+- Background Music: Journey to the West style Chinese music
+- Click Sound: "Ouch!" voice
 
-## 📁 文件结构
+## 📁 File Structure
 
 ```
 sun-wukong-heaven/
-├── index.html   # 游戏主文件
-└── README.md    # 说明文档
+├── index.html   # Game main file
+└── README.md    # This file
 ```
 
-## 🛠️ 技术实现
+## 🛠️ Technical Implementation
 
-- 纯 HTML5 + CSS3 + JavaScript
-- CSS 动画实现流畅视觉效果
-- Web Audio API 生成音效
-- SVG Data URI 实现自定义光标
+- Pure HTML5 + CSS3 + JavaScript
+- CSS animations for smooth visual effects
+- Web Audio API for sound effects
+- SVG Data URI for custom cursor
 
-## 💡 提示
+## 💡 Tips
 
-- 点击孙悟空后，乾坤圈光标会持续3秒后自动恢复
-- 可以多次点击孙悟空，每次都会有不同位置的跳跃
-- 建议开启背景音乐获得更好的游戏体验
+- After clicking Sun Wukong, the Qiankun Ring cursor will automatically restore after 3 seconds
+- You can click Sun Wukong multiple times, each time he will jump to a different position
+- Recommended to enable background music for a better experience
 
 ---
 
-*游戏灵感来源于中国古典名著《西游记》*
+*Game inspired by the classic Chinese novel "Journey to the West"*
