@@ -1,8 +1,8 @@
 # Blog Module Guide
 
-## 概述
+## Overview
 
-博客模块用于文章和写作内容。
+Blog module for articles and writing content.
 
 ### 主题
 

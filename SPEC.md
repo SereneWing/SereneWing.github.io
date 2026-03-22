@@ -3,16 +3,16 @@
 ## 1. 项目概述
 
 ### 1.1 项目名称
-AI编码项目 (AI Coding Project)
+AI Coding Project
 
 ### 1.2 项目类型
-个人网站（GitHub Pages）
+Personal website (GitHub Pages)
 
 ### 1.3 核心功能
-- **游戏模块** (`content/games/`)：西游记主题的交互式HTML5游戏
-- **博客模块** (`content/blog/`)：使用Markdown渲染的文章展示
-- **在线工具** (`content/tools/`)：实用的在线开发工具
-- **百科** (`content/wiki/`)：AI编码知识库
+- **游戏模块** (`s/games/`)：西游记主题的交互式HTML5游戏
+- **博客模块** (`s/blog/`)：使用Markdown渲染的文章展示
+- **在线工具** (`s/tools/`)：实用的在线开发工具
+- **百科** (`s/wiki/`)：AI编码知识库
 
 ### 1.4 目标用户
 AI编程爱好者、前端开发者、学习者
@@ -90,46 +90,44 @@ AI编程爱好者、前端开发者、学习者
 ```
 serenewing.github.io/
 │
-├── AI_START.md                    # AI入口点
-├── SPEC.md                        # 本文件 - 项目规格说明
-├── README.md                      # 人类可读文档
-├── index.html                     # 首页
-├── CNAME                          # 自定义域名
+├── AI_START.md                    # AI entry point
+├── SPEC.md                        # This file - Project specifications
+├── README.md                      # Human-readable documentation
+├── index.html                     # Homepage
+├── CNAME                          # Custom domain
 │
 ├── css/
-│   └── style.css                  # 统一基础样式（GitHub风格）
+│   └── style.css                  # Unified base styles (GitHub style)
 │
-├── ai_skills/                     # AI技能目录
+├── ai_skills/                     # AI skills directory
 │   ├── README.md
 │   ├── skill-01-*.md
 │   └── ...
 │
-└── content/                       # 内容目录
+└── s/                            # Content directory
     │
-    ├── index.html                 # 主内容页
-    │
-    ├── games/                     # 游戏模块
+    ├── games/                     # Games module
     │   ├── SPEC.md
     │   ├── README.md
     │   ├── index.html
     │   ├── sun-wukong-heaven/
     │   └── journey-to-heaven/
     │
-    ├── blog/                      # 博客模块
+    ├── blog/                      # Blog module
     │   ├── SPEC.md
     │   ├── README.md
     │   ├── index.html
     │   ├── blog.css
-    │   └── articles/
+    │   └── 2026/
     │
-    ├── tools/                     # 在线工具模块
+    ├── tools/                     # Online tools module
     │   ├── SPEC.md
     │   ├── README.md
     │   ├── index.html
     │   ├── json-formatter/
     │   └── encoder/
     │
-    └── wiki/                      # 百科模块
+    └── wiki/                      # Wiki module
         ├── SPEC.md
         ├── README.md
         └── index.html
@@ -141,22 +139,22 @@ serenewing.github.io/
 
 | 模块 | 状态 | 最后更新 | 备注 |
 |------|------|----------|------|
-| `content/games/` | 🟢 活跃 | 2026-03-22 | 2个游戏开发中 |
-| `content/blog/` | 🟢 活跃 | 2026-03-23 | Markdown渲染文章 |
-| `content/tools/` | 🟢 活跃 | 2026-03-23 | 2个工具可用 |
-| `content/wiki/` | 🟡 计划中 | 2026-03-23 | 百科内容建设中 |
+| `s/games/` | 🟢 活跃 | 2026-03-22 | 2个游戏开发中 |
+| `s/blog/` | 🟢 活跃 | 2026-03-23 | Markdown渲染文章 |
+| `s/tools/` | 🟢 活跃 | 2026-03-23 | 2个工具可用 |
+| `s/wiki/` | 🟡 计划中 | 2026-03-23 | 百科内容建设中 |
 
 ---
 
 ## 5. 游戏模块
 
-> **规格说明**：详见 `content/games/SPEC.md`
+> **规格说明**：详见 `s/games/SPEC.md`
 
 ---
 
 ## 6. 在线工具模块
 
-> **规格说明**：详见 `content/tools/SPEC.md`
+> **规格说明**：详见 `s/tools/SPEC.md`
 
 ### 6.1 工具列表
 
@@ -169,7 +167,7 @@ serenewing.github.io/
 
 ## 7. 博客模块
 
-> **规格说明**：详见 `content/blog/SPEC.md`
+> **规格说明**：详见 `s/blog/SPEC.md`
 
 ### 7.1 技术方案
 - 使用 **marked.js** 渲染 Markdown
@@ -180,7 +178,7 @@ serenewing.github.io/
 
 ## 8. 百科模块
 
-> **规格说明**：详见 `content/wiki/SPEC.md`
+> **规格说明**：详见 `s/wiki/SPEC.md`
 
 ---
 

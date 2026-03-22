@@ -1,40 +1,40 @@
-# AI编码项目
+# AI Coding Project
 
-一个探索 AI 辅助开发的实践项目，采用 SPEC 驱动开发模式，AI 可以直接参与项目开发。
+An exploration project for AI-assisted development, using the SPEC-driven development methodology where AI can directly participate in project development.
 
-## 项目模块
+## Project Modules
 
-| 模块 | 说明 | 链接 |
-|------|------|------|
-| 游戏 | 西游记主题的 HTML5 小游戏 | [进入](content/games/) |
-| 博客 | AI编程、项目开发和个人思考 | [进入](content/blog/) |
-| 工具 | JSON格式化、编解码等在线工具 | [进入](content/tools/) |
-| 百科 | AI编码知识库 | [进入](content/wiki/) |
+| Module | Description | Link |
+|--------|-------------|------|
+| Games | HTML5 mini-games themed around Journey to the West | [Enter](s/games/) |
+| Blog | Articles about AI programming, project development and personal thoughts | [Enter](s/blog/) |
+| Tools | Online development tools including JSON formatter, encoder/decoder | [Enter](s/tools/) |
+| Wiki | AI coding knowledge base | [Enter](s/wiki/) |
 
-## 项目特点
+## Project Features
 
-- 🤝 **AI 友好** - 专为 AI 参与项目开发而设计
-- 📋 **SPEC 驱动** - 分层规格说明文档
-- ⚡ **实用工具** - 无需安装即可使用
-- 📚 **知识积累** - 持续积累 AI 编程知识
+- 🤝 **AI-Friendly** - Designed specifically for AI participation in project development
+- 📋 **SPEC-Driven** - Layered specification document system
+- ⚡ **Practical Tools** - Ready to use without installation
+- 📚 **Knowledge Accumulation** - Continuous accumulation of AI programming knowledge
 
-## 技术栈
+## Tech Stack
 
-- **前端**: HTML5, CSS3, JavaScript
-- **样式**: GitHub 浅色风格 (CSS Variables)
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Styles**: GitHub Light Theme (CSS Variables)
 - **Markdown**: marked.js
-- **代码高亮**: highlight.js
+- **Code Highlighting**: highlight.js
 
-## 快速开始
+## Quick Start
 
-1. 克隆项目
-2. 直接在浏览器中打开 `index.html`
-3. 或部署到 GitHub Pages
+1. Clone the project
+2. Open `index.html` directly in a browser
+3. Or deploy to GitHub Pages
 
-## AI 入口
+## AI Entry Point
 
-AI 参与者请阅读 [AI_START.md](AI_START.md) 了解项目规范。
+AI participants please read [AI_START.md](AI_START.md) for project specifications.
 
-## 许可证
+## License
 
 [MIT License](LICENSE)

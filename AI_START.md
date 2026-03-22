@@ -17,8 +17,8 @@ Follow the numbered sections below in order. Begin with Section 1 (Quick Navigat
 ## 1. Quick Navigation
 
 - SPEC.md : Project specifications, modules, progress
-- content/games/SPEC.md : Games module specifications
-- content/blog/SPEC.md : Blog module specifications
+- s/games/SPEC.md : Games module specifications
+- s/blog/SPEC.md : Blog module specifications
 - README.md : Human-readable documentation
 - ai_skills/ : AI skills directory (detailed guidance for each scenario)
 
