@@ -56,4 +56,4 @@ A Journey to the West themed mini-game where Sun Wukong storms the Heavenly Pala
 
 ## 📝 License
 
-GPL v3 License - 为了帮助大家应对AI危机，衍生作品必须开源
+GPL v3 License 

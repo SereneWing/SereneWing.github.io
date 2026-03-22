@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孙悟空大闹天宫 - 南天门</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+        }
+        
+        #gameContainer {
+            position: relative;
+            width: 1000px;
+            height: 700px;
+            background: linear-gradient(180deg, #0d0d2b 0%, #1a1a4a 30%, #2a2a6a 60%, #4a4a9a 100%);
+            border: 5px solid #ffd700;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.4);
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="none" stroke="%23FFD700" stroke-width="3"/><circle cx="16" cy="16" r="5" fill="%23FFD700"/></svg>') 16 16, auto;
+        }
+        
+        /* 星星 */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* 云朵 - 南天门中下方 */
+        .cloud {
+            position: absolute;
+            background: radial-gradient(ellipse, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: floatCloud 18s ease-in-out infinite;
+        }
+        @keyframes floatCloud {
+            0%, 100% { transform: translateX(0); opacity: 0.7; }
+            50% { transform: translateX(50px); opacity: 0.9; }
+        }
+        
+        /* 仙鹤 */
+        .crane {
+            position: absolute;
+            font-size: 26px;
+            opacity: 0.8;
+            animation: craneFly 20s linear infinite;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
+        }
+        @keyframes craneFly {
+            0% { transform: translateX(-80px) translateY(0); }
+            25% { transform: translateX(200px) translateY(-40px); }
+            50% { transform: translateX(500px) translateY(15px); }
+            75% { transform: translateX(750px) translateY(-25px); }
+            100% { transform: translateX(1100px) translateY(0); }
+        }
+        
+        /* 南天门 */
+        #nantianmen {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 420px;
+        }
+        
+        .gate { position: relative; width: 100%; height: 100%; }
+        
+        /* 屋顶 */
+        .roof {
+            position: absolute;
+            bottom: 290px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 420px;
+            height: 80px;
+            background: linear-gradient(180deg, #FFD700 0%, #DAA520 50%, #B8860B 100%);
+            clip-path: polygon(3% 100%, 0% 20%, 50% 0%, 100% 20%, 97% 100%);
+        }
+        
+        /* 屋脊 */
+        .roof-ridge {
+            position: absolute;
+            bottom: 360px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 380px;
+            height: 20px;
+            background: linear-gradient(180deg, #FFD700 0%, #DAA520 100%);
+            border-radius: 10px 10px 0 0;
+        }
+        
+        /* 屋脊装饰 - 居中排列 */
+        .ridge-deco {
+            position: absolute;
+            bottom: 375px;
+            font-size: 28px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+        }
+        
+        /* 门 */
+        .gate-body {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 340px;
+            height: 240px;
+            background: linear-gradient(180deg, #654321 0%, #3a2010 100%);
+            border: 6px solid #FFD700;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        /* 牌匾 */
+        .plaque {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 70px;
+            background: #1a1a1a;
+            border: 5px solid #FFD700;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            z-index: 5;
+        }
+        .plaque-text {
+            font-size: 32px;
+            color: #FFD700;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 10px;
+        }
+        
+        /* 门 */
+        .door {
+            position: absolute;
+            bottom: 0;
+            width: 80px;
+            height: 160px;
+            background: linear-gradient(180deg, #2a1500 0%, #1a0a00 100%);
+            border: 3px solid #8B4513;
+        }
+        .door.left { left: 85px; }
+        .door.right { right: 85px; }
+        
+        .stud {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle at 30% 30%, #FFD700 0%, #B8860B 100%);
+            border-radius: 50%;
+        }
+        
+        .ring {
+            position: absolute;
+            bottom: 70px;
+            width: 22px;
+            height: 22px;
+            border: 4px solid #B8860B;
+            border-radius: 50%;
+        }
+        .door.left .ring { left: 28px; }
+        .door.right .ring { right: 28px; }
+        
+        .guardian {
+            position: absolute;
+            top: 95px;
+            font-size: 44px;
+        }
+        .guardian.left { left: 95px; }
+        .guardian.right { right: 95px; }
+        
+        .pillar {
+            position: absolute;
+            bottom: 50px;
+            width: 32px;
+            height: 245px;
+            background: linear-gradient(90deg, #654321 0%, #A0522D 50%, #654321 100%);
+            border: 2px solid #4a3520;
+        }
+        .pillar.left { left: 50px; }
+        .pillar.right { right: 50px; }
+        
+        .steps {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            height: 45px;
+            background: linear-gradient(180deg, #8B7355 0%, #6B5344 100%);
+            border: 2px solid #4a3520;
+        }
+        
+        .lantern {
+            position: absolute;
+            bottom: 210px;
+            font-size: 32px;
+            animation: sway 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 200, 0, 0.9));
+        }
+        .lantern:nth-child(1) { left: 75px; }
+        .lantern:nth-child(2) { right: 75px; animation-delay: 1.5s; }
+        @keyframes sway {
+            0%, 100% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
+        }
+        
+        /* 孙悟空 */
+        #wukong {
+            position: absolute;
+            width: 85px;
+            height: 110px;
+            cursor: pointer;
+            z-index: 100;
+            filter: drop-shadow(4px 4px 8px rgba(0,0,0,0.6));
+        }
+        
+        .wukong-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: fly 4s ease-in-out infinite;
+        }
+        @keyframes fly {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .crown {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 25px;
+            background: linear-gradient(180deg, #FFD700 0%, #DAA520 50%, #B8860B 100%);
+            clip-path: polygon(10% 100%, 0% 0%, 25% 60%, 50% 0%, 75% 60%, 100% 0%, 90% 100%);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+        .crown::before {
+            content: '🔴';
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+        }
+        
+        .headband {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 38px;
+            height: 10px;
+            background: linear-gradient(180deg, #FFD700 0%, #B8860B 100%);
+            border-radius: 50%;
+            border: 2px solid #8B4513;
+        }
+        
+        .face {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 32px;
+            background: linear-gradient(180deg, #DEB887 0%, #D2B48C 100%);
+            border-radius: 50%;
+            border: 2px solid #8B4513;
+        }
+        
+        .eyes {
+            position: absolute;
+            top: 8px;
+            left: 5px;
+            right: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .eye {
+            width: 8px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+        }
+        .eye::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+        }
+        
+        .mouth {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 5px;
+            border-bottom: 2px solid #8B4513;
+            border-radius: 0 0 50% 50%;
+        }
+        
+        .armor {
+            position: absolute;
+            top: 38px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 38px;
+            background: linear-gradient(180deg, #8B0000 0%, #DC143C 50%, #8B0000 100%);
+            border: 3px solid #FFD700;
+            border-radius: 8px;
+        }
+        
+        .cape {
+            position: absolute;
+            top: 40px;
+            left: 3px;
+            width: 75px;
+            height: 50px;
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+            z-index: -1;
+            animation: capeWave 2s ease-in-out infinite;
+        }
+        @keyframes capeWave {
+            0%, 100% { transform: skewX(-3deg); }
+            50% { transform: skewX(3deg); }
+        }
+        
+        .legs {
+            position: absolute;
+            top: 73px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 38px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .leg {
+            width: 15px;
+            height: 20px;
+            background: linear-gradient(180deg, #8B4513 0%, #654321 100%);
+            border: 2px solid #FFD700;
+            border-radius: 3px;
+        }
+        
+        .staff {
+            position: absolute;
+            right: -12px;
+            top: 20px;
+            width: 8px;
+            height: 85px;
+            background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+        }
+        .staff::before, .staff::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 8px;
+            background: linear-gradient(180deg, #FFD700 0%, #B8860B 100%);
+            border-radius: 3px;
+        }
+        .staff::before { top: -6px; }
+        .staff::after { bottom: -6px; }
+        
+        .wukong-hit .wukong-inner { animation: hurt 0.5s ease-out !important; }
+        @keyframes hurt {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(0.85) rotate(12deg); }
+            50% { transform: scale(1.1) rotate(-8deg); }
+            75% { transform: scale(0.9) rotate(8deg); }
+        }
+        
+        .bubble {
+            position: absolute;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            color: #e74c3c;
+            padding: 12px 22px;
+            border-radius: 18px;
+            font-size: 26px;
+            font-weight: bold;
+            border: 3px solid #FFD700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 200;
+            animation: float 1s ease-out forwards;
+            pointer-events: none;
+        }
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: #fff;
+        }
+        @keyframes float {
+            0% { opacity: 1; transform: translateY(0) scale(0.5); }
+            30% { transform: translateY(-15px) scale(1.1); }
+            100% { opacity: 0; transform: translateY(-70px) scale(0.8); }
+        }
+        
+        .magic-circle {
+            position: absolute;
+            border: 3px solid rgba(255, 215, 0, 0.7);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        #title {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFD700;
+            font-size: 34px;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 30px rgba(255,215,0,0.5);
+            z-index: 50;
+        }
+        
+        #hint {
+            position: absolute;
+            bottom: 18px;
+            left: 18px;
+            padding: 10px 18px;
+            background: rgba(0,0,0,0.8);
+            color: #aaa;
+            border-radius: 10px;
+            font-size: 13px;
+            border: 2px solid rgba(255,215,0,0.3);
+        }
+        
+        #musicBtn {
+            position: absolute;
+            bottom: 18px;
+            right: 18px;
+            padding: 10px 22px;
+            background: rgba(0,0,0,0.85);
+            color: #FFD700;
+            border: 3px solid #FFD700;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            z-index: 150;
+            transition: all 0.3s;
+        }
+        #musicBtn:hover {
+            background: rgba(60,60,0,0.9);
+            transform: scale(1.05);
+        }
+        
+        .qiankun-cursor, .qiankun-cursor * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="%23FFD700" stroke-width="4"/><circle cx="20" cy="20" r="6" fill="%23FF6B35"/><line x1="20" y1="4" x2="20" y2="10" stroke="%23FFD700" stroke-width="2"/><line x1="20" y1="30" x2="20" y2="36" stroke="%23FFD700" stroke-width="2"/><line x1="4" y1="20" x2="10" y2="20" stroke="%23FFD700" stroke-width="2"/><line x1="30" y1="20" x2="36" y2="20" stroke="%23FFD700" stroke-width="2"/></svg>') 20 20, pointer !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="title">🐒 孙悟空大闹天宫 🐒</div>
+        
+        <!-- 星星 - 分散在顶部 -->
+        <div class="star" style="width:3px;height:3px;top:50px;left:80px;animation-delay:0s;"></div>
+        <div class="star" style="width:2px;height:2px;top:90px;left:180px;animation-delay:0.4s;"></div>
+        <div class="star" style="width:4px;height:4px;top:60px;left:320px;animation-delay:0.8s;"></div>
+        <div class="star" style="width:2px;height:2px;top:130px;left:450px;animation-delay:1.2s;"></div>
+        <div class="star" style="width:3px;height:3px;top:70px;left:600px;animation-delay:0.2s;"></div>
+        <div class="star" style="width:2px;height:2px;top:110px;left:750px;animation-delay:0.6s;"></div>
+        <div class="star" style="width:3px;height:3px;top:55px;left:880px;animation-delay:1s;"></div>
+        <div class="star" style="width:2px;height:2px;top:170px;left:120px;animation-delay:1.4s;"></div>
+        <div class="star" style="width:3px;height:3px;top:150px;left:520px;animation-delay:0.3s;"></div>
+        
+        <!-- 云朵 - 南天门中下方 -->
+        <div class="cloud" style="width:220px;height:80px;top:350px;left:80px;"></div>
+        <div class="cloud" style="width:180px;height:70px;top:380px;left:300px;animation-delay:4s;"></div>
+        <div class="cloud" style="width:250px;height:90px;top:360px;left:600px;animation-delay:8s;"></div>
+        <div class="cloud" style="width:200px;height:75px;top:400px;left:150px;animation-delay:12s;"></div>
+        <div class="cloud" style="width:190px;height:70px;top:390px;left:700px;animation-delay:16s;"></div>
+        
+        <!-- 仙鹤 -->
+        <div class="crane" style="top:100px;animation-delay:0s;">🦅</div>
+        <div class="crane" style="top:160px;animation-delay:7s;">🦅</div>
+        <div class="crane" style="top:220px;animation-delay:14s;">🦅</div>
+        
+        <!-- 南天门 -->
+        <div id="nantianmen">
+            <div class="gate">
+                <!-- 屋脊装饰 - 居中: 龙-星星-龙 -->
+                <span class="ridge-deco" style="left:215px;">🐉</span>
+                <span class="ridge-deco" style="left:360px;">🌟</span>
+                <span class="ridge-deco" style="left:505px;">🐉</span>
+                <div class="roof-ridge"></div>
+                <div class="roof"></div>
+                
+                <div class="gate-body">
+                    <div class="plaque"><span class="plaque-text">南天门</span></div>
+                    <div class="guardian left">👹</div>
+                    <div class="guardian right">👹</div>
+                    <div class="door left">
+                        <div class="stud" style="top:15px;left:12px;"></div>
+                        <div class="stud" style="top:15px;left:55px;"></div>
+                        <div class="stud" style="top:55px;left:12px;"></div>
+                        <div class="stud" style="top:55px;left:55px;"></div>
+                        <div class="stud" style="top:95px;left:12px;"></div>
+                        <div class="stud" style="top:95px;left:55px;"></div>
+                        <div class="ring"></div>
+                    </div>
+                    <div class="door right">
+                        <div class="stud" style="top:15px;left:12px;"></div>
+                        <div class="stud" style="top:15px;left:55px;"></div>
+                        <div class="stud" style="top:55px;left:12px;"></div>
+                        <div class="stud" style="top:55px;left:55px;"></div>
+                        <div class="stud" style="top:95px;left:12px;"></div>
+                        <div class="stud" style="top:95px;left:55px;"></div>
+                        <div class="ring"></div>
+                    </div>
+                </div>
+                
+                <div class="pillar left"></div>
+                <div class="pillar right"></div>
+                <div class="steps"></div>
+                <span class="lantern">🏮</span>
+                <span class="lantern">🏮</span>
+            </div>
+        </div>
+        
+        <!-- 孙悟空 -->
+        <div id="wukong" onclick="wukongClick()">
+            <div class="wukong-inner">
+                <div class="cape"></div>
+                <div class="crown"></div>
+                <div class="headband"></div>
+                <div class="face">
+                    <div class="eyes">
+                        <div class="eye"></div>
+                        <div class="eye"></div>
+                    </div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="armor"></div>
+                <div class="legs">
+                    <div class="leg"></div>
+                    <div class="leg"></div>
+                </div>
+                <div class="staff"></div>
+            </div>
+        </div>
+        
+        <div id="hint">✨ 点击孙悟空有惊喜 ✨</div>
+        <button id="musicBtn" onclick="toggleMusic()">🔇 背景音乐</button>
+        
+        <audio id="bgMusic" loop></audio>
+    </div>
+    
+    <script>
+        // 配置
+        const cfg = { speed: 1.2, minX: 100, maxX: 850, y: 180 };
+        let state = { x: 500, targetX: 500, dir: 1, cooldown: false };
+        let musicOn = true, bgSource;
+        let audioCtx, aiyaBuffer;
+        
+        // 初始化音频
+        function initAudio() {
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // 哎呀音效
+                const sr = audioCtx.sampleRate, dur = 0.4;
+                aiyaBuffer = audioCtx.createBuffer(1, sr * dur, sr);
+                const d = aiyaBuffer.getChannelData(0);
+                for (let i = 0; i < d.length; i++) {
+                    const t = i / sr;
+                    d[i] = Math.sin(2 * Math.PI * (800 - t * 1500) * t) * Math.exp(-t * 8) * 0.6;
+                }
+                
+                // 生成背景音乐 - 简单的中国风旋律
+                createBgMusic();
+            } catch(e) { console.log('Audio not supported'); }
+        }
+        
+        // 生成背景音乐
+        function createBgMusic() {
+            const sr = audioCtx.sampleRate;
+            const dur = 12; // 12秒循环
+            const buffer = audioCtx.createBuffer(2, sr * dur, sr);
+            
+            // 中国风五声音阶 (宫商角徵羽)
+            const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
+            const melody = [0,2,4,5,4,2,0,2,4,7,5,4,2,0];
+            const beatDur = 0.35;
+            
+            for (let ch = 0; ch < 2; ch++) {
+                const data = buffer.getChannelData(ch);
+                data.fill(0);
+                
+                melody.forEach((n, i) => {
+                    const freq = notes[n] * (ch === 1 ? 0.5 : 1);
+                    const start = Math.floor(i * beatDur * sr);
+                    const end = Math.floor((i * beatDur + beatDur * 0.8) * sr);
+                    
+                    for (let j = start; j < end && j < data.length; j++) {
+                        const t = j / sr;
+                        const env = Math.min(1, (end - j) / (sr * 0.1));
+                        // 添加泛音
+                        const tone = Math.sin(2 * Math.PI * freq * t) * 0.4
+                                   + Math.sin(2 * Math.PI * freq * 2 * t) * 0.15
+                                   + Math.sin(2 * Math.PI * freq * 3 * t) * 0.05;
+                        data[j] += tone * env * (ch === 0 ? 0.5 : 0.3);
+                    }
+                });
+                
+                // 添加低音伴奏
+                for (let i = 0; i < 6; i++) {
+                    const bassFreq = notes[0] / Math.pow(2, i % 2 + 1);
+                    const start = Math.floor(i * 2 * beatDur * sr);
+                    for (let j = start; j < start + sr * 0.8 && j < data.length; j++) {
+                        const t = (j - start) / sr;
+                        const env = Math.exp(-t * 2);
+                        data[j] += Math.sin(2 * Math.PI * bassFreq * t) * env * 0.2;
+                    }
+                }
+            }
+            
+            const m = document.getElementById('bgMusic');
+            const blob = new Blob([createWav(buffer)], { type: 'audio/wav' });
+            m.src = URL.createObjectURL(blob);
+        }
+        
+        // 创建WAV格式
+        function createWav(buffer) {
+            const sr = buffer.sampleRate, ch = buffer.numberOfChannels, len = buffer.length;
+            const header = new ArrayBuffer(44);
+            const v = new DataView(header);
+            const str = s => [...s].forEach((c,i) => v.setUint8(44+i, c.charCodeAt(0)));
+            
+            str('RIFF'); v.setUint32(4, 36 + len * 2, true);
+            str('WAVE'); str('fmt '); v.setUint32(16, 16, true);
+            v.setUint16(20, 1, true); v.setUint16(22, ch, true);
+            v.setUint32(24, sr, true); v.setUint32(28, sr * ch * 2, true);
+            v.setUint16(32, ch * 2, true); v.setUint16(34, 16, true);
+            str('data'); v.setUint32(40, len * 2, true);
+            
+            const data = new Int16Array(len * ch);
+            for (let i = 0; i < len; i++)
+                for (let c = 0; c < ch; c++)
+                    data[i * ch + c] = Math.max(-32768, Math.min(32767, buffer.getChannelData(c)[i] * 32767));
+            
+            return new Uint8Array([...new Uint8Array(header), ...new Uint8Array(data.buffer)]);
+        }
+        
+        // 播放哎呀
+        function playAiya() {
+            if (audioCtx && aiyaBuffer) {
+                const src = audioCtx.createBufferSource();
+                src.buffer = aiyaBuffer;
+                src.connect(audioCtx.destination);
+                src.start();
+            }
+        }
+        
+        // 音乐开关
+        function toggleMusic() {
+            const m = document.getElementById('bgMusic'), b = document.getElementById('musicBtn');
+            if (musicOn) { m.pause(); b.textContent = '🔇 背景音乐'; musicOn = false; }
+            else { m.currentTime = 0; m.play().then(() => { b.textContent = '🔊 背景音乐'; musicOn = true; }).catch(() => { b.textContent = '❌ 播放失败'; }); }
+        }
+        
+        // 自动播放
+        function autoPlay() {
+            const m = document.getElementById('bgMusic');
+            m.play().then(() => { musicOn = true; document.getElementById('musicBtn').textContent = '🔊 背景音乐'; }).catch(() => {});
+        }
+        
+        // 飞行
+        function fly() {
+            const w = document.getElementById('wukong');
+            const dx = state.targetX - state.x;
+            
+            if (Math.abs(dx) > 8) state.x += Math.sign(dx) * cfg.speed;
+            else { state.dir *= -1; state.targetX = cfg.minX + Math.random() * (cfg.maxX - cfg.minX - 80); }
+            
+            state.x = Math.max(cfg.minX, Math.min(cfg.maxX - 80, state.x));
+            w.style.left = state.x + 'px';
+            w.style.top = cfg.y + 'px';
+            
+            const scaleX = state.dir > 0 ? 1 : -1;
+            const bob = Math.sin(Date.now() / 500) * 6;
+            w.querySelector('.wukong-inner').style.transform = `translateY(${bob}px)`;
+            w.style.transform = `scaleX(${scaleX})`;
+            
+            requestAnimationFrame(fly);
+        }
+        
+        // 气泡
+        function bubble(x, y, text) {
+            const c = document.getElementById('gameContainer');
+            const b = document.createElement('div');
+            b.className = 'bubble';
+            b.textContent = text;
+            b.style.left = (x - 30) + 'px';
+            b.style.top = (y - 50) + 'px';
+            c.appendChild(b);
+            setTimeout(() => b.remove(), 1000);
+        }
+        
+        // 魔法圈
+        function circles(x, y) {
+            const c = document.getElementById('gameContainer');
+            for (let i = 0; i < 3; i++) {
+                const circ = document.createElement('div');
+                circ.className = 'magic-circle';
+                const size = 50 + i * 25;
+                circ.style.cssText = `width:${size}px;height:${size}px;left:${x - size/2}px;top:${y - size/2}px;animation-delay:${i * 0.2}s`;
+                c.appendChild(circ);
+                setTimeout(() => circ.remove(), 2000);
+            }
+        }
+        
+        // 点击孙悟空
+        function wukongClick(e) {
+            if (state.cooldown) return;
+            state.cooldown = true;
+            
+            playAiya();
+            document.getElementById('wukong').classList.add('wukong-hit');
+            bubble(state.x + 42, cfg.y, '哎呀！');
+            circles(state.x + 42, cfg.y + 55);
+            document.getElementById('gameContainer').classList.add('qiankun-cursor');
+            
+            state.targetX = cfg.minX + Math.random() * (cfg.maxX - cfg.minX - 80);
+            state.dir = Math.random() > 0.5 ? 1 : -1;
+            
+            setTimeout(() => document.getElementById('wukong').classList.remove('wukong-hit'), 500);
+            setTimeout(() => document.getElementById('gameContainer').classList.remove('qiankun-cursor'), 3000);
+            setTimeout(() => state.cooldown = false, 500);
+        }
+        
+        document.getElementById('gameContainer').addEventListener('click', e => {
+            if (e.target.id !== 'wukong') document.getElementById('gameContainer').classList.remove('qiankun-cursor');
+        });
+        
+        window.onload = () => {
+            initAudio();
+            fly();
+            setTimeout(autoPlay, 800);
+        };
+    </script>
+</body>
+</html>
