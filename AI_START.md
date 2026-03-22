@@ -18,8 +18,8 @@ Follow the numbered sections below in order. Begin with Section 1 (Quick Navigat
 ## 1. Quick Navigation
 
 - AI_GUIDE.md : Project overview, modules, progress
-- games/AI_GUIDE.md : Games module guide
-- blog/AI_GUIDE.md : Blog module guide
+- content/games/AI_GUIDE.md : Games module guide
+- content/blog/AI_GUIDE.md : Blog module guide
 - README.md : Human-readable documentation
 - ai_skills/ : AI skills directory (detailed guidance for each scenario)
 
@@ -30,7 +30,7 @@ Follow the numbered sections below in order. Begin with Section 1 (Quick Navigat
 The fundamental principles for this project are organized into four categories:
 
 ### 2.1 File Conventions
-2.1.1 **English Content**: AI file content (AI_START.md, AI_GUIDE.md) must use English names (excluding quoted content)  
+2.1.1 **English Content**: AI file content (AI_START.md, AI_GUIDE.md, ai_skills/*.md) must use English names (excluding quoted content)  
 2.1.2 **English Names**: All filenames and file paths must use English names; when creating new files, also use English names (applies to all file types)
 
 ### 2.2 Documentation Rules
@@ -42,7 +42,7 @@ The fundamental principles for this project are organized into four categories:
 2.3.2 **Self-Contained**: Each module/project operates independently  
 
 ### 2.4 Formatting Rules
-2.4.1 **Formatting Requirement**: After numbered list items, add two spaces before line breaks to ensure proper rendering in preview
+2.4.1 **Formatting Requirement**: After numbered list items, add two spaces before line breaks to ensure proper rendering in some markdown editors
 
 ### 2.5 Version Control Rules
 2.5.1 **No Auto-Commit**: Unless explicitly stated otherwise, do NOT commit changes to GitHub

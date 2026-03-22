@@ -10,7 +10,8 @@ Task is to add a new module or feature to the project.
 
 ## Action
 
-You MUST NOT modify AI_START.md content.
+- **Permission**: MUST NOT modify AI_START.md
+- Follow Core Rules (Section 2) when making changes
 
 ## TODO List
 

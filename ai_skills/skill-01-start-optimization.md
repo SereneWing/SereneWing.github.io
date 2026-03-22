@@ -10,7 +10,8 @@ Task is to improve/modify AI_START.md itself.
 
 ## Action
 
-You MAY modify AI_START.md content.
+- **Permission**: MAY modify AI_START.md
+- Follow Core Rules (Section 2) when making changes
 
 ## TODO List
 

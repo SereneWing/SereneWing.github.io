@@ -6,18 +6,19 @@ This skill is used when the task is to add a new skill file to the `ai_skills/` 
 
 ## Trigger
 
-Task is to create a new skill for handling a new type of task scenario.
+Task is to create a new skill file in the `ai_skills/` directory.
 
 ## Action
 
-You MAY modify AI_START.md and create new skill files in `ai_skills/` directory.
+- **Permission**: MAY modify AI_START.md and files in `ai_skills/` directory
+- Follow Core Rules (Section 2) when making changes
 
 ## Requirements
 
 ### Naming Convention
 - Skill filename format: `skill-{number}-{short-description}.md`
 - Use English only for filenames
-- Use sequential numbering starting from 07
+- Use sequential numbering starting from the next available number
 
 ### Structure Requirements
 
@@ -35,7 +36,7 @@ Each skill MUST include the following sections:
 #### 3. Action
 - Define what actions are permitted or restricted
 - Reference AI_START.md Core Rules (Section 2) for basic constraints
-- State whether AI_START.md can be modified
+- Include a **Permission** line stating what can be modified
 
 #### 4. TODO List
 - Numbered checklist of steps to complete

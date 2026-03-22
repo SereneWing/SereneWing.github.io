@@ -11,7 +11,9 @@ ai_skills/
 ├── skill-02-project-inspection.md  # Skill 02: Full project inspection
 ├── skill-03-add-module.md          # Skill 03: Add new module
 ├── skill-04-modify-module.md       # Skill 04: Modify existing module
-└── skill-05-other-tasks.md         # Skill 05: Other tasks
+├── skill-05-other-tasks.md         # Skill 05: Other tasks
+├── skill-06-skill-audit.md         # Skill 06: Audit skills
+└── skill-07-add-skill.md           # Skill 07: Add new skill
 ```
 
 ## Skills Overview
@@ -23,6 +25,8 @@ ai_skills/
 | 03 | Add Module | Create new module or feature | MUST NOT modify AI_START.md |
 | 04 | Modify Module | Update existing functionality | MUST NOT modify AI_START.md |
 | 05 | Other Tasks | Catch-all for miscellaneous tasks | MUST NOT modify AI_START.md |
+| 06 | Skill Audit | Review/audit skill files | MAY modify ai_skills/ |
+| 07 | Add New Skill | Create new skill file | MAY modify AI_START.md |
 
 ## Usage
 

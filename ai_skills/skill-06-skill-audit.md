@@ -10,7 +10,8 @@ Task is to review, audit, or improve skill files in the `ai_skills/` directory.
 
 ## Action
 
-You MAY modify skill files in `ai_skills/` directory.
+- **Permission**: MAY modify files in `ai_skills/` directory
+- Follow Core Rules (Section 2) when making changes
 
 ## Audit Criteria
 

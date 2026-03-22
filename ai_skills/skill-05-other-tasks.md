@@ -10,7 +10,8 @@ Any other development task not covered above.
 
 ## Action
 
-You MUST NOT modify AI_START.md content.
+- **Permission**: MUST NOT modify AI_START.md
+- Follow Core Rules (Section 2) when making changes
 
 ## TODO List
 
@@ -23,7 +24,7 @@ You MUST NOT modify AI_START.md content.
 5.2.1 Follow Core Rules (Section 2)  
 5.2.2 Use English names for files (rule 2.1.2)  
 5.2.3 Keep AI files concise (rule 2.2.2)  
-5.2.4 Follow formatting rules (rule 2.4.1)  
+5.2.4 Follow formatting rules (2.4.1)  
 
 ### 5.3 Complete and Document
 5.3.1 Make necessary changes  

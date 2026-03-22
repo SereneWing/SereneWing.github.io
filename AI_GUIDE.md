@@ -25,17 +25,22 @@ serenewing.github.io/
 ├── index.html                     # Homepage
 ├── CNAME                          # Custom domain
 │
-├── games/                         # 🎮 Games module
-│   ├── AI_GUIDE.md                # Games module guide
-│   ├── sun-wukong-heaven/
-│   │   ├── AI_GUIDE.md
-│   │   └── README.md
-│   └── journey-to-heaven/
-│       ├── AI_GUIDE.md
-│       └── README.md
-│
-└── blog/                          # 📝 Blog module
-    └── AI_GUIDE.md                # Blog module guide
+├── content/
+│   ├── index.html                 # Main content page
+│   │
+│   ├── games/                     # 🎮 Games module
+│   │   ├── AI_GUIDE.md            # Games module guide
+│   │   ├── sun-wukong-heaven/
+│   │   │   ├── AI_GUIDE.md
+│   │   │   ├── README.md
+│   │   │   └── index.html
+│   │   └── journey-to-heaven/
+│   │       ├── AI_GUIDE.md
+│   │       ├── README.md
+│   │       └── index.html
+│   │
+│   └── blog/                      # 📝 Blog module
+│       └── AI_GUIDE.md            # Blog module guide
 ```
 
 ---

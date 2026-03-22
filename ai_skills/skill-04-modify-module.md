@@ -10,7 +10,8 @@ Task is to modify, enhance, or fix an existing module or feature.
 
 ## Action
 
-You MUST NOT modify AI_START.md content.
+- **Permission**: MUST NOT modify AI_START.md
+- Follow Core Rules (Section 2) when making changes
 
 ## TODO List
 
