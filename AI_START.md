@@ -77,3 +77,7 @@ Based on user requirements, select the corresponding skill to implement. Each sk
 ### 3.6 Skill 06: Skill Audit
 - **Trigger**: Task is to review, audit, or improve skill files in the `ai_skills/` directory
 - **Skill File**: `ai_skills/skill-06-skill-audit.md`
+
+### 3.7 Skill 07: Add New Skill
+- **Trigger**: Task is to create a new skill file in the `ai_skills/` directory
+- **Skill File**: `ai_skills/skill-07-add-skill.md`
