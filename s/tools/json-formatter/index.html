@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON格式化 - AI编码项目</title>
+    <title>JSON Formatter - SereneWing</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -13,24 +13,24 @@
         <div class="container header-inner">
             <a href="../../../" class="site-logo">
                 <span>⚡</span>
-                <span>AI编码项目</span>
+                <span>SereneWing</span>
             </a>
             <nav class="nav">
                 <a href="../../games/" class="nav-link">
                     <span class="nav-icon">🎮</span>
-                    <span>游戏</span>
+                    <span>Games</span>
                 </a>
                 <a href="../../blog/" class="nav-link">
                     <span class="nav-icon">📝</span>
-                    <span>博客</span>
+                    <span>Blog</span>
                 </a>
                 <a href="../" class="nav-link active">
                     <span class="nav-icon">🔧</span>
-                    <span>工具</span>
+                    <span>Tools</span>
                 </a>
                 <a href="../../wiki/" class="nav-link">
                     <span class="nav-icon">📖</span>
-                    <span>百科</span>
+                    <span>Wiki</span>
                 </a>
             </nav>
         </div>
@@ -39,45 +39,45 @@
     <main class="main">
         <div class="container">
             <header class="page-header">
-                <h1 class="page-title">JSON格式化</h1>
-                <p class="page-description">解析、验证、格式化和压缩JSON数据</p>
+                <h1 class="page-title">JSON Formatter</h1>
+                <p class="page-description">Parse, validate, format and compress JSON data</p>
             </header>
 
             <div class="tool-container">
                 <div class="tool-input">
                     <div class="tool-label">
-                        <span>输入</span>
-                        <button class="btn btn-sm" onclick="pasteFromClipboard()">📋 粘贴</button>
+                        <span>Input</span>
+                        <button class="btn btn-sm" onclick="pasteFromClipboard()">📋 Paste</button>
                     </div>
                     <textarea 
                         id="jsonInput" 
                         class="form-textarea" 
-                        placeholder="在此粘贴JSON数据..."
+                        placeholder="Paste JSON data here..."
                         oninput="formatJson()"
                     ></textarea>
                 </div>
 
                 <div class="tool-output">
                     <div class="tool-label">
-                        <span>输出</span>
-                        <button class="btn btn-sm" onclick="copyOutput()">📋 复制</button>
+                        <span>Output</span>
+                        <button class="btn btn-sm" onclick="copyOutput()">📋 Copy</button>
                     </div>
                     <div id="jsonOutput" class="code-block" style="min-height: 300px; flex-grow: 1;">
-                        <span class="text-muted">格式化后的结果将显示在这里...</span>
+                        <span class="text-muted">Formatted result will appear here...</span>
                     </div>
                 </div>
             </div>
 
             <div class="tool-actions" style="margin-top: var(--space-xl);">
-                <button class="btn btn-primary" onclick="formatJson()">✨ 格式化</button>
-                <button class="btn" onclick="minifyJson()">🗜️ 压缩</button>
-                <button class="btn" onclick="clearAll()">🗑️ 清空</button>
-                <button class="btn" onclick="toggleView()">👁️ 切换视图</button>
+                <button class="btn btn-primary" onclick="formatJson()">✨ Format</button>
+                <button class="btn" onclick="minifyJson()">🗜️ Minify</button>
+                <button class="btn" onclick="clearAll()">🗑️ Clear</button>
+                <button class="btn" onclick="toggleView()">👁️ Toggle View</button>
             </div>
 
             <div id="errorMessage" class="mt-lg" style="display: none;">
                 <div class="code-block" style="border-color: var(--color-danger-fg); background-color: #ffebe9;">
-                    <span style="color: var(--color-danger-fg);">❌ 错误: </span>
+                    <span style="color: var(--color-danger-fg);">❌ Error: </span>
                     <span id="errorText"></span>
                 </div>
             </div>
@@ -87,8 +87,8 @@
     <footer class="footer">
         <div class="container">
             <p>
-                <a href="../../">AI编码项目</a> · 
-                由 <a href="https://github.com/SereneWing" target="_blank">SereneWing</a> 构建
+                <a href="../../">SereneWing</a> · 
+                Built by <a href="https://github.com/SereneWing" target="_blank">SereneWing</a>
             </p>
         </div>
     </footer>
@@ -103,7 +103,7 @@
             const errorText = document.getElementById('errorText');
 
             if (!input) {
-                output.innerHTML = '<span class="text-muted">格式化后的结果将显示在这里...</span>';
+                output.innerHTML = '<span class="text-muted">Formatted result will appear here...</span>';
                 errorDiv.style.display = 'none';
                 return;
             }
@@ -117,7 +117,7 @@
                 output.innerHTML = highlightJson(formatted);
                 errorDiv.style.display = 'none';
             } catch (e) {
-                output.innerHTML = '<span class="text-muted">无效的JSON格式</span>';
+                output.innerHTML = '<span class="text-muted">Invalid JSON format</span>';
                 errorText.textContent = e.message;
                 errorDiv.style.display = 'block';
             }
@@ -131,7 +131,7 @@
 
         function clearAll() {
             document.getElementById('jsonInput').value = '';
-            document.getElementById('jsonOutput').innerHTML = '<span class="text-muted">格式化后的结果将显示在这里...</span>';
+            document.getElementById('jsonOutput').innerHTML = '<span class="text-muted">Formatted result will appear here...</span>';
             document.getElementById('errorMessage').style.display = 'none';
         }
 
@@ -149,7 +149,7 @@
                     let cls = 'json-string';
                     if (/:$/.test(match)) {
                         cls = 'json-key';
-                        match = match.slice(0, -1) + '</span>:';
+                        match = match.slice(0, -1) + '<span>:';
                     } else {
                         match = '<span class="' + cls + '">' + match + '</span>';
                     }
@@ -165,9 +165,9 @@
             const text = output.textContent;
             try {
                 await navigator.clipboard.writeText(text);
-                alert('已复制到剪贴板！');
+                alert('Copied to clipboard!');
             } catch (e) {
-                alert('复制失败');
+                alert('Copy failed');
             }
         }
 
@@ -177,7 +177,7 @@
                 document.getElementById('jsonInput').value = text;
                 formatJson();
             } catch (e) {
-                alert('粘贴失败');
+                alert('Paste failed');
             }
         }
     </script>

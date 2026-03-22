@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>编解码器 - AI编码项目</title>
+    <title>Encoder/Decoder - SereneWing</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -13,24 +13,24 @@
         <div class="container header-inner">
             <a href="../../../" class="site-logo">
                 <span>⚡</span>
-                <span>AI编码项目</span>
+                <span>SereneWing</span>
             </a>
             <nav class="nav">
                 <a href="../../games/" class="nav-link">
                     <span class="nav-icon">🎮</span>
-                    <span>游戏</span>
+                    <span>Games</span>
                 </a>
                 <a href="../../blog/" class="nav-link">
                     <span class="nav-icon">📝</span>
-                    <span>博客</span>
+                    <span>Blog</span>
                 </a>
                 <a href="../" class="nav-link active">
                     <span class="nav-icon">🔧</span>
-                    <span>工具</span>
+                    <span>Tools</span>
                 </a>
                 <a href="../../wiki/" class="nav-link">
                     <span class="nav-icon">📖</span>
-                    <span>百科</span>
+                    <span>Wiki</span>
                 </a>
             </nav>
         </div>
@@ -39,38 +39,38 @@
     <main class="main">
         <div class="container">
             <header class="page-header">
-                <h1 class="page-title">编解码器</h1>
-                <p class="page-description">Base64、URL编码等多种编码格式的转换工具</p>
+                <h1 class="page-title">Encoder/Decoder</h1>
+                <p class="page-description">Conversion tool for Base64, URL encoding and multiple encoding formats</p>
             </header>
 
             <div class="form-group">
-                <label class="form-label">编码类型</label>
+                <label class="form-label">Encoding Type</label>
                 <select id="encoderType" class="form-select" style="max-width: 300px;" onchange="processEncoding()">
                     <option value="base64">Base64</option>
-                    <option value="url">URL编码</option>
-                    <option value="html">HTML实体</option>
-                    <option value="unicode">Unicode转义</option>
+                    <option value="url">URL Encoding</option>
+                    <option value="html">HTML Entities</option>
+                    <option value="unicode">Unicode Escape</option>
                 </select>
             </div>
 
             <div class="tool-container">
                 <div class="tool-input">
                     <div class="tool-label">
-                        <span>输入</span>
-                        <button class="btn btn-sm" onclick="pasteFromClipboard()">📋 粘贴</button>
+                        <span>Input</span>
+                        <button class="btn btn-sm" onclick="pasteFromClipboard()">📋 Paste</button>
                     </div>
                     <textarea 
                         id="encoderInput" 
                         class="form-textarea" 
-                        placeholder="在此输入需要编码/解码的文本..."
+                        placeholder="Enter text to encode/decode here..."
                         oninput="processEncoding()"
                     ></textarea>
                 </div>
 
                 <div class="tool-output">
                     <div class="tool-label">
-                        <span>输出</span>
-                        <button class="btn btn-sm" onclick="copyOutput()">📋 复制</button>
+                        <span>Output</span>
+                        <button class="btn btn-sm" onclick="copyOutput()">📋 Copy</button>
                     </div>
                     <textarea 
                         id="encoderOutput" 
@@ -82,15 +82,15 @@
             </div>
 
             <div class="tool-actions" style="margin-top: var(--space-xl);">
-                <button class="btn btn-primary" onclick="encode()">🔒 编码</button>
-                <button class="btn btn-primary" onclick="decode()">🔓 解码</button>
-                <button class="btn" onclick="clearAll()">🗑️ 清空</button>
-                <button class="btn" onclick="swapInputOutput()">🔄 交换</button>
+                <button class="btn btn-primary" onclick="encode()">🔒 Encode</button>
+                <button class="btn btn-primary" onclick="decode()">🔓 Decode</button>
+                <button class="btn" onclick="clearAll()">🗑️ Clear</button>
+                <button class="btn" onclick="swapInputOutput()">🔄 Swap</button>
             </div>
 
             <div id="errorMessage" class="mt-lg" style="display: none;">
                 <div class="code-block" style="border-color: var(--color-danger-fg); background-color: #ffebe9;">
-                    <span style="color: var(--color-danger-fg);">❌ 错误: </span>
+                    <span style="color: var(--color-danger-fg);">❌ Error: </span>
                     <span id="errorText"></span>
                 </div>
             </div>
@@ -100,8 +100,8 @@
     <footer class="footer">
         <div class="container">
             <p>
-                <a href="../../">AI编码项目</a> · 
-                由 <a href="https://github.com/SereneWing" target="_blank">SereneWing</a> 构建
+                <a href="../../">SereneWing</a> · 
+                Built by <a href="https://github.com/SereneWing" target="_blank">SereneWing</a>
             </p>
         </div>
     </footer>
@@ -205,9 +205,9 @@
             const output = document.getElementById('encoderOutput');
             try {
                 await navigator.clipboard.writeText(output.value);
-                alert('已复制到剪贴板！');
+                alert('Copied to clipboard!');
             } catch (e) {
-                alert('复制失败');
+                alert('Copy failed');
             }
         }
 
@@ -216,7 +216,7 @@
                 const text = await navigator.clipboard.readText();
                 document.getElementById('encoderInput').value = text;
             } catch (e) {
-                alert('粘贴失败');
+                alert('Paste failed');
             }
         }
     </script>
