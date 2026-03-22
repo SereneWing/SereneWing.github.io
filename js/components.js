@@ -97,12 +97,14 @@ function getModulePath(moduleId) {
 
 // Get back link (to parent module index)
 function getBackLink() {
-    const prefix = getPathPrefix();
-    if (prefix === '') {
+    const segments = window.location.pathname.split('/').filter(s => s.length > 0);
+    // Root index: segments.length = 1 (just 'index.html') -> stay at root
+    // Module index: segments.length = 3 (s, module, index.html) -> stay at module
+    // Sub-pages: segments.length > 3 -> go back one level to module index
+    if (segments.length <= 2) {
         return './';
     }
-    // Go back to module index (one ../ less than going to root)
-    return '../'.repeat(Math.max(0, prefix.split('../').length - 2)) || './';
+    return '../';
 }
 
 // Get root path for logo/home link
