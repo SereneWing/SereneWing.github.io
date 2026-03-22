@@ -12,6 +12,8 @@ AI_START.md (entry point) -> AI_GUIDE.md (root project overview) -> {module}/AI_
 
 Follow the numbered sections below in order. Begin with Section 1 (Quick Navigation) to understand the project structure, then Section 2 (Core Rules) to understand the fundamental principles, and finally Section 3 (SCENARIO CHECK) to determine which path to follow based on your task.
 
+**Formatting Requirement**: After numbered list items, add two spaces before line breaks to ensure proper rendering in preview.
+
 ---
 
 ## 1. Quick Navigation
