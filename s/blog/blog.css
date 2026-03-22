@@ -152,3 +152,114 @@
 #markdown-body .hljs {
     background: var(--color-canvas-inset);
 }
+
+/* ========================================
+   Mobile Responsive - Tablet (768px)
+   ======================================== */
+@media (max-width: 768px) {
+    .article-card {
+        padding: var(--space-lg);
+    }
+    
+    .article-title {
+        font-size: var(--font-lg);
+    }
+    
+    #markdown-body {
+        padding: var(--space-xl);
+    }
+    
+    #markdown-body h1 {
+        font-size: 1.5em;
+    }
+    
+    #markdown-body h2 {
+        font-size: 1.25em;
+    }
+}
+
+/* ========================================
+   Mobile Responsive - Phone (480px)
+   ======================================== */
+@media (max-width: 480px) {
+    .article-list {
+        gap: var(--space-md);
+    }
+    
+    .article-card {
+        padding: var(--space-md);
+    }
+    
+    .article-meta {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+    
+    .article-title {
+        font-size: var(--font-md);
+    }
+    
+    .article-excerpt {
+        font-size: var(--font-sm);
+    }
+    
+    #markdown-body {
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+    }
+    
+    #markdown-body h1 {
+        font-size: 1.25em;
+    }
+    
+    #markdown-body h2 {
+        font-size: 1.1em;
+        margin-top: var(--space-xl);
+    }
+    
+    #markdown-body h3 {
+        font-size: 1em;
+    }
+    
+    #markdown-body p {
+        font-size: var(--font-sm);
+    }
+    
+    #markdown-body pre {
+        margin: var(--space-md) 0;
+        padding: var(--space-md);
+    }
+    
+    #markdown-body blockquote {
+        padding: var(--space-sm) var(--space-md);
+    }
+}
+
+/* ========================================
+   Mobile Responsive - Small Phone (320px)
+   ======================================== */
+@media (max-width: 320px) {
+    .article-card {
+        padding: var(--space-sm);
+    }
+    
+    .article-title {
+        font-size: var(--font-sm);
+    }
+    
+    .article-excerpt {
+        font-size: 11px;
+    }
+    
+    #markdown-body {
+        padding: var(--space-md);
+    }
+    
+    #markdown-body p {
+        font-size: 11px;
+    }
+    
+    #markdown-body pre {
+        font-size: 10px;
+    }
+}
