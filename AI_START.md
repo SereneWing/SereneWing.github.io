@@ -56,25 +56,24 @@ Based on user requirements, select the corresponding skill to implement. Each sk
 
 ### 3.1 Skill 01: AI_START Optimization
 - **Trigger**: Task is to improve/modify AI_START.md itself
-- **Action**: You MAY modify AI_START.md content
 - **Skill File**: `ai_skills/skill-01-start-optimization.md`
 
 ### 3.2 Skill 02: Project Full Inspection
 - **Trigger**: Task is to perform comprehensive self-check on the entire project
-- **Action**: You MUST NOT modify any file content unless inspection reveals issues
 - **Skill File**: `ai_skills/skill-02-project-inspection.md`
 
 ### 3.3 Skill 03: Add New Module or Feature
 - **Trigger**: Task is to add a new module or feature to the project
-- **Action**: You MUST NOT modify AI_START.md content
 - **Skill File**: `ai_skills/skill-03-add-module.md`
 
 ### 3.4 Skill 04: Modify Existing Module or Feature
 - **Trigger**: Task is to modify, enhance, or fix an existing module or feature
-- **Action**: You MUST NOT modify AI_START.md content
 - **Skill File**: `ai_skills/skill-04-modify-module.md`
 
 ### 3.5 Skill 05: All Other Tasks
 - **Trigger**: Any other development task not covered above
-- **Action**: You MUST NOT modify AI_START.md content
 - **Skill File**: `ai_skills/skill-05-other-tasks.md`
+
+### 3.6 Skill 06: Skill Audit
+- **Trigger**: Task is to review, audit, or improve skill files in the `ai_skills/` directory
+- **Skill File**: `ai_skills/skill-06-skill-audit.md`
