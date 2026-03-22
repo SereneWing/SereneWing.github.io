@@ -69,12 +69,24 @@ function generateHeader(activePage = '') {
         { id: 'wiki', label: 'Wiki', icon: icons.wiki }
     ];
     
-    const navHtml = navItems.map(item => `
-        <a href="${item.id === 'games' ? '../games/' : '../' + item.id + '/'}" class="nav-link ${activePage === item.id ? 'active' : ''}">
+    const navHtml = navItems.map(item => {
+        if (item.id === activePage) {
+            return `<a href="./" class="nav-link active">
             <span class="nav-icon">${item.icon}</span>
             <span>${item.label}</span>
-        </a>
-    `).join('');
+        </a>`;
+        } else if (item.id === 'games') {
+            return `<a href="../games/" class="nav-link">
+            <span class="nav-icon">${item.icon}</span>
+            <span>${item.label}</span>
+        </a>`;
+        } else {
+            return `<a href="../${item.id}/" class="nav-link">
+            <span class="nav-icon">${item.icon}</span>
+            <span>${item.label}</span>
+        </a>`;
+        }
+    }).join('');
     
     return `
     <header class="header">
