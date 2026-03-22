@@ -14,6 +14,7 @@ A personal website hosted on GitHub Pages.
 ```
 serenewing.github.io/
 ├── index.html           # Homepage
+├── AI_START.md          # AI entry point (START HERE for AI)
 ├── AI_GUIDE.md          # Project overview (for AI)
 ├── README.md            # Human-readable docs
 ├── CNAME                # Custom domain config
@@ -21,7 +22,9 @@ serenewing.github.io/
 ├── games/               # 🎮 Game projects
 │   ├── AI_GUIDE.md      # Game development guide
 │   ├── sun-wukong-heaven/
+│   │   └── README.md
 │   └── journey-to-heaven/
+│       └── README.md
 │
 └── blog/                # 📝 Blog (planned)
     └── AI_GUIDE.md      # Blog writing guide
