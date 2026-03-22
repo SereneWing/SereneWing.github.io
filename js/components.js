@@ -75,13 +75,8 @@ function generateHeader(activePage = '') {
             <span class="nav-icon">${item.icon}</span>
             <span>${item.label}</span>
         </a>`;
-        } else if (item.id === 'games') {
-            return `<a href="../games/" class="nav-link">
-            <span class="nav-icon">${item.icon}</span>
-            <span>${item.label}</span>
-        </a>`;
         } else {
-            return `<a href="../${item.id}/" class="nav-link">
+            return `<a href="s/${item.id}/" class="nav-link">
             <span class="nav-icon">${item.icon}</span>
             <span>${item.label}</span>
         </a>`;
@@ -91,7 +86,7 @@ function generateHeader(activePage = '') {
     return `
     <header class="header">
         <div class="container header-inner">
-            <a href="../../" class="site-logo">
+            <a href="s/" class="site-logo">
                 <span class="logo-icon">${icons.logo}</span>
                 <span>SereneWing</span>
             </a>
