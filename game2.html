@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西游记 - 大闹天宫</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #2a2a6e 100%);
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+        }
+        #gameContainer {
+            position: relative;
+            width: 900px;
+            height: 700px;
+            background: linear-gradient(180deg, #1a0a3e 0%, #2a1a5e 30%, #3a2a7e 60%, #4a3a8e 100%);
+            border: 5px solid #FFD700;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5), inset 0 0 100px rgba(100, 100, 255, 0.1);
+        }
+        /* 星星背景 */
+        .bg-star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        /* 云雾效果 */
+        .mist {
+            position: absolute;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        /* 道路 - 白色石板路 */
+        .road {
+            position: absolute;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #f0f0f0 100%);
+            border: 3px solid #ccc;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .road::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, transparent 0px, transparent 15px, #ddd 15px, #ddd 20px);
+        }
+        /* 天宫 */
+        #tiangong {
+            position: absolute;
+            width: 150px;
+            height: 130px;
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+            border: 4px solid #8B4513;
+            border-radius: 15px 15px 5px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.5);
+            z-index: 30;
+        }
+        #tiangong::before {
+            content: '🏯';
+            font-size: 50px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        #tiangong::after {
+            content: '天宫';
+            color: #8B4513;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #FFD700;
+        }
+        /* 天宫装饰 */
+        .palace-decor {
+            position: absolute;
+            font-size: 24px;
+            z-index: 31;
+        }
+        /* 人物基础样式 */
+        .character {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            z-index: 10;
+        }
+        .character-icon {
+            font-size: 42px;
+            filter: drop-shadow(3px 3px 3px rgba(0,0,0,0.5));
+            transition: transform 0.2s;
+        }
+        .character-label {
+            font-size: 14px;
+            color: #fff;
+            background: linear-gradient(180deg, #333 0%, #111 100%);
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-top: 4px;
+            border: 2px solid #FFD700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        /* 孙悟空 */
+        #wukong {
+            z-index: 15;
+            animation: wukongBounce 0.4s ease-in-out infinite;
+        }
+        @keyframes wukongBounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+        /* 托塔李天王 */
+        #litianwang {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #litianwang:hover {
+            transform: scale(1.1);
+        }
+        #litianwang:hover .character-icon {
+            transform: rotate(15deg);
+        }
+        /* 哪吒 */
+        #nezha {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #nezha:hover {
+            transform: scale(1.1);
+        }
+        /* 塔攻击 */
+        .tower {
+            position: absolute;
+            font-size: 36px;
+            z-index: 25;
+            pointer-events: none;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+        }
+        /* 哪吒飞行 */
+        #nezhaFlying {
+            position: absolute;
+            font-size: 42px;
+            z-index: 25;
+            display: none;
+            pointer-events: none;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+        }
+        /* 开始按钮 */
+        #startBtn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 18px 50px;
+            font-size: 24px;
+            background: linear-gradient(180deg, #FF6B35 0%, #E55A2B 100%);
+            color: white;
+            border: 4px solid #FFD700;
+            border-radius: 15px;
+            cursor: pointer;
+            z-index: 100;
+            font-family: 'Microsoft YaHei', sans-serif;
+            box-shadow: 0 5px 20px rgba(255,107,53,0.5), 0 0 30px rgba(255,215,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: all 0.3s;
+        }
+        #startBtn:hover {
+            background: linear-gradient(180deg, #FF8555 0%, #FF6B35 100%);
+            transform: translate(-50%, -50%) scale(1.08);
+            box-shadow: 0 8px 30px rgba(255,107,53,0.7), 0 0 40px rgba(255,215,0,0.5);
+        }
+        /* 游戏提示 */
+        #gameMsg {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 10px 25px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+            color: #FFD700;
+            border-radius: 25px;
+            font-size: 16px;
+            z-index: 50;
+            border: 2px solid #FFD700;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+        }
+        /* 信息面板 */
+        #infoPanel {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 10px 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 50;
+            border: 2px solid #FFD700;
+        }
+        /* 重新开始按钮 */
+        #restartBtn {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 40px;
+            font-size: 20px;
+            background: linear-gradient(180deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: 3px solid #FFD700;
+            border-radius: 12px;
+            cursor: pointer;
+            z-index: 100;
+            font-family: 'Microsoft YaHei', sans-serif;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        #restartBtn:hover {
+            background: linear-gradient(180deg, #66BB6A 0%, #4CAF50 100%);
+        }
+        /* 音乐控制 */
+        #musicBtn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            padding: 10px 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 50;
+            transition: all 0.3s;
+        }
+        #musicBtn:hover {
+            background: linear-gradient(180deg, rgba(50,50,0,0.8) 0%, rgba(30,30,0,0.9) 100%);
+            transform: scale(1.05);
+        }
+        /* 音效提示 */
+        .effect-hint {
+            position: absolute;
+            font-size: 20px;
+            color: #FFD700;
+            font-weight: bold;
+            z-index: 60;
+            animation: floatUp 1s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
+        }
+        /* 击中效果 */
+        .hit-effect {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff6b6b 0%, transparent 70%);
+            animation: explode 0.5s ease-out forwards;
+            pointer-events: none;
+            z-index: 40;
+        }
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- 游戏提示 -->
+        <div id="gameMsg">🎮 点击托塔李天王发射塔，哪吒可飞向敌人</div>
+        
+        <!-- 信息面板 -->
+        <div id="infoPanel">
+            <div>步数: <span id="stepCount">0</span></div>
+        </div>
+        
+        <!-- 星星背景 -->
+        <div class="bg-star" style="width:3px;height:3px;top:30px;left:50px;animation-delay:0s;"></div>
+        <div class="bg-star" style="width:2px;height:2px;top:60px;left:150px;animation-delay:0.5s;"></div>
+        <div class="bg-star" style="width:4px;height:4px;top:100px;left:300px;animation-delay:1s;"></div>
+        <div class="bg-star" style="width:2px;height:2px;top:80px;left:450px;animation-delay:1.5s;"></div>
+        <div class="bg-star" style="width:3px;height:3px;top:120px;left:550px;animation-delay:0.3s;"></div>
+        <div class="bg-star" style="width:2px;height:2px;top:50px;left:700px;animation-delay:0.8s;"></div>
+        <div class="bg-star" style="width:3px;height:3px;top:200px;left:100px;animation-delay:1.2s;"></div>
+        <div class="bg-star" style="width:2px;height:2px;top:250px;left:350px;animation-delay:0.7s;"></div>
+        <div class="bg-star" style="width:4px;height:4px;top:300px;left:500px;animation-delay:1.8s;"></div>
+        
+        <!-- 云雾 -->
+        <div class="mist" style="width:150px;height:80px;top:150px;left:50px;opacity:0.3;"></div>
+        <div class="mist" style="width:120px;height:60px;top:300px;left:400px;opacity:0.2;"></div>
+        
+        <!-- 道路容器 -->
+        <div id="roadSegments"></div>
+        
+        <!-- 天宫 -->
+        <div id="tiangong"></div>
+        <div class="palace-decor" style="top:15px;left:770px;">✨</div>
+        <div class="palace-decor" style="top:35px;left:800px;">✨</div>
+        
+        <!-- 托塔李天王 -->
+        <div id="litianwang" class="character" onclick="shootTower()">
+            <div class="character-icon">👨‍🦱</div>
+            <div class="character-label">托塔李天王</div>
+        </div>
+        
+        <!-- 哪吒 -->
+        <div id="nezha" class="character" onclick="nezhaAttack()">
+            <div class="character-icon">🦁</div>
+            <div class="character-label">哪吒</div>
+        </div>
+        
+        <!-- 孙悟空 -->
+        <div id="wukong" class="character">
+            <div class="character-icon">🐵</div>
+            <div class="character-label">孙悟空</div>
+        </div>
+        
+        <!-- 哪吒飞行状态 -->
+        <div id="nezhaFlying">🦁</div>
+        
+        <!-- 开始按钮 -->
+        <button id="startBtn" onclick="startGame()">🎮 开始大闹天宫</button>
+        
+        <!-- 重新开始按钮 -->
+        <button id="restartBtn" onclick="restartGame()">🔄 再来一局</button>
+        
+        <!-- 音乐控制 -->
+        <button id="musicBtn" onclick="toggleMusic()">🔇 音乐</button>
+        
+        <!-- 背景音乐 - 使用多个可能的源 -->
+        <audio id="bgMusic" loop preload="auto">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // 游戏配置
+        const config = {
+            containerWidth: 900,
+            containerHeight: 700,
+            roadWidth: 60,
+            wukongSpeed: 2.5,
+            towerSpeed: 10,
+            nezhaSpeed: 6
+        };
+        
+        // 道路路径点 - 从左下到右上的折线路径
+        const roadPath = [
+            { x: 0, y: 650 },      // 起点 (左下)
+            { x: 250, y: 650 },    // 向右
+            { x: 250, y: 480 },    // 向上
+            { x: 500, y: 480 },    // 向右
+            { x: 500, y: 300 },    // 向上
+            { x: 700, y: 300 },    // 向右
+            { x: 700, y: 150 },    // 向上
+            { x: 780, y: 150 }     // 终点 (天宫位置)
+        ];
+        
+        // 游戏状态
+        let gameState = {
+            isRunning: false,
+            wukongPathIndex: 0,
+            wukongProgress: 0,
+            stepCount: 0,
+            wukongStartPos: { x: 30, y: 620 },
+            wukongPos: { x: 30, y: 620 },
+            towerFlying: false,
+            nezhaFlying: false
+        };
+        
+        // 动画ID
+        let animationId = null;
+        let isMusicPlaying = false;
+        
+        // 切换音乐
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicBtn');
+            
+            if (isMusicPlaying) {
+                music.pause();
+                btn.textContent = '🔇 音乐';
+                isMusicPlaying = false;
+            } else {
+                music.currentTime = 0;
+                music.play().then(() => {
+                    btn.textContent = '🔊 音乐';
+                    isMusicPlaying = true;
+                }).catch(e => {
+                    console.log('音乐播放失败:', e);
+                    btn.textContent = '❌ 无音乐';
+                });
+            }
+        }
+        
+        // 初始化道路
+        function initRoad() {
+            const segmentsContainer = document.getElementById('roadSegments');
+            segmentsContainer.innerHTML = '';
+            
+            for (let i = 0; i < roadPath.length - 1; i++) {
+                const start = roadPath[i];
+                const end = roadPath[i + 1];
+                
+                const segment = document.createElement('div');
+                segment.className = 'road';
+                
+                if (start.x === end.x) {
+                    // 垂直道路
+                    const top = Math.min(start.y, end.y);
+                    const height = Math.abs(end.y - start.y);
+                    segment.style.left = (start.x - config.roadWidth / 2) + 'px';
+                    segment.style.top = top + 'px';
+                    segment.style.width = config.roadWidth + 'px';
+                    segment.style.height = height + 'px';
+                    // 垂直道路的线
+                    segment.style.background = 'linear-gradient(90deg, #e8e8e8 0%, #f5f5f5 50%, #e8e8e8 100%)';
+                } else {
+                    // 水平道路
+                    const left = Math.min(start.x, end.x);
+                    const width = Math.abs(end.x - start.x);
+                    segment.style.left = left + 'px';
+                    segment.style.top = (start.y - config.roadWidth / 2) + 'px';
+                    segment.style.width = width + 'px';
+                    segment.style.height = config.roadWidth + 'px';
+                }
+                
+                segmentsContainer.appendChild(segment);
+            }
+            
+            // 放置天宫
+            const tiangong = document.getElementById('tiangong');
+            tiangong.style.left = '720px';
+            tiangong.style.top = '20px';
+            
+            // 放置托塔李天王 (道路左侧中间位置)
+            const litianwang = document.getElementById('litianwang');
+            litianwang.style.left = '150px';
+            litianwang.style.top = '420px';
+            
+            // 放置哪吒 (道路右侧)
+            const nezha = document.getElementById('nezha');
+            nezha.style.left = '600px';
+            nezha.style.top = '550px';
+        }
+        
+        // 开始游戏
+        function startGame() {
+            document.getElementById('startBtn').style.display = 'none';
+            gameState.isRunning = true;
+            gameState.wukongPathIndex = 0;
+            gameState.wukongProgress = 0;
+            gameState.stepCount = 0;
+            document.getElementById('stepCount').textContent = '0';
+            
+            resetWukong();
+            gameLoop();
+        }
+        
+        // 重置孙悟空
+        function resetWukong() {
+            gameState.wukongPathIndex = 0;
+            gameState.wukongProgress = 0;
+            const wukong = document.getElementById('wukong');
+            wukong.style.left = gameState.wukongStartPos.x + 'px';
+            wukong.style.top = gameState.wukongStartPos.y + 'px';
+            wukong.style.opacity = '1';
+            gameState.wukongPos = { ...gameState.wukongStartPos };
+        }
+        
+        // 游戏主循环
+        function gameLoop() {
+            if (!gameState.isRunning) return;
+            
+            moveWukong();
+            animationId = requestAnimationFrame(gameLoop);
+        }
+        
+        // 移动孙悟空
+        function moveWukong() {
+            if (gameState.wukongPathIndex >= roadPath.length - 1) {
+                winGame();
+                return;
+            }
+            
+            const currentPoint = roadPath[gameState.wukongPathIndex];
+            const nextPoint = roadPath[gameState.wukongPathIndex + 1];
+            
+            const dx = nextPoint.x - currentPoint.x;
+            const dy = nextPoint.y - currentPoint.y;
+            const segmentLength = Math.sqrt(dx * dx + dy * dy);
+            
+            gameState.wukongProgress += config.wukongSpeed;
+            
+            if (gameState.wukongProgress >= segmentLength) {
+                gameState.wukongProgress = 0;
+                gameState.wukongPathIndex++;
+                
+                if (gameState.wukongPathIndex >= roadPath.length - 1) {
+                    winGame();
+                    return;
+                }
+            }
+            
+            const ratio = gameState.wukongProgress / segmentLength;
+            const newX = currentPoint.x + dx * ratio - 20;
+            const newY = currentPoint.y + dy * ratio - 20;
+            
+            gameState.wukongPos.x = newX;
+            gameState.wukongPos.y = newY;
+            
+            const wukong = document.getElementById('wukong');
+            wukong.style.left = newX + 'px';
+            wukong.style.top = newY + 'px';
+            
+            gameState.stepCount++;
+            if (gameState.stepCount % 30 === 0) {
+                document.getElementById('stepCount').textContent = Math.floor(gameState.stepCount / 30);
+            }
+            
+            checkWinCondition(newX, newY);
+        }
+        
+        // 检测胜利条件
+        function checkWinCondition(x, y) {
+            const tiangongX = 795;
+            const tiangongY = 85;
+            
+            const distance = Math.sqrt(Math.pow(x - tiangongX, 2) + Math.pow(y - tiangongY, 2));
+            
+            if (distance < 70) {
+                winGame();
+            }
+        }
+        
+        // 胜利
+        function winGame() {
+            gameState.isRunning = false;
+            cancelAnimationFrame(animationId);
+            
+            const msg = document.getElementById('gameMsg');
+            msg.textContent = '🎉 恭喜！大闹天宫成功！';
+            msg.style.color = '#00ff00';
+            
+            // 显示特效
+            showEffect(document.getElementById('wukong'), '🎊');
+            
+            document.getElementById('restartBtn').style.display = 'block';
+        }
+        
+        // 显示浮动特效
+        function showEffect(element, text) {
+            const rect = element.getBoundingClientRect();
+            const container = document.getElementById('gameContainer');
+            const containerRect = container.getBoundingClientRect();
+            
+            const effect = document.createElement('div');
+            effect.className = 'effect-hint';
+            effect.textContent = text;
+            effect.style.left = (rect.left - containerRect.left + rect.width/2 - 20) + 'px';
+            effect.style.top = (rect.top - containerRect.top - 20) + 'px';
+            container.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 1000);
+        }
+        
+        // 显示击中效果
+        function showHitEffect(x, y) {
+            const container = document.getElementById('gameContainer');
+            const effect = document.createElement('div');
+            effect.className = 'hit-effect';
+            effect.style.left = (x - 30) + 'px';
+            effect.style.top = (y - 30) + 'px';
+            container.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 500);
+        }
+        
+        // 托塔李天王发射塔 - 向右飞行，飞到道路末端收回
+        function shootTower() {
+            if (!gameState.isRunning || gameState.towerFlying) return;
+            
+            const container = document.getElementById('gameContainer');
+            
+            // 发射位置 (托塔李天王位置，稍微偏移)
+            const startX = 190;
+            const startY = 450;
+            
+            // 创建塔
+            const tower = document.createElement('div');
+            tower.className = 'tower';
+            tower.textContent = '🗼';
+            tower.style.left = startX + 'px';
+            tower.style.top = startY + 'px';
+            container.appendChild(tower);
+            
+            gameState.towerFlying = true;
+            showEffect(document.getElementById('litianwang'), '发射!');
+            
+            let towerX = startX;
+            let towerY = startY;
+            const maxDistance = 550; // 飞到道路末端
+            
+            function animateTower() {
+                towerX += config.towerSpeed;
+                tower.style.left = towerX + 'px';
+                
+                // 检测碰撞
+                const towerDist = Math.sqrt(
+                    Math.pow(towerX - (gameState.wukongPos.x + 20), 2) +
+                    Math.pow(towerY - (gameState.wukongPos.y + 20), 2)
+                );
+                
+                if (towerDist < 35) {
+                    tower.remove();
+                    gameState.towerFlying = false;
+                    showHitEffect(gameState.wukongPos.x + 20, gameState.wukongPos.y + 20);
+                    wukongHit();
+                    return;
+                }
+                
+                // 飞到末端收回
+                if (towerX > startX + maxDistance) {
+                    // 收回动画
+                    let returnScale = 1;
+                    let returnOpacity = 1;
+                    const returnInterval = setInterval(() => {
+                        returnScale -= 0.1;
+                        returnOpacity -= 0.1;
+                        tower.style.transform = `scale(${Math.max(0, returnScale)})`;
+                        tower.style.opacity = Math.max(0, returnOpacity);
+                        
+                        if (returnScale <= 0) {
+                            clearInterval(returnInterval);
+                            tower.remove();
+                            gameState.towerFlying = false;
+                        }
+                    }, 30);
+                    return;
+                }
+                
+                requestAnimationFrame(animateTower);
+            }
+            
+            animateTower();
+        }
+        
+        // 哪吒攻击 - 向上飞，飞到顶部回到原位
+        function nezhaAttack() {
+            if (!gameState.isRunning || gameState.nezhaFlying) return;
+            
+            const nezhaFlying = document.getElementById('nezhaFlying');
+            const nezha = document.getElementById('nezha');
+            
+            // 哪吒原位
+            const startX = 630;
+            const startY = 580;
+            
+            // 飞行目标 - 向上飞
+            const targetY = 100;
+            
+            nezhaFlying.style.left = startX + 'px';
+            nezhaFlying.style.top = startY + 'px';
+            nezhaFlying.style.display = 'block';
+            nezha.style.opacity = '0.3';
+            
+            gameState.nezhaFlying = true;
+            showEffect(nezha, '起飞!');
+            
+            let currentX = startX;
+            let currentY = startY;
+            let phase = 'up';
+            
+            function animateNezha() {
+                if (phase === 'up') {
+                    currentY -= config.nezhaSpeed;
+                    nezhaFlying.style.top = currentY + 'px';
+                    
+                    // 检测碰撞
+                    const dist = Math.sqrt(
+                        Math.pow(currentX - (gameState.wukongPos.x + 20), 2) +
+                        Math.pow(currentY - (gameState.wukongPos.y + 20), 2)
+                    );
+                    
+                    if (dist < 40) {
+                        nezhaFlying.style.display = 'none';
+                        nezha.style.opacity = '1';
+                        gameState.nezhaFlying = false;
+                        showHitEffect(gameState.wukongPos.x + 20, gameState.wukongPos.y + 20);
+                        wukongHit();
+                        return;
+                    }
+                    
+                    // 飞到顶部
+                    if (currentY <= targetY) {
+                        phase = 'back';
+                    } else {
+                        requestAnimationFrame(animateNezha);
+                    }
+                } else {
+                    // 返回原位
+                    const dx = startX - currentX;
+                    const dy = startY - currentY;
+                    const distToHome = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distToHome < config.nezhaSpeed) {
+                        nezhaFlying.style.display = 'none';
+                        nezha.style.opacity = '1';
+                        gameState.nezhaFlying = false;
+                        return;
+                    }
+                    
+                    currentX += dx * config.nezhaSpeed / distToHome;
+                    currentY += dy * config.nezhaSpeed / distToHome;
+                    nezhaFlying.style.left = currentX + 'px';
+                    nezhaFlying.style.top = currentY + 'px';
+                    
+                    requestAnimationFrame(animateNezha);
+                }
+            }
+            
+            animateNezha();
+        }
+        
+        // 孙悟空被击中
+        function wukongHit() {
+            const msg = document.getElementById('gameMsg');
+            msg.textContent = '💥 击中孙悟空！重新开始...';
+            msg.style.color = '#ff6b6b';
+            
+            cancelAnimationFrame(animationId);
+            
+            const wukong = document.getElementById('wukong');
+            let blinkCount = 0;
+            
+            function blink() {
+                blinkCount++;
+                wukong.style.opacity = blinkCount % 2 === 0 ? '1' : '0.3';
+                
+                if (blinkCount < 8) {
+                    setTimeout(blink, 150);
+                } else {
+                    resetWukong();
+                    msg.textContent = '🎮 点击托塔李天王发射塔，哪吒可飞向敌人';
+                    msg.style.color = '#FFD700';
+                    gameLoop();
+                }
+            }
+            
+            blink();
+        }
+        
+        // 重新开始游戏
+        function restartGame() {
+            document.getElementById('restartBtn').style.display = 'none';
+            
+            const msg = document.getElementById('gameMsg');
+            msg.textContent = '🎮 点击托塔李天王发射塔，哪吒可飞向敌人';
+            msg.style.color = '#FFD700';
+            
+            gameState.wukongPathIndex = 0;
+            gameState.wukongProgress = 0;
+            gameState.stepCount = 0;
+            gameState.towerFlying = false;
+            gameState.nezhaFlying = false;
+            document.getElementById('stepCount').textContent = '0';
+            
+            resetWukong();
+            gameState.isRunning = true;
+            gameLoop();
+        }
+        
+        // 页面加载完成后初始化
+        window.onload = function() {
+            initRoad();
+        };
+    </script>
+</body>
+</html>

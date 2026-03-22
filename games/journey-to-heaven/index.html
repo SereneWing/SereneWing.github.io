@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西游记 - 大闹天宫</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #2a2a6e 100%);
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+        }
+        #gameContainer {
+            position: relative;
+            width: 900px;
+            height: 700px;
+            background: linear-gradient(180deg, #1a0a3e 0%, #2a1a5e 30%, #3a2a7e 60%, #4a3a8e 100%);
+            border: 5px solid #FFD700;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5), inset 0 0 100px rgba(100, 100, 255, 0.1);
+        }
+        /* Star background */
+        .bg-star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        /* Mist effect */
+        .mist {
+            position: absolute;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        /* Road - White stone path */
+        .road {
+            position: absolute;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #f0f0f0 100%);
+            border: 3px solid #ccc;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .road::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, transparent 0px, transparent 15px, #ddd 15px, #ddd 20px);
+        }
+        /* Heavenly Palace */
+        #tiangong {
+            position: absolute;
+            width: 150px;
+            height: 130px;
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+            border: 4px solid #8B4513;
+            border-radius: 15px 15px 5px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.5);
+            z-index: 30;
+        }
+        #tiangong::before {
+            content: '🏯';
+            font-size: 50px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        #tiangong::after {
+            content: '天宫';
+            color: #8B4513;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #FFD700;
+        }
+        /* Palace decoration */
+        .palace-decor {
+            position: absolute;
+            font-size: 24px;
+            z-index: 31;
+        }
+        /* Character base style */
+        .character {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            z-index: 10;
+        }
+        .character-icon {
+            font-size: 42px;
+            filter: drop-shadow(3px 3px 3px rgba(0,0,0,0.5));
+            transition: transform 0.2s;
+        }
+        .character-label {
+            font-size: 14px;
+            color: #fff;
+            background: linear-gradient(180deg, #333 0%, #111 100%);
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-top: 4px;
+            border: 2px solid #FFD700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        /* Sun Wukong */
+        #wukong {
+            z-index: 15;
+            animation: wukongBounce 0.4s ease-in-out infinite;
+        }
+        @keyframes wukongBounce {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+        /* Li Tianwang */
+        #litianwang {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #litianwang:hover {
+            transform: scale(1.1);
+        }
+        #litianwang:hover .character-icon {
+            transform: rotate(15deg);
+        }
+        /* Nezha */
+        #nezha {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #nezha:hover {
+            transform: scale(1.1);
+        }
+        /* Tower attack */
+        .tower {
+            position: absolute;
+            font-size: 36px;
+            z-index: 25;
+            pointer-events: none;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+        }
+        /* Nezha flying */
+        #nezhaFlying {
+            position: absolute;
+            font-size: 42px;
+            z-index: 25;
+            display: none;
+            pointer-events: none;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+        }
+        /* Start button */
+        #startBtn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 18px 50px;
+            font-size: 24px;
+            background: linear-gradient(180deg, #FF6B35 0%, #E55A2B 100%);
+            color: white;
+            border: 4px solid #FFD700;
+            border-radius: 15px;
+            cursor: pointer;
+            z-index: 100;
+            font-family: 'Microsoft YaHei', sans-serif;
+            box-shadow: 0 5px 20px rgba(255,107,53,0.5), 0 0 30px rgba(255,215,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: all 0.3s;
+        }
+        #startBtn:hover {
+            background: linear-gradient(180deg, #FF8555 0%, #FF6B35 100%);
+            transform: translate(-50%, -50%) scale(1.08);
+            box-shadow: 0 8px 30px rgba(255,107,53,0.7), 0 0 40px rgba(255,215,0,0.5);
+        }
+        /* Game message */
+        #gameMsg {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 10px 25px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+            color: #FFD700;
+            border-radius: 25px;
+            font-size: 16px;
+            z-index: 50;
+            border: 2px solid #FFD700;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+        }
+        /* Info panel */
+        #infoPanel {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 10px 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 50;
+            border: 2px solid #FFD700;
+        }
+        /* Restart button */
+        #restartBtn {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 40px;
+            font-size: 20px;
+            background: linear-gradient(180deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: 3px solid #FFD700;
+            border-radius: 12px;
+            cursor: pointer;
+            z-index: 100;
+            font-family: 'Microsoft YaHei', sans-serif;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        #restartBtn:hover {
+            background: linear-gradient(180deg, #66BB6A 0%, #4CAF50 100%);
+        }
+        /* Music control */
+        #musicBtn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            padding: 10px 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 50;
+            transition: all 0.3s;
+        }
+        #musicBtn:hover {
+            background: linear-gradient(180deg, rgba(50,50,0,0.8) 0%, rgba(30,30,0,0.9) 100%);
+            transform: scale(1.05);
+        }
+        /* Effect hint */
+        .effect-hint {
+            position: absolute;
+            font-size: 20px;
+            color: #FFD700;
+            font-weight: bold;
+            z-index: 60;
+            animation: floatUp 1s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
+        }
+        /* Hit effect */
+        .hit-effect {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff6b6b 0%, transparent 70%);
+            animation: explode 0.5s ease-out forwards;
+            pointer-events: none;
+            z-index: 40;
+        }
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- Game message -->
+        <div id="gameMsg">🎮 Click Li Tianwang to shoot tower, Nezha can fly to attack</div>
+        
+        <!-- Info panel -->
+        <div id="infoPanel">
+            <div>Steps: <span id="stepCount">0</span></div>
+        </div>
+        
+        <!-- Star background -->
+        <div class="bg-star" style="width:3px;height:3px;top:30px;left:50px;animation-delay:0s;"></div>
+        <div class="bg-star" style="width:2px;height:2px;top:60px;left:150px;animation-delay:0.5s;"></div>
+        <div class="bg-star" style="width:4px;height:4px;top:100px;left:300px;animation-delay:1s;"></div>
+        <div class="bg-star" style="width:2px;height:2px;top:80px;left:450px;animation-delay:1.5s;"></div>
+        <div class="bg-star" style="width:3px;height:3px;top:120px;left:550px;animation-delay:0.3s;"></div>
+        <div class="bg-star" style="width:2px;height:2px;top:50px;left:700px;animation-delay:0.8s;"></div>
+        <div class="bg-star" style="width:3px;height:3px;top:200px;left:100px;animation-delay:1.2s;"></div>
+        <div class="bg-star" style="width:2px;height:2px;top:250px;left:350px;animation-delay:0.7s;"></div>
+        <div class="bg-star" style="width:4px;height:4px;top:300px;left:500px;animation-delay:1.8s;"></div>
+        
+        <!-- Mist -->
+        <div class="mist" style="width:150px;height:80px;top:150px;left:50px;opacity:0.3;"></div>
+        <div class="mist" style="width:120px;height:60px;top:300px;left:400px;opacity:0.2;"></div>
+        
+        <!-- Road container -->
+        <div id="roadSegments"></div>
+        
+        <!-- Heavenly Palace -->
+        <div id="tiangong"></div>
+        <div class="palace-decor" style="top:15px;left:770px;">✨</div>
+        <div class="palace-decor" style="top:35px;left:800px;">✨</div>
+        
+        <!-- Li Tianwang -->
+        <div id="litianwang" class="character" onclick="shootTower()">
+            <div class="character-icon">👨‍🦱</div>
+            <div class="character-label">Li Tianwang</div>
+        </div>
+        
+        <!-- Nezha -->
+        <div id="nezha" class="character" onclick="nezhaAttack()">
+            <div class="character-icon">🦁</div>
+            <div class="character-label">Nezha</div>
+        </div>
+        
+        <!-- Sun Wukong -->
+        <div id="wukong" class="character">
+            <div class="character-icon">🐵</div>
+            <div class="character-label">Sun Wukong</div>
+        </div>
+        
+        <!-- Nezha flying state -->
+        <div id="nezhaFlying">🦁</div>
+        
+        <!-- Start button -->
+        <button id="startBtn" onclick="startGame()">🎮 Start Game</button>
+        
+        <!-- Restart button -->
+        <button id="restartBtn" onclick="restartGame()">🔄 Play Again</button>
+        
+        <!-- Music control -->
+        <button id="musicBtn" onclick="toggleMusic()">🔇 Music</button>
+        
+        <!-- Background music -->
+        <audio id="bgMusic" loop preload="auto">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // Game configuration
+        const config = {
+            containerWidth: 900,
+            containerHeight: 700,
+            roadWidth: 60,
+            wukongSpeed: 2.5,
+            towerSpeed: 10,
+            nezhaSpeed: 6
+        };
+        
+        // Road path points - zigzag from bottom-left to top-right
+        const roadPath = [
+            { x: 0, y: 650 },      // Start (bottom-left)
+            { x: 250, y: 650 },    // Go right
+            { x: 250, y: 480 },    // Go up
+            { x: 500, y: 480 },    // Go right
+            { x: 500, y: 300 },    // Go up
+            { x: 700, y: 300 },    // Go right
+            { x: 700, y: 150 },    // Go up
+            { x: 780, y: 150 }     // End (palace position)
+        ];
+        
+        // Game state
+        let gameState = {
+            isRunning: false,
+            wukongPathIndex: 0,
+            wukongProgress: 0,
+            stepCount: 0,
+            wukongStartPos: { x: 30, y: 620 },
+            wukongPos: { x: 30, y: 620 },
+            towerFlying: false,
+            nezhaFlying: false
+        };
+        
+        // Animation ID
+        let animationId = null;
+        let isMusicPlaying = false;
+        
+        // Toggle music
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicBtn');
+            
+            if (isMusicPlaying) {
+                music.pause();
+                btn.textContent = '🔇 Music';
+                isMusicPlaying = false;
+            } else {
+                music.currentTime = 0;
+                music.play().then(() => {
+                    btn.textContent = '🔊 Music';
+                    isMusicPlaying = true;
+                }).catch(e => {
+                    console.log('Music play failed:', e);
+                    btn.textContent = '❌ No Music';
+                });
+            }
+        }
+        
+        // Initialize road
+        function initRoad() {
+            const segmentsContainer = document.getElementById('roadSegments');
+            segmentsContainer.innerHTML = '';
+            
+            for (let i = 0; i < roadPath.length - 1; i++) {
+                const start = roadPath[i];
+                const end = roadPath[i + 1];
+                
+                const segment = document.createElement('div');
+                segment.className = 'road';
+                
+                if (start.x === end.x) {
+                    // Vertical road
+                    const top = Math.min(start.y, end.y);
+                    const height = Math.abs(end.y - start.y);
+                    segment.style.left = (start.x - config.roadWidth / 2) + 'px';
+                    segment.style.top = top + 'px';
+                    segment.style.width = config.roadWidth + 'px';
+                    segment.style.height = height + 'px';
+                    segment.style.background = 'linear-gradient(90deg, #e8e8e8 0%, #f5f5f5 50%, #e8e8e8 100%)';
+                } else {
+                    // Horizontal road
+                    const left = Math.min(start.x, end.x);
+                    const width = Math.abs(end.x - start.x);
+                    segment.style.left = left + 'px';
+                    segment.style.top = (start.y - config.roadWidth / 2) + 'px';
+                    segment.style.width = width + 'px';
+                    segment.style.height = config.roadWidth + 'px';
+                }
+                
+                segmentsContainer.appendChild(segment);
+            }
+            
+            // Position Heavenly Palace
+            const tiangong = document.getElementById('tiangong');
+            tiangong.style.left = '720px';
+            tiangong.style.top = '20px';
+            
+            // Position Li Tianwang
+            const litianwang = document.getElementById('litianwang');
+            litianwang.style.left = '150px';
+            litianwang.style.top = '420px';
+            
+            // Position Nezha
+            const nezha = document.getElementById('nezha');
+            nezha.style.left = '600px';
+            nezha.style.top = '550px';
+        }
+        
+        // Start game
+        function startGame() {
+            document.getElementById('startBtn').style.display = 'none';
+            gameState.isRunning = true;
+            gameState.wukongPathIndex = 0;
+            gameState.wukongProgress = 0;
+            gameState.stepCount = 0;
+            document.getElementById('stepCount').textContent = '0';
+            
+            resetWukong();
+            gameLoop();
+        }
+        
+        // Reset Sun Wukong
+        function resetWukong() {
+            gameState.wukongPathIndex = 0;
+            gameState.wukongProgress = 0;
+            const wukong = document.getElementById('wukong');
+            wukong.style.left = gameState.wukongStartPos.x + 'px';
+            wukong.style.top = gameState.wukongStartPos.y + 'px';
+            wukong.style.opacity = '1';
+            gameState.wukongPos = { ...gameState.wukongStartPos };
+        }
+        
+        // Game main loop
+        function gameLoop() {
+            if (!gameState.isRunning) return;
+            
+            moveWukong();
+            animationId = requestAnimationFrame(gameLoop);
+        }
+        
+        // Move Sun Wukong
+        function moveWukong() {
+            if (gameState.wukongPathIndex >= roadPath.length - 1) {
+                winGame();
+                return;
+            }
+            
+            const currentPoint = roadPath[gameState.wukongPathIndex];
+            const nextPoint = roadPath[gameState.wukongPathIndex + 1];
+            
+            const dx = nextPoint.x - currentPoint.x;
+            const dy = nextPoint.y - currentPoint.y;
+            const segmentLength = Math.sqrt(dx * dx + dy * dy);
+            
+            gameState.wukongProgress += config.wukongSpeed;
+            
+            if (gameState.wukongProgress >= segmentLength) {
+                gameState.wukongProgress = 0;
+                gameState.wukongPathIndex++;
+                
+                if (gameState.wukongPathIndex >= roadPath.length - 1) {
+                    winGame();
+                    return;
+                }
+            }
+            
+            const ratio = gameState.wukongProgress / segmentLength;
+            const newX = currentPoint.x + dx * ratio - 20;
+            const newY = currentPoint.y + dy * ratio - 20;
+            
+            gameState.wukongPos.x = newX;
+            gameState.wukongPos.y = newY;
+            
+            const wukong = document.getElementById('wukong');
+            wukong.style.left = newX + 'px';
+            wukong.style.top = newY + 'px';
+            
+            gameState.stepCount++;
+            if (gameState.stepCount % 30 === 0) {
+                document.getElementById('stepCount').textContent = Math.floor(gameState.stepCount / 30);
+            }
+            
+            checkWinCondition(newX, newY);
+        }
+        
+        // Check win condition
+        function checkWinCondition(x, y) {
+            const tiangongX = 795;
+            const tiangongY = 85;
+            
+            const distance = Math.sqrt(Math.pow(x - tiangongX, 2) + Math.pow(y - tiangongY, 2));
+            
+            if (distance < 70) {
+                winGame();
+            }
+        }
+        
+        // Win
+        function winGame() {
+            gameState.isRunning = false;
+            cancelAnimationFrame(animationId);
+            
+            const msg = document.getElementById('gameMsg');
+            msg.textContent = '🎉 Congratulations! Storming the Heavenly Palace Success!';
+            msg.style.color = '#00ff00';
+            
+            // Show effect
+            showEffect(document.getElementById('wukong'), '🎊');
+            
+            document.getElementById('restartBtn').style.display = 'block';
+        }
+        
+        // Show floating effect
+        function showEffect(element, text) {
+            const rect = element.getBoundingClientRect();
+            const container = document.getElementById('gameContainer');
+            const containerRect = container.getBoundingClientRect();
+            
+            const effect = document.createElement('div');
+            effect.className = 'effect-hint';
+            effect.textContent = text;
+            effect.style.left = (rect.left - containerRect.left + rect.width/2 - 20) + 'px';
+            effect.style.top = (rect.top - containerRect.top - 20) + 'px';
+            container.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 1000);
+        }
+        
+        // Show hit effect
+        function showHitEffect(x, y) {
+            const container = document.getElementById('gameContainer');
+            const effect = document.createElement('div');
+            effect.className = 'hit-effect';
+            effect.style.left = (x - 30) + 'px';
+            effect.style.top = (y - 30) + 'px';
+            container.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 500);
+        }
+        
+        // Li Tianwang shoots tower - flies right, returns at road end
+        function shootTower() {
+            if (!gameState.isRunning || gameState.towerFlying) return;
+            
+            const container = document.getElementById('gameContainer');
+            
+            // Start position
+            const startX = 190;
+            const startY = 450;
+            
+            // Create tower
+            const tower = document.createElement('div');
+            tower.className = 'tower';
+            tower.textContent = '🗼';
+            tower.style.left = startX + 'px';
+            tower.style.top = startY + 'px';
+            container.appendChild(tower);
+            
+            gameState.towerFlying = true;
+            showEffect(document.getElementById('litianwang'), 'Shoot!');
+            
+            let towerX = startX;
+            let towerY = startY;
+            const maxDistance = 550;
+            
+            function animateTower() {
+                towerX += config.towerSpeed;
+                tower.style.left = towerX + 'px';
+                
+                // Check collision
+                const towerDist = Math.sqrt(
+                    Math.pow(towerX - (gameState.wukongPos.x + 20), 2) +
+                    Math.pow(towerY - (gameState.wukongPos.y + 20), 2)
+                );
+                
+                if (towerDist < 35) {
+                    tower.remove();
+                    gameState.towerFlying = false;
+                    showHitEffect(gameState.wukongPos.x + 20, gameState.wukongPos.y + 20);
+                    wukongHit();
+                    return;
+                }
+                
+                // Return at road end
+                if (towerX > startX + maxDistance) {
+                    let returnScale = 1;
+                    let returnOpacity = 1;
+                    const returnInterval = setInterval(() => {
+                        returnScale -= 0.1;
+                        returnOpacity -= 0.1;
+                        tower.style.transform = `scale(${Math.max(0, returnScale)})`;
+                        tower.style.opacity = Math.max(0, returnOpacity);
+                        
+                        if (returnScale <= 0) {
+                            clearInterval(returnInterval);
+                            tower.remove();
+                            gameState.towerFlying = false;
+                        }
+                    }, 30);
+                    return;
+                }
+                
+                requestAnimationFrame(animateTower);
+            }
+            
+            animateTower();
+        }
+        
+        // Nezha attacks - flies up, returns to original position
+        function nezhaAttack() {
+            if (!gameState.isRunning || gameState.nezhaFlying) return;
+            
+            const nezhaFlying = document.getElementById('nezhaFlying');
+            const nezha = document.getElementById('nezha');
+            
+            // Original position
+            const startX = 630;
+            const startY = 580;
+            
+            // Target - fly up
+            const targetY = 100;
+            
+            nezhaFlying.style.left = startX + 'px';
+            nezhaFlying.style.top = startY + 'px';
+            nezhaFlying.style.display = 'block';
+            nezha.style.opacity = '0.3';
+            
+            gameState.nezhaFlying = true;
+            showEffect(nezha, 'Take off!');
+            
+            let currentX = startX;
+            let currentY = startY;
+            let phase = 'up';
+            
+            function animateNezha() {
+                if (phase === 'up') {
+                    currentY -= config.nezhaSpeed;
+                    nezhaFlying.style.top = currentY + 'px';
+                    
+                    // Check collision
+                    const dist = Math.sqrt(
+                        Math.pow(currentX - (gameState.wukongPos.x + 20), 2) +
+                        Math.pow(currentY - (gameState.wukongPos.y + 20), 2)
+                    );
+                    
+                    if (dist < 40) {
+                        nezhaFlying.style.display = 'none';
+                        nezha.style.opacity = '1';
+                        gameState.nezhaFlying = false;
+                        showHitEffect(gameState.wukongPos.x + 20, gameState.wukongPos.y + 20);
+                        wukongHit();
+                        return;
+                    }
+                    
+                    // Fly to top
+                    if (currentY <= targetY) {
+                        phase = 'back';
+                    } else {
+                        requestAnimationFrame(animateNezha);
+                    }
+                } else {
+                    // Return to original position
+                    const dx = startX - currentX;
+                    const dy = startY - currentY;
+                    const distToHome = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distToHome < config.nezhaSpeed) {
+                        nezhaFlying.style.display = 'none';
+                        nezha.style.opacity = '1';
+                        gameState.nezhaFlying = false;
+                        return;
+                    }
+                    
+                    currentX += dx * config.nezhaSpeed / distToHome;
+                    currentY += dy * config.nezhaSpeed / distToHome;
+                    nezhaFlying.style.left = currentX + 'px';
+                    nezhaFlying.style.top = currentY + 'px';
+                    
+                    requestAnimationFrame(animateNezha);
+                }
+            }
+            
+            animateNezha();
+        }
+        
+        // Sun Wukong gets hit
+        function wukongHit() {
+            const msg = document.getElementById('gameMsg');
+            msg.textContent = '💥 Sun Wukong hit! Restarting...';
+            msg.style.color = '#ff6b6b';
+            
+            cancelAnimationFrame(animationId);
+            
+            const wukong = document.getElementById('wukong');
+            let blinkCount = 0;
+            
+            function blink() {
+                blinkCount++;
+                wukong.style.opacity = blinkCount % 2 === 0 ? '1' : '0.3';
+                
+                if (blinkCount < 8) {
+                    setTimeout(blink, 150);
+                } else {
+                    resetWukong();
+                    msg.textContent = '🎮 Click Li Tianwang to shoot tower, Nezha can fly to attack';
+                    msg.style.color = '#FFD700';
+                    gameLoop();
+                }
+            }
+            
+            blink();
+        }
+        
+        // Restart game
+        function restartGame() {
+            document.getElementById('restartBtn').style.display = 'none';
+            
+            const msg = document.getElementById('gameMsg');
+            msg.textContent = '🎮 Click Li Tianwang to shoot tower, Nezha can fly to attack';
+            msg.style.color = '#FFD700';
+            
+            gameState.wukongPathIndex = 0;
+            gameState.wukongProgress = 0;
+            gameState.stepCount = 0;
+            gameState.towerFlying = false;
+            gameState.nezhaFlying = false;
+            document.getElementById('stepCount').textContent = '0';
+            
+            resetWukong();
+            gameState.isRunning = true;
+            gameLoop();
+        }
+        
+        // Initialize on page load
+        window.onload = function() {
+            initRoad();
+        };
+    </script>
+</body>
+</html>
