@@ -60,6 +60,61 @@ const icons = {
     resources: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
 };
 
+// Calculate relative path prefix to navigate from current page to site root
+function getPathPrefix() {
+    // Get current path relative to site root
+    const path = window.location.pathname;
+    
+    // Count directory levels to go back to reach root
+    // Root index.html: / -> 0 levels
+    // Module index: /s/{module}/ -> 1 level (back to root)
+    // Sub-page: /s/{module}/{subpage}/ -> 2 levels
+    // Deep sub-page: /s/{module}/{year}/{month}/{slug}/ -> 4 levels
+    
+    const segments = path.split('/').filter(s => s.length > 0);
+    // segments = ['s', 'module', 'subpage1', ...]
+    // Number of ../ needed = number of segments (each segment is one level down from root)
+    
+    if (segments.length <= 1) {
+        // At root or index page, no prefix needed
+        return '';
+    }
+    
+    // Each segment needs one ../ to go back
+    return '../'.repeat(segments.length);
+}
+
+// Get the target module path from current location
+function getModulePath(moduleId) {
+    const prefix = getPathPrefix();
+    if (prefix === '') {
+        // At root, use root-relative path
+        return `s/${moduleId}/`;
+    }
+    // From sub-pages, go back to root then to target module
+    return `${prefix}s/${moduleId}/`;
+}
+
+// Get back link (to parent module index)
+function getBackLink() {
+    const prefix = getPathPrefix();
+    if (prefix === '') {
+        return './';
+    }
+    // Go back to module index (one ../ less than going to root)
+    return '../'.repeat(Math.max(0, prefix.split('../').length - 2)) || './';
+}
+
+// Get root path for logo/home link
+function getRootPath() {
+    const prefix = getPathPrefix();
+    if (prefix === '') {
+        return './';
+    }
+    // Go back to root
+    return prefix;
+}
+
 // Generate header HTML
 function generateHeader(activePage = '') {
     const navItems = [
@@ -69,24 +124,32 @@ function generateHeader(activePage = '') {
         { id: 'wiki', label: 'Wiki', icon: icons.wiki }
     ];
     
+    const pathPrefix = getPathPrefix();
+    const backLink = getBackLink();
+    
     const navHtml = navItems.map(item => {
+        const targetPath = getModulePath(item.id);
+        
         if (item.id === activePage) {
-            return `<a href="./" class="nav-link active">
+            return `<a href="${backLink}" class="nav-link active">
             <span class="nav-icon">${item.icon}</span>
             <span>${item.label}</span>
         </a>`;
         } else {
-            return `<a href="s/${item.id}/" class="nav-link">
+            return `<a href="${targetPath}" class="nav-link">
             <span class="nav-icon">${item.icon}</span>
             <span>${item.label}</span>
         </a>`;
         }
     }).join('');
     
+    // Get root path for logo link (same as getPathPrefix, which gives ../ needed to reach root)
+    const rootPath = getPathPrefix() || './';
+    
     return `
     <header class="header">
         <div class="container header-inner">
-            <a href="s/" class="site-logo">
+            <a href="${rootPath}" class="site-logo">
                 <span class="logo-icon">${icons.logo}</span>
                 <span>SereneWing</span>
             </a>
