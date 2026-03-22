@@ -12,15 +12,19 @@ A personal website hosted on GitHub Pages.
 ## 📚 Project Structure
 
 ```
+serenewing.github.io/
 ├── index.html           # Homepage
-├── AI_GUIDE.md          # AI development instructions
-├── README.md            # This file
-├── CNAME                # Custom domain configuration
+├── AI_GUIDE.md          # Project overview (for AI)
+├── README.md            # Human-readable docs
+├── CNAME                # Custom domain config
 │
-└── games/               # Game projects
-    └── journey-to-heaven/   # Journey to Heaven (大闹天宫)
-        ├── index.html       # Game entry point
-        └── README.md        # Game documentation
+├── games/               # 🎮 Game projects
+│   ├── AI_GUIDE.md      # Game development guide
+│   ├── sun-wukong-heaven/
+│   └── journey-to-heaven/
+│
+└── blog/                # 📝 Blog (planned)
+    └── AI_GUIDE.md      # Blog writing guide
 ```
 
 ## 🎨 Design Philosophy
@@ -56,4 +60,4 @@ A Journey to the West themed mini-game where Sun Wukong storms the Heavenly Pala
 
 ## 📝 License
 
-GPL v3 License 
+MIT License 

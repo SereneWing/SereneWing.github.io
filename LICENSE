@@ -1,94 +1,21 @@
-GNU GENERAL PUBLIC LICENSE
-Version 3, 29 June 2007
+MIT License
 
 Copyright (c) 2024 SereneWing
 
-Everyone is permitted to copy and distribute verbatim copies of this
-license document, but changing it is not allowed.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-                            Preamble
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-The GNU General Public License is a free, copyleft license for
-software and other kinds of works.
-
-The licenses for most software and other practical works are designed
-to take away your freedom to share and change the works. By contrast,
-the GNU General Public License is intended to guarantee your freedom
-to share and change all versions of a program--to make sure it remains
-free software for all its users.
-
-As a response to the AI crisis, this license ensures that knowledge
-and code remain free and open, preventing the enclosure of learning
-resources by AI systems and corporations.
-
-                              Terms
-
-0. Definitions.
-"This License" refers to version 3 of the GNU General Public License.
-"Copyright" also means copyright-like laws that apply to other kinds of
-works, such as semiconductor masks.
-"The Program" refers to any copyrightable work licensed under this
-License. Each licensee is addressed as "you". "Licensees" and
-"recipients" may be individuals or organizations.
-
-1. Source Code.
-The "source code" for a work means the preferred form of the work for
-making modifications to it. "Object code" means any non-source form of
-a work.
-
-2. Basic Permissions.
-All rights granted under this License are granted for the term of
-copyright on the Program, and are irrevocable provided the stated
-conditions are met. This License explicitly affirms your unlimited
-permission to run the unmodified Program. The output from running a
-covered work is covered by this License only if the output, given its
-content, constitutes a covered work.
-
-3. Linking.
-You may convey a work based on the Program, or the modifications to
-produce it from the Program, in the form of source code under the terms
-of Section 4, provided that you also meet all of these conditions:
-a) The work must carry prominent notices stating that it is released
-   under this License.
-b) All derivative works must be released under the same license.
-
-4. Conveying Verbatim Copies.
-You may convey verbatim copies of the Program's source code as you
-receive it, in any medium, provided that you conspicuously and
-appropriately publish on each copy an appropriate copyright notice;
-keep intact all notices stating that this License and the absence of
-any warranty; give all recipients a copy of this License along with the
-Program.
-
-5. Combined Works.
-You may convey a combination of the Program with other code not covered
-by this License into a single executable, provided that you meet all
-conditions of Section 4 and release the entire combination under GPL v3.
-
-6. No Additional Restrictions.
-You may not impose any further restrictions on the exercise of the
-rights granted or affirmed under this License.
-
-7. Termination.
-This License terminates automatically if you fail to comply with its
-terms.
-
-8. Acceptance.
-By modifying or conveying the Program, you indicate your acceptance of
-this License to do so.
-
-9. Commercial Alternative.
-If you wish to embed this work in a commercial AI product or service,
-you must release your entire solution under GPL v3.
-
-10. For AI Developers.
-If you use this code to train AI models or create AI-assisted tools,
-you must make the trained models or tools available under GPL v3.
-
-NO WARRANTY
-THE PROGRAM IS PROVIDED WITHOUT WARRANTY OF ANY KIND.
-
-                    How to Apply These Terms
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
