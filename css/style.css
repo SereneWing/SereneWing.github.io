@@ -336,6 +336,44 @@ body {
 }
 
 /* ========================================
+   Icons
+   ======================================== */
+.card-icon svg,
+.feature-icon svg {
+    display: block;
+}
+
+.feature-icon {
+    font-size: 24px;
+    margin-bottom: var(--space-sm);
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-icon {
+    color: var(--color-fg-muted);
+    transition: color 0.2s;
+}
+
+.card:hover .card-icon {
+    color: var(--color-accent-fg);
+}
+
+/* Icon color themes for cards */
+.card[data-icon="games"] .card-icon { color: #f97316; }
+.card[data-icon="blog"] .card-icon { color: #8b5cf6; }
+.card[data-icon="tools"] .card-icon { color: #0891b2; }
+.card[data-icon="wiki"] .card-icon { color: #16a34a; }
+
+.card:hover[data-icon="games"] .card-icon { color: #ea580c; }
+.card:hover[data-icon="blog"] .card-icon { color: #7c3aed; }
+.card:hover[data-icon="tools"] .card-icon { color: #0e7490; }
+.card:hover[data-icon="wiki"] .card-icon { color: #15803d; }
+
+/* ========================================
    Utility Classes
    ======================================== */
 .text-center { text-align: center; }

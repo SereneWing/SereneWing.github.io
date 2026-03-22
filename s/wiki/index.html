@@ -8,32 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 </head>
 <body>
-    <header class="header">
-        <div class="container header-inner">
-            <a href="../../" class="site-logo">
-                <span class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
-                <span>SereneWing</span>
-            </a>
-            <nav class="nav">
-                <a href="../games/" class="nav-link">
-                    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4"></path><path d="M8 10v4"></path><circle cx="17" cy="10" r="1"></circle><circle cx="15" cy="13" r="1"></circle></svg></span>
-                    <span>Games</span>
-                </a>
-                <a href="../blog/" class="nav-link">
-                    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg></span>
-                    <span>Blog</span>
-                </a>
-                <a href="../tools/" class="nav-link">
-                    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span>
-                    <span>Tools</span>
-                </a>
-                <a href="./" class="nav-link active">
-                    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
-                    <span>Wiki</span>
-                </a>
-            </nav>
-        </div>
-    </header>
+    <header class="component-header"></header>
 
     <main class="main">
         <div class="container">
@@ -44,7 +19,7 @@
 
             <div class="card-grid">
                 <div class="card" style="cursor: default;">
-                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                    <div class="card-icon" id="wiki-glossary-icon"></div>
                     <h2 class="card-title">Glossary</h2>
                     <p class="card-description">Explanations of AI programming and frontend development related terms</p>
                     <div class="card-meta">
@@ -53,7 +28,7 @@
                 </div>
 
                 <div class="card" style="cursor: default;">
-                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+                    <div class="card-icon" id="wiki-practices-icon"></div>
                     <h2 class="card-title">Best Practices</h2>
                     <p class="card-description">Code style guidelines and performance optimization tips</p>
                     <div class="card-meta">
@@ -62,7 +37,7 @@
                 </div>
 
                 <div class="card" style="cursor: default;">
-                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
+                    <div class="card-icon" id="wiki-patterns-icon"></div>
                     <h2 class="card-title">Design Patterns</h2>
                     <p class="card-description">Frontend design patterns and project architecture patterns</p>
                     <div class="card-meta">
@@ -71,7 +46,7 @@
                 </div>
 
                 <div class="card" style="cursor: default;">
-                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
+                    <div class="card-icon" id="wiki-templates-icon"></div>
                     <h2 class="card-title">Templates</h2>
                     <p class="card-description">HTML, CSS, JavaScript code templates</p>
                     <div class="card-meta">
@@ -80,7 +55,7 @@
                 </div>
 
                 <div class="card" style="cursor: default;">
-                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+                    <div class="card-icon" id="wiki-resources-icon"></div>
                     <h2 class="card-title">Resources</h2>
                     <p class="card-description">Development tools and learning materials recommendations</p>
                     <div class="card-meta">
@@ -112,13 +87,15 @@
         </div>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>
-                <a href="../../">SereneWing</a> · 
-                Built by <a href="https://github.com/SereneWing" target="_blank">SereneWing</a>
-            </p>
-        </div>
-    </footer>
+    <footer class="component-footer"></footer>
+    <script src="../../js/components.js"></script>
+    <script>
+        SereneWing.initComponents('wiki');
+        document.getElementById('wiki-glossary-icon').innerHTML = SereneWing.icons.glossary;
+        document.getElementById('wiki-practices-icon').innerHTML = SereneWing.icons.practices;
+        document.getElementById('wiki-patterns-icon').innerHTML = SereneWing.icons.patterns;
+        document.getElementById('wiki-templates-icon').innerHTML = SereneWing.icons.templates;
+        document.getElementById('wiki-resources-icon').innerHTML = SereneWing.icons.resources;
+    </script>
 </body>
 </html>
