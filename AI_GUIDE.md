@@ -1,85 +1,138 @@
-# SereneWing GitHub Pages - AI 总览
+# AI_GUIDE.md - Project Overview
 
-> 本文件是项目入口文件，AI 首次对话时应首先阅读此文件。
+## Project Summary
+
+**SereneWing GitHub Pages** - A personal website featuring:
+- **Games Module** (`games/`): Interactive HTML5 games with Journey to the West theme
+- **Blog Module** (`blog/`): Blog section (planned)
+
+### Theme
+
+- **Color Scheme**: Dark blue background (`#0a0a2e`) with gold accents (`#FFD700`)
+- **Language**: Chinese content with `lang="zh-CN"`
+- **Style**: Consistent across all pages using CSS variables
 
 ---
 
-## 🚦 模块总览与进展
-
-| 模块 | 状态 | 最后更新 | 备注 |
-|------|------|----------|------|
-| `games/` | 🟢 开发中 | 2026-03-22 | 有改动需求 |
-| `blog/` | 🟡 规划中 | - | 未启动开发 |
-
----
-
-## 📁 项目结构
+## 📁 File Structure
 
 ```
 serenewing.github.io/
-├── AI_GUIDE.md          # 项目总览（本文档）
-├── AI_RULE.md           # 通用开发规则
-├── index.html           # 网站首页
-├── README.md            # 人类可读文档
-├── CNAME                # 自定义域名
 │
-├── games/               # 🎮 游戏项目
-│   ├── AI_RULE.md       # 游戏开发规范
+├── AI_START.md                    # Entry point
+├── AI_GUIDE.md                    # This file - project overview
+├── README.md                      # Human-readable documentation
+├── index.html                     # Homepage
+├── CNAME                          # Custom domain
+│
+├── games/                         # 🎮 Games module
+│   ├── AI_GUIDE.md                # Games module guide
 │   ├── sun-wukong-heaven/
-│   │   ├── AI_RULE.md   # 孙悟空大闹天宫规则
+│   │   ├── AI_GUIDE.md
 │   │   └── README.md
 │   └── journey-to-heaven/
-│       ├── AI_RULE.md   # 闯天宫游戏规则
+│       ├── AI_GUIDE.md
 │       └── README.md
 │
-└── blog/                # 📝 博客项目（规划中）
-    ├── AI_RULE.md       # 博客写作规范
-    └── ...
+└── blog/                          # 📝 Blog module
+    └── AI_GUIDE.md                # Blog module guide
 ```
 
 ---
 
-## 🔑 核心规则（Every Change MUST）
+## 📊 Module Status
 
-1. **文档同步**：任何代码变更后，必须更新对应的 README.md
-2. **分层原则**：
-   - `AI_GUIDE.md` = 总览与进展
-   - `AI_RULE.md` = 开发规则与规范
-3. **简洁原则**：GUIDE/RULE 文件只写核心规则，详细说明放 README.md
-
----
-
-## 📖 阅读指南
-
-### AI 读取策略
-
-1. **首次对话**：读取本文件 → 了解项目总览和模块进展
-2. **需要开发某模块**：读取对应目录的 `AI_RULE.md`
-3. **需要开发单个项目**：读取单个项目目录的 `AI_RULE.md`
-
-### 当前任务
-
-（本节由 AI 根据用户对话自动更新）
-
-- 2026-03-22：重构 AI_GUIDE 文件系统，从 `AI_GUIDE.md` 改为分层命名
+| Module | Status | Last Updated | Notes |
+|--------|--------|--------------|-------|
+| `games/` | 🟢 Active | 2026-03-22 | 2 games in development |
+| `blog/` | 🟡 Planned | - | Not started |
 
 ---
 
-## ⚠️ Critical Rules
+## 🎮 Games Module
 
-1. **文档同步**：任何代码变更后，必须更新对应的 README.md
-2. **分层规范**：
-   - `AI_GUIDE.md` → 总览、指引、进展追踪
-   - `AI_RULE.md` → 规则、规范、开发标准
-3. **简洁原则**：AI_GUIDE/RULE 只写核心规则，详细说明放 README.md
+### Projects
+
+| Game | Status | Description |
+|------|--------|-------------|
+| `sun-wukong-heaven/` | 🟢 Active | Sun Wukong flies freely at Heavenly Gate |
+| `journey-to-heaven/` | 🟢 Active | Navigate through heaven avoiding enemies |
 
 ---
 
-## 🔧 通用检查清单
+## 🔧 Development Standards
 
-每次完成代码变更后，验证：
-- [ ] README.md 已同步更新
-- [ ] 资源路径正确
-- [ ] 无损坏链接或缺失资源
-- [ ] HTML 语义化和无障碍
-- [ ] 进展已更新（适用时）
+### CSS Variables (Required)
+
+```css
+:root {
+    --color-primary: #FFD700;       /* Gold */
+    --color-bg: #0a0a2e;            /* Dark Blue */
+    --color-bg-secondary: #1a1a4e;  /* Secondary */
+    --color-text: #ffffff;          /* White */
+    --color-border: #FFD700;        /* Gold */
+}
+```
+
+### Naming Conventions
+
+| Type | Convention | Example |
+|------|------------|---------|
+| Files | kebab-case | `game-template.html` |
+| CSS Classes | BEM-like | `game-container__title--active` |
+| IDs | camelCase | `gameContainer` |
+| Variables/Functions | camelCase | `initGame()`, `scoreValue` |
+
+### HTML Requirements
+
+- Semantic tags: `<main>`, `<nav>`, `<section>`, `<article>`
+- Required meta tags:
+  ```html
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ```
+- Chinese content: `lang="zh-CN"`
+
+### JavaScript Standards
+
+- Prefer native JS, avoid unnecessary dependencies
+- External libraries via CDN only
+- Animations use `requestAnimationFrame`
+- Minimize global variable pollution
+
+### Resource Management
+
+- **Images**: Compress, prefer WebP format
+- **Audio**: Max 5MB per file
+- **Initial Load**: Total under 2MB
+- Use relative paths or CDN, avoid hardcoded absolute paths
+
+---
+
+## ✅ Verification Checklist
+
+After any code change, verify:
+
+- [ ] README.md synchronized with code changes
+- [ ] All resource paths correct
+- [ ] CSS uses CSS variables (no hardcoded colors)
+- [ ] No broken links or missing resources
+- [ ] HTML is semantic and accessible
+- [ ] Chinese content uses `lang="zh-CN"`
+- [ ] Code follows naming conventions
+- [ ] Progress section updated
+
+---
+
+## 🔑 Core Principles
+
+1. **Documentation Sync**: Any code change → MUST update README.md
+2. **Layered Clarity**:
+   - `AI_START.md` = Entry point, quick navigation
+   - `AI_GUIDE.md` = Overview, standards, progress
+3. **Simplicity**: Keep AI files concise; detailed explanations in README.md
+4. **Self-Contained**: Each module is independent (no cross-directory references)
+
+---
+
+*Last Updated: 2026-03-22*

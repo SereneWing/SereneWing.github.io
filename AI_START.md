@@ -1,53 +1,58 @@
-# AI 入口文件
+# AI_START.md - Entry Point for AI Agents
 
-> **AI 开发必读**。每次开始工作前，AI 应首先阅读此文件。
+**READ THIS FILE FIRST** before any work.
 
 ---
 
-## 📖 阅读顺序
+## 📋 First-Time Reading Checklist
+
+- [ ] 1. Read AI_START.md (you are here)
+- [ ] 2. Read AI_GUIDE.md (project overview)
+- [ ] 3. Identify target module
+- [ ] 4. Read module AI_GUIDE.md
+- [ ] 5. Begin development
+
+---
+
+## 🔄 Document Hierarchy
 
 ```
-1. AI_START.md  ← 你在这里
-2. AI_GUIDE.md  → 项目总览、模块状态、进展追踪
-3. AI_RULE.md   → 开发规则、规范、标准
+┌────────────────────────────────────────────┐
+│  AI_START.md                               │
+│  Entry point, quick navigation             │
+└────────────────────────────────────────────┘
+                    ↓
+┌────────────────────────────────────────────┐
+│  AI_GUIDE.md (root)                        │
+│  Project overview, progress, modules       │
+└────────────────────────────────────────────┘
+                    ↓
+┌────────────────────────────────────────────┐
+│  {module}/AI_GUIDE.md                      │
+│  Module-specific guide                     │
+└────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📁 快速导航
+## ⚡ Quick Navigation
 
-| 文件 | 用途 |
-|------|------|
-| `AI_GUIDE.md` | 项目总览：模块结构、状态、进展 |
-| `AI_RULE.md` | 开发规则：通用规范、命名、检查清单 |
-| `games/AI_RULE.md` | 游戏模块详细规则 |
-| `blog/AI_RULE.md` | 博客模块详细规则 |
-
----
-
-## ⚡ 快速开始
-
-### 了解项目
-
-1. 读取 `AI_GUIDE.md` 了解项目模块和当前进展
-
-### 开始开发
-
-1. 读取 `AI_GUIDE.md` → 找到需要开发的模块
-2. 读取对应目录的 `AI_RULE.md` → 了解详细规则
-3. 读取单个项目目录的 `AI_RULE.md` → 了解具体项目
-
-### 更新进展
-
-每次完成开发后，必须更新相关文件的进展部分：
-- 项目总进展 → `AI_GUIDE.md`
-- 模块进展 → `{module}/AI_RULE.md`
-- 项目进展 → `{module}/{project}/AI_RULE.md`
+| File | Purpose |
+|------|---------|
+| `AI_GUIDE.md` | Project overview, modules, progress |
+| `games/AI_GUIDE.md` | Games module guide |
+| `blog/AI_GUIDE.md` | Blog module guide |
+| `README.md` | Human-readable documentation |
 
 ---
 
-## 🔑 核心原则
+## 🔑 Core Rules Summary
 
-1. **文档同步**：任何代码变更后，必须更新 README.md
-2. **分层清晰**：GUIDE=总览，RULE=规则
-3. **简洁原则**：规则文件只写核心，详细说明放 README.md
+1. **Documentation Sync**: Any code change → MUST update README.md
+2. **Layered Structure**: AI_START → AI_GUIDE → Module AI_GUIDE
+3. **Concise AI Files**: Detailed content in README.md
+4. **Self-Contained**: Each module/project is independent
+
+---
+
+*Last Updated: 2026-03-22*
