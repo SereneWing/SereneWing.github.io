@@ -164,12 +164,13 @@ function generateHeader(activePage = '') {
 
 // Generate footer HTML
 function generateFooter() {
+    const currentYear = new Date().getFullYear();
     return `
     <footer class="footer">
         <div class="container">
             <p>
-                <a href="https://github.com/SereneWing" target="_blank">SereneWing</a> · 
-                MIT License
+                &copy; ${currentYear} <a href="https://github.com/SereneWing/SereneWing.github.io" target="_blank" rel="noopener">SereneWing</a> · 
+                <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>
             </p>
         </div>
     </footer>`;

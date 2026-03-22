@@ -320,7 +320,7 @@ body {
 .footer {
     background-color: var(--color-canvas-subtle);
     border-top: 1px solid var(--color-border-default);
-    padding: var(--space-xl) 0;
+    padding: var(--space-2xl) 0;
     text-align: center;
     color: var(--color-fg-muted);
     font-size: var(--font-sm);
@@ -329,10 +329,27 @@ body {
 .footer a {
     color: var(--color-accent-fg);
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 .footer a:hover {
-    text-decoration: underline;
+    color: var(--color-fg-default);
+    text-decoration: none;
+}
+
+.footer-separator {
+    margin: 0 var(--space-sm);
+    color: var(--color-border-default);
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: var(--space-xl) var(--space-md);
+    }
+    
+    .footer p {
+        line-height: 1.8;
+    }
 }
 
 /* ========================================
