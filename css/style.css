@@ -59,6 +59,7 @@ html {
     font-size: var(--font-md);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    scrollbar-gutter: stable;
 }
 
 body {
@@ -66,6 +67,9 @@ body {
     background-color: var(--color-canvas-default);
     color: var(--color-fg-default);
     min-height: 100vh;
+    /* Reserve space for scrollbar to prevent layout shift */
+    padding-right: calc(100vw - 100%);
+    overflow-x: hidden;
 }
 
 /* Container */

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Patterns - SereneWing Wiki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2L9 6C8 7 7 8.5 7 10C7 12 8 14 10 15C8 13 7 10 8 7C9 4 11 3 12 3C13 3 15 4 16 7C17 10 16 13 14 15C16 14 17 12 17 10C17 8.5 16 7 15 6L12 2Z' fill='white' stroke='#999' stroke-width='0.5'/></svg>">
+</head>
+<body>
+    <header class="component-header"></header>
+
+    <main class="main">
+        <div class="container">
+            <a href="../" class="btn mb-lg" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Back to Wiki
+            </a>
+
+            <header class="page-header">
+                <h1 class="page-title">Design Patterns</h1>
+                <p class="page-description">Frontend design patterns and project architecture patterns</p>
+            </header>
+
+            <section class="mt-xl">
+                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">Frontend Patterns</h2>
+                <div class="card-grid" style="max-width: 800px;">
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Component Pattern</h3>
+                        <p class="card-description">Build reusable UI components with consistent interfaces. Each component should be self-contained and follow single responsibility.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Module Pattern</h3>
+                        <p class="card-description">Organize code into modules with clear boundaries. Use IIFE or ES6 modules to encapsulate functionality.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Observer Pattern</h3>
+                        <p class="card-description">Implement event-driven communication between components. Useful for handling user interactions and state changes.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Factory Pattern</h3>
+                        <p class="card-description">Create objects without specifying exact classes. Useful for generating similar components with variations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-3xl">
+                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">Architecture Patterns</h2>
+                <div class="card-grid" style="max-width: 800px;">
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Progressive Enhancement</h3>
+                        <p class="card-description">Start with basic HTML, add CSS for presentation, then JavaScript for enhanced functionality. Ensures content accessibility.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Progressive Web App</h3>
+                        <p class="card-description">Build web applications that work offline, support push notifications, and provide native-like experiences.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">JAMstack</h3>
+                        <p class="card-description">JavaScript, APIs, and Markup architecture. Pre-built markup for performance, with dynamic content from APIs.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Micro-frontend</h3>
+                        <p class="card-description">Decompose frontend into independent features. Each team can develop and deploy features independently.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="component-footer"></footer>
+    <script src="../../js/components.js"></script>
+    <script>SereneWing.initComponents('wiki');</script>
+</body>
+</html>

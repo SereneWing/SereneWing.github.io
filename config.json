@@ -1,0 +1,9 @@
+{
+    "server": {
+        "host": "localhost",
+        "port": 39112
+    },
+    "browse": {
+        "auto_open": true
+    }
+}

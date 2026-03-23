@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossary - SereneWing Wiki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2L9 6C8 7 7 8.5 7 10C7 12 8 14 10 15C8 13 7 10 8 7C9 4 11 3 12 3C13 3 15 4 16 7C17 10 16 13 14 15C16 14 17 12 17 10C17 8.5 16 7 15 6L12 2Z' fill='white' stroke='#999' stroke-width='0.5'/></svg>">
+</head>
+<body>
+    <header class="component-header"></header>
+
+    <main class="main">
+        <div class="container">
+            <a href="../" class="btn mb-lg" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Back to Wiki
+            </a>
+
+            <header class="page-header">
+                <h1 class="page-title">Glossary</h1>
+                <p class="page-description">Term explanations for AI programming and frontend development</p>
+            </header>
+
+            <section class="mt-xl">
+                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">AI-Related Terms</h2>
+                <div class="card-grid" style="max-width: 800px;">
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">SPEC-Driven Development</h3>
+                        <p class="card-description">A development methodology where specifications (SPEC.md) define functional requirements before coding begins. AI agents follow these specifications to ensure consistent implementation.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Prompt Engineering</h3>
+                        <p class="card-description">The practice of designing and optimizing prompts to effectively communicate with AI models. Includes techniques like few-shot learning, chain-of-thought, and role assignment.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Context Window</h3>
+                        <p class="card-description">The maximum amount of text (tokens) an AI model can process in a single conversation. Determines how much history and instructions can be included.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Token</h3>
+                        <p class="card-description">The basic unit of text processing for AI models. Roughly corresponds to 4 characters in English or 1-2 characters in Chinese.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-3xl">
+                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">Frontend Terms</h2>
+                <div class="card-grid" style="max-width: 800px;">
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">CSS Variables</h3>
+                        <p class="card-description">Custom properties defined with --variable-name syntax. Allow consistent theming and easy style updates across a website.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Semantic HTML</h3>
+                        <p class="card-description">Using appropriate HTML elements (header, nav, main, article, section, footer) to convey meaning, improving accessibility and SEO.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">BEM Naming</h3>
+                        <p class="card-description">Block Element Modifier - a CSS naming convention (e.g., .card__title--active) that improves code organization and maintainability.</p>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Responsive Design</h3>
+                        <p class="card-description">Designing websites to adapt layout and content to different screen sizes using media queries and flexible layouts.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="component-footer"></footer>
+    <script src="../../js/components.js"></script>
+    <script>SereneWing.initComponents('wiki');</script>
+</body>
+</html>

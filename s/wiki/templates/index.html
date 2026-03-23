@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates - SereneWing Wiki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2L9 6C8 7 7 8.5 7 10C7 12 8 14 10 15C8 13 7 10 8 7C9 4 11 3 12 3C13 3 15 4 16 7C17 10 16 13 14 15C16 14 17 12 17 10C17 8.5 16 7 15 6L12 2Z' fill='white' stroke='#999' stroke-width='0.5'/></svg>">
+</head>
+<body>
+    <header class="component-header"></header>
+
+    <main class="main">
+        <div class="container">
+            <a href="../" class="btn mb-lg" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Back to Wiki
+            </a>
+
+            <header class="page-header">
+                <h1 class="page-title">Templates</h1>
+                <p class="page-description">Ready-to-use code templates for common scenarios</p>
+            </header>
+
+            <section class="mt-xl">
+                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">HTML Templates</h2>
+                <div class="card-grid" style="max-width: 800px;">
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Basic Page Template</h3>
+                        <p class="card-description">Standard HTML5 page structure with proper meta tags and responsive viewport.</p>
+                        <div class="code-block mt-md" style="font-size: 11px;">
+<pre><code><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0">
+    <title>Page Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>Header</header>
+    <main>Content</main>
+    <footer>Footer</footer>
+</body>
+</html></code></pre>
+                        </div>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Card Component</h3>
+                        <p class="card-description">Reusable card layout with icon, title, description and metadata.</p>
+                        <div class="code-block mt-md" style="font-size: 11px;">
+<pre><code><div class="card">
+    <div class="card-icon">Icon</div>
+    <h3 class="card-title">Title</h3>
+    <p class="card-description">Description</p>
+    <div class="card-meta">Metadata</div>
+</div></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-3xl">
+                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">CSS Templates</h2>
+                <div class="card-grid" style="max-width: 800px;">
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">CSS Variables Template</h3>
+                        <p class="card-description">GitHub-style CSS variable definitions for consistent theming.</p>
+                        <div class="code-block mt-md" style="font-size: 11px;">
+<pre><code>:root {
+    --color-bg: #ffffff;
+    --color-border: #d0d7de;
+    --color-text: #1f2328;
+    --color-link: #0969da;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --radius: 6px;
+}</code></pre>
+                        </div>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Flexbox Center</h3>
+                        <p class="card-description">Common flexbox centering patterns.</p>
+                        <div class="code-block mt-md" style="font-size: 11px;">
+<pre><code>/* Center both axes */
+.center-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Center horizontally */
+.h-center {
+    display: flex;
+    justify-content: center;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-3xl">
+                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">JavaScript Templates</h2>
+                <div class="card-grid" style="max-width: 800px;">
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Module Pattern</h3>
+                        <p class="card-description">Encapsulated module with public API.</p>
+                        <div class="code-block mt-md" style="font-size: 11px;">
+<pre><code>const MyModule = (function() {
+    // Private variables
+    let privateVar = 0;
+    
+    // Private function
+    function privateFn() {
+        return 'private';
+    }
+    
+    // Public API
+    return {
+        publicMethod: function() {
+            privateVar++;
+            return privateVar;
+        }
+    };
+})();</code></pre>
+                        </div>
+                    </div>
+                    <div class="card" style="cursor: default;">
+                        <h3 class="card-title">Event Handler</h3>
+                        <p class="card-description">Safe event handling with cleanup.</p>
+                        <div class="code-block mt-md" style="font-size: 11px;">
+<pre><code>function setupEvent(element, event, handler) {
+    element.addEventListener(event, handler);
+    // Return cleanup function
+    return () => {
+        element.removeEventListener(event, handler);
+    };
+}
+
+// Usage
+const cleanup = setupEvent(
+    button, 'click', handleClick
+);
+// Later: cleanup() to remove listener</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="component-footer"></footer>
+    <script src="../../js/components.js"></script>
+    <script>SereneWing.initComponents('wiki');</script>
+</body>
+</html>

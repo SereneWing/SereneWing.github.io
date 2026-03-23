@@ -14,7 +14,7 @@ const iconColors = {
 
 // SVG Icons with optimized style
 const icons = {
-    logo: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#logoGrad)" stroke="none"/><defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#f97316"/><stop offset="100%" style="stop-color:#fbbf24"/></linearGradient></defs></svg>`,
+    logo: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1316 1024"><path d="M486.770116 995.320869s333.298009-224.782378-15.502233-527.075922-395.306941-348.800242-426.311407-434.062523c0 0-116.266747 108.515631 147.271213 418.56029 0 0-77.511165-15.502233-155.02233-116.266747 0 0-77.511165 131.76898 240.284611 325.546893 0 0-100.764514 23.253349-170.524562-54.257816 0 0-46.506699 108.515631 186.026795 201.529029 0 0 124.017864 38.755582 193.777913 186.026796zM829.369465 995.320869s-333.298009-224.782378 15.502233-527.075922 395.306941-348.800242 426.311407-434.062523c0 0 116.266747 108.515631-147.271213 418.56029 0 0 77.511165-15.502233 155.022329-116.266747 0 0 77.511165 131.76898-240.284611 325.546893 0 0 100.764514 23.253349 170.524563-54.257816 0 0 46.506699 108.515631-186.026796 201.529029 0 0-124.017864 38.755582-193.777912 186.026796z" fill="#ffffff" stroke="#000000" stroke-width="12" fill-rule="evenodd"/></svg>`,
     
     games: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="17" cy="10" r="1" fill="#f97316"/><circle cx="15" cy="13" r="1" fill="#f97316"/></svg>`,
     
@@ -170,7 +170,7 @@ function generateFooter() {
         <div class="container">
             <p>
                 &copy; ${currentYear} <a href="https://github.com/SereneWing/SereneWing.github.io" target="_blank" rel="noopener">SereneWing</a> · 
-                <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>
+                <a href="${getPathPrefix() || './'}s/LICENSE.txt" target="_blank" rel="noopener">MIT License</a>
             </p>
         </div>
     </footer>`;
@@ -178,8 +178,8 @@ function generateFooter() {
 
 // Inject components into page
 function initComponents(headerActive = '', footerExtra = '') {
-    const header = document.querySelector('header.component-header');
-    const footer = document.querySelector('footer.component-footer');
+    const header = document.querySelector('div.component-header');
+    const footer = document.querySelector('div.component-footer');
     
     if (header) {
         header.innerHTML = generateHeader(headerActive);

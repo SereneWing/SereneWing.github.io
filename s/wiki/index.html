@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wiki - SereneWing</title>
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2L9 6C8 7 7 8.5 7 10C7 12 8 14 10 15C8 13 7 10 8 7C9 4 11 3 12 3C13 3 15 4 16 7C17 10 16 13 14 15C16 14 17 12 17 10C17 8.5 16 7 15 6L12 2Z' fill='white' stroke='#999' stroke-width='0.5'/></svg>">
 </head>
 <body>
-    <header class="component-header"></header>
+    <div class="component-header"></div>
 
     <main class="main">
         <div class="container">
@@ -17,77 +17,58 @@
                 <p class="page-description">AI coding knowledge base with term explanations, best practices, design patterns, template examples and resource recommendations</p>
             </header>
 
-            <div class="card-grid">
-                <div class="card" style="cursor: default;">
+            <div class="card-grid" style="max-width: 800px;">
+                <a href="./glossary/" class="card" data-icon="wiki">
                     <div class="card-icon" id="wiki-glossary-icon"></div>
                     <h2 class="card-title">Glossary</h2>
                     <p class="card-description">Explanations of AI programming and frontend development related terms</p>
                     <div class="card-meta">
-                        <a href="./glossary/" class="btn btn-sm">View Details</a>
+                        <span class="text-mono" style="font-size: var(--font-sm);">8 terms</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card" style="cursor: default;">
+                <a href="./best-practices/" class="card" data-icon="wiki">
                     <div class="card-icon" id="wiki-practices-icon"></div>
                     <h2 class="card-title">Best Practices</h2>
                     <p class="card-description">Code style guidelines and performance optimization tips</p>
                     <div class="card-meta">
-                        <a href="./best-practices/" class="btn btn-sm">View Details</a>
+                        <span class="text-mono" style="font-size: var(--font-sm);">8 tips</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card" style="cursor: default;">
+                <a href="./patterns/" class="card" data-icon="wiki">
                     <div class="card-icon" id="wiki-patterns-icon"></div>
                     <h2 class="card-title">Design Patterns</h2>
                     <p class="card-description">Frontend design patterns and project architecture patterns</p>
                     <div class="card-meta">
-                        <a href="./patterns/" class="btn btn-sm">View Details</a>
+                        <span class="text-mono" style="font-size: var(--font-sm);">8 patterns</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card" style="cursor: default;">
+                <a href="./templates/" class="card" data-icon="wiki">
                     <div class="card-icon" id="wiki-templates-icon"></div>
                     <h2 class="card-title">Templates</h2>
                     <p class="card-description">HTML, CSS, JavaScript code templates</p>
                     <div class="card-meta">
-                        <a href="./templates/" class="btn btn-sm">View Details</a>
+                        <span class="text-mono" style="font-size: var(--font-sm);">6 templates</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="card" style="cursor: default;">
+                <a href="./resources/" class="card" data-icon="wiki">
                     <div class="card-icon" id="wiki-resources-icon"></div>
                     <h2 class="card-title">Resources</h2>
                     <p class="card-description">Development tools and learning materials recommendations</p>
                     <div class="card-meta">
-                        <a href="./resources/" class="btn btn-sm">View Details</a>
+                        <span class="text-mono" style="font-size: var(--font-sm);">20+ resources</span>
                     </div>
-                </div>
+                </a>
             </div>
 
-            <section class="mt-3xl">
-                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">Quick Reference</h2>
-                <div class="code-block">
-                    <p class="text-muted mb-md">// Common CSS Variables</p>
-<pre><code>:root {
-    --color-primary: #0969da;
-    --color-bg: #ffffff;
-    --color-text: #1f2328;
-    --color-border: #d0d7de;
-}</code></pre>
-
-                    <p class="text-muted mb-md mt-lg">// Semantic HTML Structure</p>
-<pre><code><header> - Page Header
-<nav> - Navigation Menu
-<main> - Main Content
-<section> - Section Block
-<article> - Article Content
-<footer> - Page Footer</code></pre>
-                </div>
-            </section>
+            
         </div>
     </main>
 
-    <footer class="component-footer"></footer>
+    <div class="component-footer"></div>
     <script src="../../js/components.js"></script>
     <script>
         SereneWing.initComponents('wiki');

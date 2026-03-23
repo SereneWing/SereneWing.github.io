@@ -72,30 +72,25 @@ AI编程爱好者、前端开发者、学习者
 content/wiki/
 ├── SPEC.md              # 本文件
 ├── README.md            # 百科说明
-├── glossary/             # 术语表
-│   ├── ai-terms.md       # AI术语
-│   └── frontend-terms.md # 前端术语
-├── best-practices/       # 最佳实践
-│   ├── coding-standards.md
-│   └── performance.md
-├── patterns/             # 设计模式
-│   ├── frontend-patterns.md
-│   └── architecture.md
-├── templates/            # 模板示例
-│   ├── html-templates.md
-│   ├── css-templates.md
-│   └── js-templates.md
-└── resources/            # 资源推荐
-    ├── tools.md
-    └── learning.md
+├── index.html           # 百科首页
+├── glossary/            # 术语表
+│   └── index.html       # 术语页面
+├── best-practices/      # 最佳实践
+│   └── index.html       # 最佳实践页面
+├── patterns/            # 设计模式
+│   └── index.html       # 设计模式页面
+├── templates/           # 模板示例
+│   └── index.html       # 模板页面
+└── resources/           # 资源推荐
+    └── index.html       # 资源页面
 ```
 
 ---
 
 ## 5. 开发计划
 
-1. 创建百科基础页面
-2. 完善术语表内容
-3. 添加最佳实践指南
-4. 建立模板示例库
-5. 添加资源推荐
+1. ✅ 创建百科基础页面
+2. ✅ 完善术语表内容
+3. ✅ 添加最佳实践指南
+4. ✅ 建立模板示例库
+5. ✅ 添加资源推荐
