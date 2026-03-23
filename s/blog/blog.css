@@ -38,6 +38,7 @@
     font-size: var(--font-xl);
     font-weight: 600;
     margin-bottom: var(--space-sm);
+    color: var(--color-fg-default);
 }
 
 .article-excerpt {

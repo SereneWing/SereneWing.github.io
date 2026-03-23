@@ -67,6 +67,8 @@ body {
     background-color: var(--color-canvas-default);
     color: var(--color-fg-default);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     /* Reserve space for scrollbar to prevent layout shift */
     padding-right: calc(100vw - 100%);
     overflow-x: hidden;
@@ -149,7 +151,7 @@ body {
    Main Content
    ======================================== */
 .main {
-    min-height: calc(100vh - 200px);
+    flex: 1;
     padding: var(--space-3xl) 0;
 }
 

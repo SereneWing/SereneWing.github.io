@@ -178,8 +178,8 @@ function generateFooter() {
 
 // Inject components into page
 function initComponents(headerActive = '', footerExtra = '') {
-    const header = document.querySelector('div.component-header');
-    const footer = document.querySelector('div.component-footer');
+    const header = document.querySelector('.component-header');
+    const footer = document.querySelector('.component-footer');
     
     if (header) {
         header.innerHTML = generateHeader(headerActive);

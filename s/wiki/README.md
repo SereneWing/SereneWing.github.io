@@ -30,3 +30,30 @@ AI编码知识库，包含术语解释、最佳实践、设计模式、模板示
 - 持续更新完善
 - 理论与实践结合
 - 适合快速查阅参考
+
+## 样式更新
+
+详情页采用统一的视觉设计：
+
+### Hero Header
+- 每个详情页都有渐变色背景的 Hero 区域
+- 包含面包屑导航
+- 显示页面图标和标题描述
+- 不同页面使用不同的主题色：
+  - Glossary: 绿色系 (#16a34a)
+  - Best Practices: 默认绿色系
+  - Design Patterns: 紫色系 (#7c3aed)
+  - Templates: 青色系 (#0891b2)
+  - Resources: 橙色系 (#ea580c)
+
+### 卡片样式
+- **Term Card**: 带标签的术语卡片（用于 Glossary）
+- **Practice Card**: 带图标的实践卡片（用于 Best Practices）
+- **Pattern Card**: 带编号和标签的设计模式卡片
+- **Template Card**: 带语言标签的代码模板卡片
+- **Resource Card**: 带资源链接的资源卡片
+
+### 响应式设计
+- 平板设备 (768px): 自适应网格布局
+- 手机设备 (480px): 单列布局
+- 小屏幕设备 (320px): 紧凑布局

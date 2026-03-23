@@ -4,30 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Templates - SereneWing Wiki</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../wiki.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2L9 6C8 7 7 8.5 7 10C7 12 8 14 10 15C8 13 7 10 8 7C9 4 11 3 12 3C13 3 15 4 16 7C17 10 16 13 14 15C16 14 17 12 17 10C17 8.5 16 7 15 6L12 2Z' fill='white' stroke='#999' stroke-width='0.5'/></svg>">
 </head>
 <body>
-    <header class="component-header"></header>
+    <div class="component-header"></div>
 
     <main class="main">
+        <!-- Page Hero Header -->
+        <div class="wiki-hero wiki-hero-templates">
+            <div class="container">
+                <nav class="wiki-breadcrumb">
+                    <a href="../">Wiki</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Templates</span>
+                </nav>
+                <div class="wiki-hero-content">
+                    <div class="wiki-hero-icon" id="templates-icon"></div>
+                    <div class="wiki-hero-text">
+                        <h1 class="wiki-hero-title">Templates</h1>
+                        <p class="wiki-hero-description">Ready-to-use code templates for common scenarios</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
-            <a href="../" class="btn mb-lg" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                Back to Wiki
-            </a>
-
-            <header class="page-header">
-                <h1 class="page-title">Templates</h1>
-                <p class="page-description">Ready-to-use code templates for common scenarios</p>
-            </header>
-
-            <section class="mt-xl">
-                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">HTML Templates</h2>
-                <div class="card-grid" style="max-width: 800px;">
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Basic Page Template</h3>
-                        <p class="card-description">Standard HTML5 page structure with proper meta tags and responsive viewport.</p>
+            <section class="wiki-section">
+                <h2 class="wiki-section-title">
+                    <span class="wiki-section-icon">📄</span>
+                    HTML Templates
+                </h2>
+                <div class="wiki-template-grid">
+                    <div class="wiki-template-card">
+                        <div class="wiki-template-header">
+                            <span class="wiki-template-lang">HTML</span>
+                            <h3 class="wiki-template-title">Basic Page Template</h3>
+                        </div>
+                        <p class="wiki-template-description">Standard HTML5 page structure with proper meta tags and responsive viewport.</p>
                         <div class="code-block mt-md" style="font-size: 11px;">
 <pre><code><!DOCTYPE html>
 <html lang="en">
@@ -46,9 +61,12 @@
 </html></code></pre>
                         </div>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Card Component</h3>
-                        <p class="card-description">Reusable card layout with icon, title, description and metadata.</p>
+                    <div class="wiki-template-card">
+                        <div class="wiki-template-header">
+                            <span class="wiki-template-lang">HTML</span>
+                            <h3 class="wiki-template-title">Card Component</h3>
+                        </div>
+                        <p class="wiki-template-description">Reusable card layout with icon, title, description and metadata.</p>
                         <div class="code-block mt-md" style="font-size: 11px;">
 <pre><code><div class="card">
     <div class="card-icon">Icon</div>
@@ -61,12 +79,18 @@
                 </div>
             </section>
 
-            <section class="mt-3xl">
-                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">CSS Templates</h2>
-                <div class="card-grid" style="max-width: 800px;">
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">CSS Variables Template</h3>
-                        <p class="card-description">GitHub-style CSS variable definitions for consistent theming.</p>
+            <section class="wiki-section">
+                <h2 class="wiki-section-title">
+                    <span class="wiki-section-icon">🎨</span>
+                    CSS Templates
+                </h2>
+                <div class="wiki-template-grid">
+                    <div class="wiki-template-card">
+                        <div class="wiki-template-header">
+                            <span class="wiki-template-lang">CSS</span>
+                            <h3 class="wiki-template-title">CSS Variables Template</h3>
+                        </div>
+                        <p class="wiki-template-description">GitHub-style CSS variable definitions for consistent theming.</p>
                         <div class="code-block mt-md" style="font-size: 11px;">
 <pre><code>:root {
     --color-bg: #ffffff;
@@ -80,9 +104,12 @@
 }</code></pre>
                         </div>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Flexbox Center</h3>
-                        <p class="card-description">Common flexbox centering patterns.</p>
+                    <div class="wiki-template-card">
+                        <div class="wiki-template-header">
+                            <span class="wiki-template-lang">CSS</span>
+                            <h3 class="wiki-template-title">Flexbox Center</h3>
+                        </div>
+                        <p class="wiki-template-description">Common flexbox centering patterns.</p>
                         <div class="code-block mt-md" style="font-size: 11px;">
 <pre><code>/* Center both axes */
 .center-flex {
@@ -101,12 +128,18 @@
                 </div>
             </section>
 
-            <section class="mt-3xl">
-                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">JavaScript Templates</h2>
-                <div class="card-grid" style="max-width: 800px;">
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Module Pattern</h3>
-                        <p class="card-description">Encapsulated module with public API.</p>
+            <section class="wiki-section">
+                <h2 class="wiki-section-title">
+                    <span class="wiki-section-icon">⚡</span>
+                    JavaScript Templates
+                </h2>
+                <div class="wiki-template-grid">
+                    <div class="wiki-template-card">
+                        <div class="wiki-template-header">
+                            <span class="wiki-template-lang">JS</span>
+                            <h3 class="wiki-template-title">Module Pattern</h3>
+                        </div>
+                        <p class="wiki-template-description">Encapsulated module with public API.</p>
                         <div class="code-block mt-md" style="font-size: 11px;">
 <pre><code>const MyModule = (function() {
     // Private variables
@@ -127,9 +160,12 @@
 })();</code></pre>
                         </div>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Event Handler</h3>
-                        <p class="card-description">Safe event handling with cleanup.</p>
+                    <div class="wiki-template-card">
+                        <div class="wiki-template-header">
+                            <span class="wiki-template-lang">JS</span>
+                            <h3 class="wiki-template-title">Event Handler</h3>
+                        </div>
+                        <p class="wiki-template-description">Safe event handling with cleanup.</p>
                         <div class="code-block mt-md" style="font-size: 11px;">
 <pre><code>function setupEvent(element, event, handler) {
     element.addEventListener(event, handler);
@@ -152,7 +188,10 @@ const cleanup = setupEvent(
     </main>
 
     <footer class="component-footer"></footer>
-    <script src="../../js/components.js"></script>
-    <script>SereneWing.initComponents('wiki');</script>
+    <script src="../../../js/components.js"></script>
+    <script>
+        SereneWing.initComponents('wiki');
+        document.getElementById('templates-icon').innerHTML = SereneWing.icons.templates;
+    </script>
 </body>
 </html>

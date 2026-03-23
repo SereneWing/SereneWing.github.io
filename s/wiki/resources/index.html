@@ -4,98 +4,185 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources - SereneWing Wiki</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../wiki.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2L9 6C8 7 7 8.5 7 10C7 12 8 14 10 15C8 13 7 10 8 7C9 4 11 3 12 3C13 3 15 4 16 7C17 10 16 13 14 15C16 14 17 12 17 10C17 8.5 16 7 15 6L12 2Z' fill='white' stroke='#999' stroke-width='0.5'/></svg>">
 </head>
 <body>
-    <header class="component-header"></header>
+    <div class="component-header"></div>
 
     <main class="main">
+        <!-- Page Hero Header -->
+        <div class="wiki-hero wiki-hero-resources">
+            <div class="container">
+                <nav class="wiki-breadcrumb">
+                    <a href="../">Wiki</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Resources</span>
+                </nav>
+                <div class="wiki-hero-content">
+                    <div class="wiki-hero-icon" id="resources-icon"></div>
+                    <div class="wiki-hero-text">
+                        <h1 class="wiki-hero-title">Resources</h1>
+                        <p class="wiki-hero-description">Development tools and learning materials recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
-            <a href="../" class="btn mb-lg" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                Back to Wiki
-            </a>
-
-            <header class="page-header">
-                <h1 class="page-title">Resources</h1>
-                <p class="page-description">Development tools and learning materials recommendations</p>
-            </header>
-
-            <section class="mt-xl">
-                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">Development Tools</h2>
-                <div class="card-grid" style="max-width: 800px;">
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">CDN Services</h3>
-                        <p class="card-description">Content delivery networks for static resources.</p>
-                        <ul style="margin-top: var(--space-md); padding-left: var(--space-lg); color: var(--color-fg-muted);">
-                            <li><a href="https://cdnjs.com/" target="_blank" rel="noopener">cdnjs</a> - Cloudflare CDN</li>
-                            <li><a href="https://www.jsdelivr.com/" target="_blank" rel="noopener">jsDelivr</a> - Multi-CDN</li>
-                            <li><a href="https://unpkg.com/" target="_blank" rel="noopener">unpkg</a> - npm CDN</li>
+            <section class="wiki-section">
+                <h2 class="wiki-section-title">
+                    <span class="wiki-section-icon">🛠️</span>
+                    Development Tools
+                </h2>
+                <div class="wiki-resource-grid">
+                    <div class="wiki-resource-card">
+                        <div class="wiki-resource-header">
+                            <span class="wiki-resource-icon">🌐</span>
+                            <h3 class="wiki-resource-title">CDN Services</h3>
+                        </div>
+                        <p class="wiki-resource-description">Content delivery networks for static resources.</p>
+                        <ul class="wiki-resource-list">
+                            <li>
+                                <a href="https://cdnjs.com/" target="_blank" rel="noopener">cdnjs</a>
+                                <span class="wiki-resource-tag">Cloudflare CDN</span>
+                            </li>
+                            <li>
+                                <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener">jsDelivr</a>
+                                <span class="wiki-resource-tag">Multi-CDN</span>
+                            </li>
+                            <li>
+                                <a href="https://unpkg.com/" target="_blank" rel="noopener">unpkg</a>
+                                <span class="wiki-resource-tag">npm CDN</span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Code Editors</h3>
-                        <p class="card-description">Recommended code editors and IDEs.</p>
-                        <ul style="margin-top: var(--space-md); padding-left: var(--space-lg); color: var(--color-fg-muted);">
-                            <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a> - Popular and extensible</li>
-                            <li><a href="https://github.dev/" target="_blank" rel="noopener">GitHub.dev</a> - VS Code in browser</li>
-                            <li><a href="https://codepen.io/" target="_blank" rel="noopener">CodePen</a> - Frontend playground</li>
+                    <div class="wiki-resource-card">
+                        <div class="wiki-resource-header">
+                            <span class="wiki-resource-icon">✏️</span>
+                            <h3 class="wiki-resource-title">Code Editors</h3>
+                        </div>
+                        <p class="wiki-resource-description">Recommended code editors and IDEs.</p>
+                        <ul class="wiki-resource-list">
+                            <li>
+                                <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>
+                                <span class="wiki-resource-tag">Popular and extensible</span>
+                            </li>
+                            <li>
+                                <a href="https://github.dev/" target="_blank" rel="noopener">GitHub.dev</a>
+                                <span class="wiki-resource-tag">VS Code in browser</span>
+                            </li>
+                            <li>
+                                <a href="https://codepen.io/" target="_blank" rel="noopener">CodePen</a>
+                                <span class="wiki-resource-tag">Frontend playground</span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Browser DevTools</h3>
-                        <p class="card-description">Built-in browser development tools.</p>
-                        <ul style="margin-top: var(--space-md); padding-left: var(--space-lg); color: var(--color-fg-muted);">
-                            <li>Chrome DevTools - Comprehensive debugging</li>
-                            <li>Firefox Developer Tools - Privacy-focused</li>
-                            <li>Microsoft Edge DevTools - Chromium-based</li>
+                    <div class="wiki-resource-card">
+                        <div class="wiki-resource-header">
+                            <span class="wiki-resource-icon">🔧</span>
+                            <h3 class="wiki-resource-title">Browser DevTools</h3>
+                        </div>
+                        <p class="wiki-resource-description">Built-in browser development tools.</p>
+                        <ul class="wiki-resource-list">
+                            <li>Chrome DevTools <span class="wiki-resource-tag">Comprehensive debugging</span></li>
+                            <li>Firefox Developer Tools <span class="wiki-resource-tag">Privacy-focused</span></li>
+                            <li>Microsoft Edge DevTools <span class="wiki-resource-tag">Chromium-based</span></li>
                         </ul>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Design Tools</h3>
-                        <p class="card-description">UI design and prototyping tools.</p>
-                        <ul style="margin-top: var(--space-md); padding-left: var(--space-lg); color: var(--color-fg-muted);">
-                            <li><a href="https://www.figma.com/" target="_blank" rel="noopener">Figma</a> - Collaborative design</li>
-                            <li><a href="https://excalidraw.com/" target="_blank" rel="noopener">Excalidraw</a> - Hand-drawn style diagrams</li>
+                    <div class="wiki-resource-card">
+                        <div class="wiki-resource-header">
+                            <span class="wiki-resource-icon">🎨</span>
+                            <h3 class="wiki-resource-title">Design Tools</h3>
+                        </div>
+                        <p class="wiki-resource-description">UI design and prototyping tools.</p>
+                        <ul class="wiki-resource-list">
+                            <li>
+                                <a href="https://www.figma.com/" target="_blank" rel="noopener">Figma</a>
+                                <span class="wiki-resource-tag">Collaborative design</span>
+                            </li>
+                            <li>
+                                <a href="https://excalidraw.com/" target="_blank" rel="noopener">Excalidraw</a>
+                                <span class="wiki-resource-tag">Hand-drawn diagrams</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <section class="mt-3xl">
-                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">Learning Resources</h2>
-                <div class="card-grid" style="max-width: 800px;">
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">HTML & CSS</h3>
-                        <p class="card-description">Official documentation and guides.</p>
-                        <ul style="margin-top: var(--space-md); padding-left: var(--space-lg); color: var(--color-fg-muted);">
-                            <li><a href="https://developer.mozilla.org/" target="_blank" rel="noopener">MDN Web Docs</a> - Comprehensive references</li>
-                            <li><a href="https://css-tricks.com/" target="_blank" rel="noopener">CSS-Tricks</a> - CSS tips and tricks</li>
+            <section class="wiki-section">
+                <h2 class="wiki-section-title">
+                    <span class="wiki-section-icon">📚</span>
+                    Learning Resources
+                </h2>
+                <div class="wiki-resource-grid">
+                    <div class="wiki-resource-card">
+                        <div class="wiki-resource-header">
+                            <span class="wiki-resource-icon">📄</span>
+                            <h3 class="wiki-resource-title">HTML & CSS</h3>
+                        </div>
+                        <p class="wiki-resource-description">Official documentation and guides.</p>
+                        <ul class="wiki-resource-list">
+                            <li>
+                                <a href="https://developer.mozilla.org/" target="_blank" rel="noopener">MDN Web Docs</a>
+                                <span class="wiki-resource-tag">Comprehensive references</span>
+                            </li>
+                            <li>
+                                <a href="https://css-tricks.com/" target="_blank" rel="noopener">CSS-Tricks</a>
+                                <span class="wiki-resource-tag">CSS tips and tricks</span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">JavaScript</h3>
-                        <p class="card-description">JavaScript learning materials.</p>
-                        <ul style="margin-top: var(--space-md); padding-left: var(--space-lg); color: var(--color-fg-muted);">
-                            <li><a href="https://javascript.info/" target="_blank" rel="noopener">Modern JavaScript</a> - From basics to advanced</li>
-                            <li><a href="https://eloquentjavascript.net/" target="_blank" rel="noopener">Eloquent JavaScript</a> - Free online book</li>
+                    <div class="wiki-resource-card">
+                        <div class="wiki-resource-header">
+                            <span class="wiki-resource-icon">⚡</span>
+                            <h3 class="wiki-resource-title">JavaScript</h3>
+                        </div>
+                        <p class="wiki-resource-description">JavaScript learning materials.</p>
+                        <ul class="wiki-resource-list">
+                            <li>
+                                <a href="https://javascript.info/" target="_blank" rel="noopener">Modern JavaScript</a>
+                                <span class="wiki-resource-tag">Basics to advanced</span>
+                            </li>
+                            <li>
+                                <a href="https://eloquentjavascript.net/" target="_blank" rel="noopener">Eloquent JavaScript</a>
+                                <span class="wiki-resource-tag">Free online book</span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">AI & Prompting</h3>
-                        <p class="card-description">Resources for AI-assisted development.</p>
-                        <ul style="margin-top: var(--space-md); padding-left: var(--space-lg); color: var(--color-fg-muted);">
-                            <li><a href="https://platform.openai.com/" target="_blank" rel="noopener">OpenAI API</a> - AI model documentation</li>
-                            <li><a href="https://www.promptingguide.ai/" target="_blank" rel="noopener">Prompt Engineering Guide</a></li>
+                    <div class="wiki-resource-card">
+                        <div class="wiki-resource-header">
+                            <span class="wiki-resource-icon">🤖</span>
+                            <h3 class="wiki-resource-title">AI & Prompting</h3>
+                        </div>
+                        <p class="wiki-resource-description">Resources for AI-assisted development.</p>
+                        <ul class="wiki-resource-list">
+                            <li>
+                                <a href="https://platform.openai.com/" target="_blank" rel="noopener">OpenAI API</a>
+                                <span class="wiki-resource-tag">AI model documentation</span>
+                            </li>
+                            <li>
+                                <a href="https://www.promptingguide.ai/" target="_blank" rel="noopener">Prompt Engineering Guide</a>
+                                <span class="wiki-resource-tag">Prompt techniques</span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Community</h3>
-                        <p class="card-description">Developer communities and forums.</p>
-                        <ul style="margin-top: var(--space-md); padding-left: var(--space-lg); color: var(--color-fg-muted);">
-                            <li><a href="https://stackoverflow.com/" target="_blank" rel="noopener">Stack Overflow</a> - Q&A for developers</li>
-                            <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> - Code hosting and collaboration</li>
+                    <div class="wiki-resource-card">
+                        <div class="wiki-resource-header">
+                            <span class="wiki-resource-icon">👥</span>
+                            <h3 class="wiki-resource-title">Community</h3>
+                        </div>
+                        <p class="wiki-resource-description">Developer communities and forums.</p>
+                        <ul class="wiki-resource-list">
+                            <li>
+                                <a href="https://stackoverflow.com/" target="_blank" rel="noopener">Stack Overflow</a>
+                                <span class="wiki-resource-tag">Q&A for developers</span>
+                            </li>
+                            <li>
+                                <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+                                <span class="wiki-resource-tag">Code hosting</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -104,7 +191,10 @@
     </main>
 
     <footer class="component-footer"></footer>
-    <script src="../../js/components.js"></script>
-    <script>SereneWing.initComponents('wiki');</script>
+    <script src="../../../js/components.js"></script>
+    <script>
+        SereneWing.initComponents('wiki');
+        document.getElementById('resources-icon').innerHTML = SereneWing.icons.resources;
+    </script>
 </body>
 </html>

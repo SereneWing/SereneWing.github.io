@@ -4,64 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Best Practices - SereneWing Wiki</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../wiki.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2L9 6C8 7 7 8.5 7 10C7 12 8 14 10 15C8 13 7 10 8 7C9 4 11 3 12 3C13 3 15 4 16 7C17 10 16 13 14 15C16 14 17 12 17 10C17 8.5 16 7 15 6L12 2Z' fill='white' stroke='#999' stroke-width='0.5'/></svg>">
 </head>
 <body>
-    <header class="component-header"></header>
+    <div class="component-header"></div>
 
     <main class="main">
+        <!-- Page Hero Header -->
+        <div class="wiki-hero wiki-hero-practices">
+            <div class="container">
+                <nav class="wiki-breadcrumb">
+                    <a href="../">Wiki</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Best Practices</span>
+                </nav>
+                <div class="wiki-hero-content">
+                    <div class="wiki-hero-icon" id="practices-icon"></div>
+                    <div class="wiki-hero-text">
+                        <h1 class="wiki-hero-title">Best Practices</h1>
+                        <p class="wiki-hero-description">Coding standards and performance optimization guidelines</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
-            <a href="../" class="btn mb-lg" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                Back to Wiki
-            </a>
-
-            <header class="page-header">
-                <h1 class="page-title">Best Practices</h1>
-                <p class="page-description">Coding standards and performance optimization guidelines</p>
-            </header>
-
-            <section class="mt-xl">
-                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">Coding Standards</h2>
-                <div class="card-grid" style="max-width: 800px;">
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">File Naming</h3>
-                        <p class="card-description">Use kebab-case for all files: <code>my-file-name.html</code>. This improves readability and works across all file systems.</p>
+            <section class="wiki-section">
+                <h2 class="wiki-section-title">
+                    <span class="wiki-section-icon">📝</span>
+                    Coding Standards
+                </h2>
+                <div class="wiki-card-grid">
+                    <div class="wiki-practice-card">
+                        <div class="wiki-practice-icon">📄</div>
+                        <div class="wiki-practice-content">
+                            <h3 class="wiki-practice-title">File Naming</h3>
+                            <p class="wiki-practice-description">Use kebab-case for all files: <code>my-file-name.html</code>. This improves readability and works across all file systems.</p>
+                        </div>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">CSS Organization</h3>
-                        <p class="card-description">Use CSS variables for theming. Group related styles together. Follow BEM naming for component styles.</p>
+                    <div class="wiki-practice-card">
+                        <div class="wiki-practice-icon">🎨</div>
+                        <div class="wiki-practice-content">
+                            <h3 class="wiki-practice-title">CSS Organization</h3>
+                            <p class="wiki-practice-description">Use CSS variables for theming. Group related styles together. Follow BEM naming for component styles.</p>
+                        </div>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">JavaScript Best Practices</h3>
-                        <p class="card-description">Use const/let instead of var. Prefer arrow functions. Minimize global variables. Use semantic function names.</p>
+                    <div class="wiki-practice-card">
+                        <div class="wiki-practice-icon">⚡</div>
+                        <div class="wiki-practice-content">
+                            <h3 class="wiki-practice-title">JavaScript Best Practices</h3>
+                            <p class="wiki-practice-description">Use const/let instead of var. Prefer arrow functions. Minimize global variables. Use semantic function names.</p>
+                        </div>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">HTML Semantics</h3>
-                        <p class="card-description">Use appropriate semantic elements. Include required meta tags. Set lang attribute correctly for i18n.</p>
+                    <div class="wiki-practice-card">
+                        <div class="wiki-practice-icon">🏗️</div>
+                        <div class="wiki-practice-content">
+                            <h3 class="wiki-practice-title">HTML Semantics</h3>
+                            <p class="wiki-practice-description">Use appropriate semantic elements. Include required meta tags. Set lang attribute correctly for i18n.</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="mt-3xl">
-                <h2 style="font-size: var(--font-xl); margin-bottom: var(--space-lg);">Performance Tips</h2>
-                <div class="card-grid" style="max-width: 800px;">
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Lazy Loading</h3>
-                        <p class="card-description">Load images and scripts only when needed. Use <code>loading="lazy"</code> for images and dynamic imports for JS modules.</p>
+            <section class="wiki-section">
+                <h2 class="wiki-section-title">
+                    <span class="wiki-section-icon">🚀</span>
+                    Performance Tips
+                </h2>
+                <div class="wiki-card-grid">
+                    <div class="wiki-practice-card">
+                        <div class="wiki-practice-icon">⏳</div>
+                        <div class="wiki-practice-content">
+                            <h3 class="wiki-practice-title">Lazy Loading</h3>
+                            <p class="wiki-practice-description">Load images and scripts only when needed. Use <code>loading="lazy"</code> for images and dynamic imports for JS modules.</p>
+                        </div>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Optimize Images</h3>
-                        <p class="card-description">Use WebP format when possible. Compress images. Specify width/height to avoid layout shifts.</p>
+                    <div class="wiki-practice-card">
+                        <div class="wiki-practice-icon">🖼️</div>
+                        <div class="wiki-practice-content">
+                            <h3 class="wiki-practice-title">Optimize Images</h3>
+                            <p class="wiki-practice-description">Use WebP format when possible. Compress images. Specify width/height to avoid layout shifts.</p>
+                        </div>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Minimize Reflows</h3>
-                        <p class="card-description">Batch DOM changes. Use CSS transforms instead of layout properties. Cache layout measurements.</p>
+                    <div class="wiki-practice-card">
+                        <div class="wiki-practice-icon">⚙️</div>
+                        <div class="wiki-practice-content">
+                            <h3 class="wiki-practice-title">Minimize Reflows</h3>
+                            <p class="wiki-practice-description">Batch DOM changes. Use CSS transforms instead of layout properties. Cache layout measurements.</p>
+                        </div>
                     </div>
-                    <div class="card" style="cursor: default;">
-                        <h3 class="card-title">Use CDN Wisely</h3>
-                        <p class="card-description">Use reliable CDNs with multiple fallback options. Consider self-hosting critical resources.</p>
+                    <div class="wiki-practice-card">
+                        <div class="wiki-practice-icon">🌐</div>
+                        <div class="wiki-practice-content">
+                            <h3 class="wiki-practice-title">Use CDN Wisely</h3>
+                            <p class="wiki-practice-description">Use reliable CDNs with multiple fallback options. Consider self-hosting critical resources.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -69,7 +108,10 @@
     </main>
 
     <footer class="component-footer"></footer>
-    <script src="../../js/components.js"></script>
-    <script>SereneWing.initComponents('wiki');</script>
+    <script src="../../../js/components.js"></script>
+    <script>
+        SereneWing.initComponents('wiki');
+        document.getElementById('practices-icon').innerHTML = SereneWing.icons.practices;
+    </script>
 </body>
 </html>
