@@ -10,7 +10,7 @@ This is a personal website hosted on GitHub Pages, featuring interactive HTML5 g
 
 | Module | Description | Link | Status |
 |--------|-------------|------|--------|
-| **Games** | HTML5 mini-games themed around Journey to the West | [Enter](s/games/) | 🟢 2 games |
+| **Games** | HTML5 mini-games themed around Journey to the West | [Enter](s/games/) | 🟢 3 games |
 | **Blog** | Articles about AI programming and personal thoughts | [Enter](s/blog/) | 🟢 1 article |
 | **Tools** | Online development tools | [Enter](s/tools/) | 🟢 2 tools |
 | **Wiki** | AI coding knowledge base | [Enter](s/wiki/) | 🟢 5 categories |
@@ -23,6 +23,7 @@ Interactive HTML5 games with Journey to the West theme.
 |------|-------------|
 | **南天门** | Sun Wukong flies freely at the Heavenly Gate - click to interact |
 | **大闹天宫** | Navigate through heaven, dodge enemies, and reach the palace |
+| **方块战士** | Minecraft dungeon-style game - defeat zombies and skeletons with Sun Wukong |
 
 ### 📝 Blog Module
 

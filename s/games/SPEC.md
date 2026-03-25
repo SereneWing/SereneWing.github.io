@@ -20,7 +20,11 @@ games/
 │   ├── SPEC.md                   # 详细规格说明
 │   ├── README.md
 │   └── index.html
-└── journey-to-heaven/
+├── journey-to-heaven/
+│   ├── SPEC.md                   # 详细规格说明
+│   ├── README.md
+│   └── index.html
+└── mc-dungeon-fight/
     ├── SPEC.md                   # 详细规格说明
     ├── README.md
     └── index.html
@@ -36,6 +40,7 @@ games/
 |---------|--------|--------------|
 | `sun-wukong-heaven/` | 🟢 活跃 | - |
 | `journey-to-heaven/` | 🟢 活跃 | - |
+| `mc-dungeon-fight/` | 🟢 活跃 | - |
 
 ---
 
@@ -52,6 +57,12 @@ games/
 穿越天宫，躲避敌人（托塔李天王、哪吒），到达天宫。
 
 > **规格说明**：详见 `journey-to-heaven/SPEC.md`
+
+### mc-dungeon-fight
+
+我的世界地下城风格游戏，控制方块孙悟空击败僵尸和骷髅。
+
+> **规格说明**：详见 `mc-dungeon-fight/SPEC.md`
 
 ---
 
