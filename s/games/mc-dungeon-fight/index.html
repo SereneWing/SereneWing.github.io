@@ -17,529 +17,130 @@
             overflow: hidden;
         }
         
-        :root {
-            --color-grass: #3D8B37;
-            --color-dirt: #8B5A2B;
-            --color-wood: #8B4513;
-            --color-gold: #FFD700;
-            --color-player: #DEB887;
-            --color-monster-zombie: #00AA00;
-            --color-monster-skeleton: #CCCCCC;
-        }
-        
         #gameContainer {
             position: relative;
             width: 900px;
             height: 650px;
             background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 30px,
-                    rgba(0,0,0,0.05) 30px,
-                    rgba(0,0,0,0.05) 32px
-                ),
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 30px,
-                    rgba(0,0,0,0.05) 30px,
-                    rgba(0,0,0,0.05) 32px
-                ),
+                repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(0,0,0,0.05) 30px, rgba(0,0,0,0.05) 32px),
+                repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(0,0,0,0.05) 30px, rgba(0,0,0,0.05) 32px),
                 linear-gradient(180deg, #5D8B37 0%, #4A7B2D 20%, #3D6B25 40%, #8B5A2B 60%, #7A4A1B 80%, #6A3A0B 100%);
             border: 8px solid #8B4513;
-            border-radius: 0;
             overflow: hidden;
-            box-shadow: 
-                inset 0 0 50px rgba(0,0,0,0.3),
-                0 0 30px rgba(0,0,0,0.5);
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.3), 0 0 30px rgba(0,0,0,0.5);
             cursor: crosshair;
         }
         
-        /* 我的世界风格草丛 */
-        .grass-tuft {
-            position: absolute;
-            font-size: 14px;
-            color: #2D6B1D;
-            pointer-events: none;
-        }
+        .grass-tuft { position: absolute; font-size: 14px; color: #2D6B1D; pointer-events: none; }
         
-        /* 游戏标题 */
         #title {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #FFD700;
-            font-size: 28px;
-            font-weight: bold;
-            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000;
-            z-index: 100;
+            position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            color: #FFD700; font-size: 28px; font-weight: bold;
+            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000; z-index: 100;
             font-family: 'Courier New', monospace;
         }
         
-        /* 计分板 */
         #scoreBoard {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: rgba(139, 69, 19, 0.9);
-            border: 4px solid #5D3A1A;
-            padding: 8px 15px;
-            color: #FFD700;
-            font-size: 20px;
-            font-weight: bold;
-            z-index: 100;
-            font-family: 'Courier New', monospace;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            position: absolute; top: 10px; right: 15px;
+            background: rgba(139, 69, 19, 0.9); border: 4px solid #5D3A1A;
+            padding: 8px 15px; color: #FFD700; font-size: 20px; font-weight: bold;
+            z-index: 100; font-family: 'Courier New', monospace;
         }
         
-        /* 玩家角色 */
-        #player {
-            position: absolute;
-            width: 50px;
-            height: 70px;
-            z-index: 50;
-            transition: none;
-        }
-        
-        .player-body {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* 玩家头部 - 方块 */
+        #player { position: absolute; width: 50px; height: 70px; z-index: 50; transition: none; }
+        .player-body { position: relative; width: 100%; height: 100%; }
         .player-head {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 36px;
-            height: 32px;
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 36px; height: 32px;
             background: linear-gradient(135deg, #DEB887 0%, #D2B48C 50%, #C4A882 100%);
-            border: 3px solid #8B7355;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
+            border: 3px solid #8B7355; display: flex; flex-wrap: wrap;
+            justify-content: center; align-items: center;
         }
-        
-        .player-eye {
-            width: 6px;
-            height: 6px;
-            background: #333;
-            margin: 2px;
-            border-radius: 0;
-        }
-        
-        /* 玩家帽子 - 紧箍 */
+        .player-eye { width: 6px; height: 6px; background: #333; margin: 2px; }
         .player-hat {
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 42px;
-            height: 12px;
-            background: linear-gradient(180deg, #FFD700 0%, #DAA520 100%);
+            position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
+            width: 42px; height: 12px; background: linear-gradient(180deg, #FFD700 0%, #DAA520 100%);
             border: 2px solid #B8860B;
         }
-        
-        .player-hat::after {
-            content: '⭕';
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            font-size: 14px;
-        }
-        
-        /* 玩家身体 */
+        .player-hat::after { content: '⭕'; position: absolute; top: -8px; right: -10px; font-size: 14px; }
         .player-torso {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 32px;
-            height: 24px;
-            background: linear-gradient(180deg, #8B0000 0%, #DC143C 50%, #8B0000 100%);
+            position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
+            width: 32px; height: 24px; background: linear-gradient(180deg, #8B0000 0%, #DC143C 50%, #8B0000 100%);
             border: 3px solid #5C0000;
         }
-        
-        /* 玩家腿部 */
         .player-legs {
-            position: absolute;
-            top: 52px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 18px;
-            display: flex;
-            justify-content: space-between;
+            position: absolute; top: 52px; left: 50%; transform: translateX(-50%);
+            width: 30px; height: 18px; display: flex; justify-content: space-between;
         }
+        .player-leg { width: 12px; height: 18px; background: linear-gradient(180deg, #8B4513 0%, #654321 100%); border: 2px solid #4A3010; }
         
-        .player-leg {
-            width: 12px;
-            height: 18px;
-            background: linear-gradient(180deg, #8B4513 0%, #654321 100%);
-            border: 2px solid #4A3010;
-        }
+        .walking .player-leg.left { animation: walkLeft 0.3s ease-in-out infinite; }
+        .walking .player-leg.right { animation: walkRight 0.3s ease-in-out infinite; }
+        @keyframes walkLeft { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-5px) rotate(5deg); } }
+        @keyframes walkRight { 0%, 100% { transform: translateY(-5px) rotate(5deg); } 50% { transform: translateY(0) rotate(-5deg); } }
         
-        /* 走路动画 */
-        .walking .player-leg.left {
-            animation: walkLeft 0.3s ease-in-out infinite;
-        }
-        .walking .player-leg.right {
-            animation: walkRight 0.3s ease-in-out infinite;
-        }
-        
-        @keyframes walkLeft {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-5px) rotate(5deg); }
-        }
-        
-        @keyframes walkRight {
-            0%, 100% { transform: translateY(-5px) rotate(5deg); }
-            50% { transform: translateY(0) rotate(-5deg); }
-        }
-        
-        /* 金箍棒 */
         .player-staff {
-            position: absolute;
-            right: -8px;
-            top: 15px;
-            width: 8px;
-            height: 50px;
+            position: absolute; right: -8px; top: 15px; width: 8px; height: 50px;
             background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
-            border-radius: 2px;
-            transform-origin: bottom center;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            border-radius: 2px; transform-origin: bottom center; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
+        .attacking .player-staff { animation: attackSwing 0.3s ease-in-out infinite; }
+        @keyframes attackSwing { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-45deg); } 75% { transform: rotate(45deg); } }
         
-        /* 攻击动画 */
-        .attacking .player-staff {
-            animation: attackSwing 0.3s ease-in-out infinite;
-        }
+        .monster { position: absolute; cursor: pointer; z-index: 40; }
+        .monster-body { position: relative; width: 100%; height: 100%; }
         
-        @keyframes attackSwing {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-45deg); }
-            75% { transform: rotate(45deg); }
-        }
-        
-        /* 怪物基础样式 */
-        .monster {
-            position: absolute;
-            cursor: pointer;
-            z-index: 40;
-            transition: none;
-        }
-        
-        .monster-body {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* 僵尸怪物 */
         .zombie .monster-head {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 36px;
-            height: 32px;
-            background: linear-gradient(135deg, #00AA00 0%, #008800 50%, #006600 100%);
-            border: 3px solid #004400;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 36px; height: 32px; background: linear-gradient(135deg, #00AA00 0%, #008800 50%, #006600 100%);
+            border: 3px solid #004400; display: flex; justify-content: center; align-items: center;
         }
-        
-        .zombie .monster-eyes {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .zombie .monster-eye {
-            width: 8px;
-            height: 8px;
-            background: #FF0000;
-            border-radius: 0;
-        }
-        
-        .zombie .monster-mouth {
-            position: absolute;
-            bottom: 4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 16px;
-            height: 6px;
-            background: #003300;
-            display: flex;
-            gap: 2px;
-        }
-        
-        .zombie .monster-teeth {
-            width: 4px;
-            height: 4px;
-            background: #FFFFFF;
-            margin-top: -2px;
-        }
-        
-        .zombie .monster-torso {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 20px;
-            background: linear-gradient(180deg, #00AA00 0%, #008800 100%);
-            border: 2px solid #004400;
-        }
-        
-        .zombie .monster-arms {
-            position: absolute;
-            top: 32px;
-            width: 100%;
-        }
-        
-        .zombie .monster-arm {
-            position: absolute;
-            width: 10px;
-            height: 18px;
-            background: #00AA00;
-            border: 2px solid #004400;
-        }
-        
+        .zombie .monster-eyes { display: flex; gap: 8px; }
+        .zombie .monster-eye { width: 8px; height: 8px; background: #FF0000; }
+        .zombie .monster-mouth { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 16px; height: 6px; background: #003300; display: flex; gap: 2px; }
+        .zombie .monster-teeth { width: 4px; height: 4px; background: #FFFFFF; margin-top: -2px; }
+        .zombie .monster-torso { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); width: 30px; height: 20px; background: linear-gradient(180deg, #00AA00 0%, #008800 100%); border: 2px solid #004400; }
+        .zombie .monster-arms { position: absolute; top: 32px; width: 100%; }
+        .zombie .monster-arm { position: absolute; width: 10px; height: 18px; background: #00AA00; border: 2px solid #004400; }
         .zombie .monster-arm.left { left: -5px; transform: rotate(15deg); }
         .zombie .monster-arm.right { right: -5px; transform: rotate(-15deg); }
+        .zombie .monster-legs { position: absolute; top: 48px; left: 50%; transform: translateX(-50%); width: 28px; display: flex; justify-content: space-between; }
+        .zombie .monster-leg { width: 11px; height: 10px; background: #006600; border: 2px solid #004400; }
         
-        .zombie .monster-legs {
-            position: absolute;
-            top: 48px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 28px;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .zombie .monster-leg {
-            width: 11px;
-            height: 10px;
-            background: #006600;
-            border: 2px solid #004400;
-        }
-        
-        /* 骷髅怪物 */
         .skeleton .monster-head {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 36px;
-            height: 32px;
-            background: linear-gradient(135deg, #DDDDDD 0%, #CCCCCC 50%, #AAAAAA 100%);
-            border: 3px solid #666666;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 36px; height: 32px; background: linear-gradient(135deg, #DDDDDD 0%, #CCCCCC 50%, #AAAAAA 100%);
+            border: 3px solid #666666; display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
+        .skeleton .monster-eyes { display: flex; gap: 10px; margin-bottom: 4px; }
+        .skeleton .monster-eye { width: 8px; height: 8px; background: #000000; }
+        .skeleton .monster-nose { width: 6px; height: 4px; background: #666666; }
+        .skeleton .monster-mouth { position: absolute; bottom: 2px; width: 18px; height: 8px; background: #000000; display: flex; justify-content: center; gap: 2px; padding-top: 2px; }
+        .skeleton .monster-teeth { width: 3px; height: 5px; background: #FFFFFF; }
+        .skeleton .monster-torso { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); width: 28px; height: 20px; background: linear-gradient(180deg, transparent 0%, transparent 50%, #666666 50%, #666666 100%); border: 2px solid #666666; }
+        .skeleton .monster-ribs { position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 20px; height: 12px; background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, #666666 2px, #666666 4px); }
+        .skeleton .monster-legs { position: absolute; top: 48px; left: 50%; transform: translateX(-50%); width: 26px; display: flex; justify-content: space-between; }
+        .skeleton .monster-leg { width: 10px; height: 10px; background: #AAAAAA; border: 2px solid #666666; }
         
-        .skeleton .monster-eyes {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 4px;
-        }
+        .monster.hurt { animation: hurtFlash 0.15s ease-in-out 2; }
+        @keyframes hurtFlash { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(3) hue-rotate(30deg); } }
+        .monster.dying { animation: die 0.5s ease-out forwards; }
+        @keyframes die { 0% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(1.2) rotate(10deg); } 100% { transform: scale(0) rotate(45deg); opacity: 0; } }
         
-        .skeleton .monster-eye {
-            width: 8px;
-            height: 8px;
-            background: #000000;
-        }
+        .hit-effect { position: absolute; font-size: 24px; pointer-events: none; animation: hitPop 0.4s ease-out forwards; z-index: 200; }
+        @keyframes hitPop { 0% { transform: scale(0.5); opacity: 1; } 50% { transform: scale(1.5); opacity: 1; } 100% { transform: scale(0.8) translateY(-20px); opacity: 0; } }
         
-        .skeleton .monster-nose {
-            width: 6px;
-            height: 4px;
-            background: #666666;
-        }
+        .score-popup { position: absolute; color: #FFD700; font-size: 28px; font-weight: bold; text-shadow: 2px 2px 0 #000; pointer-events: none; animation: scoreFloat 1s ease-out forwards; z-index: 200; font-family: 'Courier New', monospace; }
+        @keyframes scoreFloat { 0% { transform: scale(0.5) translateY(0); opacity: 1; } 100% { transform: scale(1.2) translateY(-50px); opacity: 0; } }
         
-        .skeleton .monster-mouth {
-            position: absolute;
-            bottom: 2px;
-            width: 18px;
-            height: 8px;
-            background: #000000;
-            display: flex;
-            justify-content: center;
-            gap: 2px;
-            padding-top: 2px;
-        }
-        
-        .skeleton .monster-teeth {
-            width: 3px;
-            height: 5px;
-            background: #FFFFFF;
-        }
-        
-        .skeleton .monster-torso {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 28px;
-            height: 20px;
-            background: 
-                linear-gradient(180deg, transparent 0%, transparent 50%, #666666 50%, #666666 100%);
-            border: 2px solid #666666;
-        }
-        
-        .skeleton .monster-ribs {
-            position: absolute;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 12px;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent 0px,
-                transparent 2px,
-                #666666 2px,
-                #666666 4px
-            );
-        }
-        
-        .skeleton .monster-legs {
-            position: absolute;
-            top: 48px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 26px;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .skeleton .monster-leg {
-            width: 10px;
-            height: 10px;
-            background: #AAAAAA;
-            border: 2px solid #666666;
-        }
-        
-        /* 怪物受伤闪烁 */
-        .monster.hurt {
-            animation: hurtFlash 0.15s ease-in-out 2;
-        }
-        
-        @keyframes hurtFlash {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(3) hue-rotate(30deg); }
-        }
-        
-        /* 怪物死亡 */
-        .monster.dying {
-            animation: die 0.5s ease-out forwards;
-        }
-        
-        @keyframes die {
-            0% { transform: scale(1) rotate(0deg); opacity: 1; }
-            50% { transform: scale(1.2) rotate(10deg); }
-            100% { transform: scale(0) rotate(45deg); opacity: 0; }
-        }
-        
-        /* 攻击特效 */
-        .hit-effect {
-            position: absolute;
-            font-size: 24px;
-            pointer-events: none;
-            animation: hitPop 0.4s ease-out forwards;
-            z-index: 200;
-        }
-        
-        @keyframes hitPop {
-            0% { transform: scale(0.5); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 1; }
-            100% { transform: scale(0.8) translateY(-20px); opacity: 0; }
-        }
-        
-        /* 得分特效 */
-        .score-popup {
-            position: absolute;
-            color: #FFD700;
-            font-size: 28px;
-            font-weight: bold;
-            text-shadow: 2px 2px 0 #000;
-            pointer-events: none;
-            animation: scoreFloat 1s ease-out forwards;
-            z-index: 200;
-            font-family: 'Courier New', monospace;
-        }
-        
-        @keyframes scoreFloat {
-            0% { transform: scale(0.5) translateY(0); opacity: 1; }
-            100% { transform: scale(1.2) translateY(-50px); opacity: 0; }
-        }
-        
-        /* 音乐按钮 */
-        #musicBtn {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            padding: 10px 20px;
-            background: rgba(139, 69, 19, 0.9);
-            color: #FFD700;
-            border: 4px solid #5D3A1A;
-            border-radius: 0;
-            cursor: pointer;
-            font-size: 16px;
-            z-index: 150;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            transition: all 0.1s;
-        }
-        
-        #musicBtn:hover {
-            background: rgba(100, 50, 10, 0.9);
-            transform: scale(1.05);
-        }
-        
-        #musicBtn:active {
-            transform: scale(0.95);
-        }
-        
-        /* 提示信息 */
         #hint {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
-            padding: 8px 12px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #CCCCCC;
-            border: 3px solid #666;
-            font-size: 13px;
-            z-index: 100;
-            font-family: 'Courier New', monospace;
+            position: absolute; bottom: 15px; left: 15px; padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.8); color: #CCCCCC; border: 3px solid #666;
+            font-size: 13px; z-index: 100; font-family: 'Courier New', monospace;
         }
         
-        /* 血条 */
-        .health-bar {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 6px;
-            background: #333;
-            border: 2px solid #000;
-        }
-        
-        .health-fill {
-            height: 100%;
-            background: #FF3333;
-            transition: width 0.1s;
-        }
+        .health-bar { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 40px; height: 6px; background: #333; border: 2px solid #000; }
+        .health-fill { height: 100%; background: #FF3333; transition: width 0.1s; }
     </style>
 </head>
 <body>
@@ -550,128 +151,58 @@
         <div id="player">
             <div class="player-body">
                 <div class="player-hat"></div>
-                <div class="player-head">
-                    <div class="player-eye"></div>
-                    <div class="player-eye"></div>
-                </div>
+                <div class="player-head"><div class="player-eye"></div><div class="player-eye"></div></div>
                 <div class="player-torso"></div>
-                <div class="player-legs">
-                    <div class="player-leg left"></div>
-                    <div class="player-leg right"></div>
-                </div>
+                <div class="player-legs"><div class="player-leg left"></div><div class="player-leg right"></div></div>
                 <div class="player-staff"></div>
             </div>
         </div>
         
         <div id="hint">🎯 点击移动 | ⚔️ 点击怪物攻击</div>
-        <button id="musicBtn" onclick="toggleMusic()">🔇 音乐</button>
-        
         <audio id="bgMusic" loop></audio>
     </div>
     
     <script>
-        // 游戏配置
-        const config = {
-            containerWidth: 900,
-            containerHeight: 650,
-            playerSpeed: 2,
-            monsterSpeed: 0.6,
-            attackRange: 60,
-            attackInterval: 300,
-            monsterHP: 3,
-            spawnInterval: 3000,
-            maxMonsters: 6,
-            initialMonsters: 2
-        };
+        const config = { containerWidth: 900, containerHeight: 650, playerSpeed: 2, monsterSpeed: 0.6, attackRange: 60, attackInterval: 300, monsterHP: 3, spawnInterval: 3000, maxMonsters: 6, initialMonsters: 2 };
+        const state = { playerX: 450, playerY: 325, targetX: 450, targetY: 325, isMoving: false, isAttacking: false, currentTarget: null, score: 0, monsters: [], musicOn: true };
         
-        // 游戏状态
-        const state = {
-            playerX: 450,
-            playerY: 325,
-            targetX: 450,
-            targetY: 325,
-            isMoving: false,
-            isAttacking: false,
-            currentTarget: null,
-            score: 0,
-            monsters: [],
-            musicOn: true
-        };
-        
-        // 音频上下文
-        let audioCtx;
-        let hitBuffer;
-        let bgMusicBuffer;
-        
-        // DOM元素
+        let audioCtx, hitBuffer;
         const player = document.getElementById('player');
         const container = document.getElementById('gameContainer');
         const scoreEl = document.getElementById('score');
         
-        // 初始化音频
         function initAudio() {
             try {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // 打击音效 - Minecraft风格的撞击声
-                const sr = audioCtx.sampleRate;
-                const dur = 0.12;
+                const sr = audioCtx.sampleRate, dur = 0.12;
                 hitBuffer = audioCtx.createBuffer(1, sr * dur, sr);
                 const data = hitBuffer.getChannelData(0);
                 for (let i = 0; i < data.length; i++) {
                     const t = i / sr;
-                    // 低频撞击 + 高频噼啪
-                    const bass = Math.sin(2 * Math.PI * 150 * t) * Math.exp(-t * 30) * 0.8;
-                    const crackle = (Math.random() * 2 - 1) * Math.exp(-t * 50) * 0.3;
-                    const high = Math.sin(2 * Math.PI * 800 * t) * Math.exp(-t * 40) * 0.2;
-                    data[i] = bass + crackle + high;
+                    data[i] = Math.sin(2 * Math.PI * 150 * t) * Math.exp(-t * 30) * 0.8 + (Math.random() * 2 - 1) * Math.exp(-t * 50) * 0.3 + Math.sin(2 * Math.PI * 800 * t) * Math.exp(-t * 40) * 0.2;
                 }
-                
-                // 背景音乐 - Minecraft风格的8-bit中国风
                 createBgMusic();
-            } catch (e) {
-                console.log('Audio not supported');
-            }
+            } catch (e) { /* Audio not supported */ }
         }
         
-        // 生成背景音乐
         function createBgMusic() {
-            const sr = audioCtx.sampleRate;
-            const dur = 8; // 8秒循环
+            const sr = audioCtx.sampleRate, dur = 8;
             const buffer = audioCtx.createBuffer(2, sr * dur, sr);
-            
-            // 简化的五声音阶
             const notes = [262, 294, 330, 392, 440, 523, 587, 659];
-            // Minecraft风格的节奏
-            const pattern = [
-                0, 2, 4, 5, 4, 2, 0, 2,
-                4, 5, 7, 5, 4, 2, 4, 0,
-                2, 4, 5, 7, 5, 4, 2, 0,
-                4, 2, 0, 2, 4, 5, 4, 2
-            ];
+            const pattern = [0, 2, 4, 5, 4, 2, 0, 2, 4, 5, 7, 5, 4, 2, 4, 0, 2, 4, 5, 7, 5, 4, 2, 0, 4, 2, 0, 2, 4, 5, 4, 2];
             const beatDur = dur * sr / pattern.length;
             
             for (let ch = 0; ch < 2; ch++) {
                 const data = buffer.getChannelData(ch);
                 data.fill(0);
-                
-                // 主旋律
                 pattern.forEach((note, i) => {
                     const freq = notes[note] * (ch === 1 ? 0.5 : 1);
-                    const start = Math.floor(i * beatDur);
-                    const end = Math.floor((i * beatDur + beatDur * 0.7));
-                    
+                    const start = Math.floor(i * beatDur), end = Math.floor(i * beatDur + beatDur * 0.7);
                     for (let j = start; j < end && j < data.length; j++) {
-                        const t = (j - start) / sr;
-                        const env = Math.min(1, (end - j) / (sr * 0.05));
-                        // 方波风格的声音
-                        const square = Math.sign(Math.sin(2 * Math.PI * freq * t)) * 0.3;
-                        const sine = Math.sin(2 * Math.PI * freq * t) * 0.2;
-                        data[j] += (square + sine) * env * (ch === 0 ? 0.4 : 0.25);
+                        const t = (j - start) / sr, env = Math.min(1, (end - j) / (sr * 0.05));
+                        data[j] += (Math.sign(Math.sin(2 * Math.PI * freq * t)) * 0.3 + Math.sin(2 * Math.PI * freq * t) * 0.2) * env * (ch === 0 ? 0.4 : 0.25);
                     }
                 });
-                
-                // 低音鼓点
                 for (let i = 0; i < 16; i++) {
                     const start = Math.floor(i * beatDur * 2);
                     for (let j = start; j < start + sr * 0.05 && j < data.length; j++) {
@@ -679,342 +210,124 @@
                         data[j] += Math.sin(2 * Math.PI * 80 * t) * Math.exp(-t * 40) * 0.4;
                     }
                 }
-                
-                // 脚步声效果
-                for (let i = 0; i < 8; i++) {
-                    const start = Math.floor(i * beatDur * 4 + beatDur);
-                    for (let j = start; j < start + sr * 0.02 && j < data.length; j++) {
-                        const t = (j - start) / sr;
-                        data[j] += (Math.random() * 2 - 1) * Math.exp(-t * 100) * 0.15;
-                    }
-                }
             }
-            
             const m = document.getElementById('bgMusic');
             const blob = new Blob([createWav(buffer)], { type: 'audio/wav' });
             m.src = URL.createObjectURL(blob);
         }
         
-        // 创建WAV
         function createWav(buffer) {
             const sr = buffer.sampleRate, ch = buffer.numberOfChannels, len = buffer.length;
-            const header = new ArrayBuffer(44);
-            const v = new DataView(header);
+            const header = new ArrayBuffer(44), v = new DataView(header);
             const str = s => [...s].forEach((c, i) => v.setUint8(44 + i, c.charCodeAt(0)));
-            
             str('RIFF'); v.setUint32(4, 36 + len * 2, true);
             str('WAVE'); str('fmt '); v.setUint32(16, 16, true);
             v.setUint16(20, 1, true); v.setUint16(22, ch, true);
             v.setUint32(24, sr, true); v.setUint32(28, sr * ch * 2, true);
             v.setUint16(32, ch * 2, true); v.setUint16(34, 16, true);
             str('data'); v.setUint32(40, len * 2, true);
-            
             const out = new Int16Array(len * ch);
-            for (let i = 0; i < len; i++)
-                for (let c = 0; c < ch; c++)
-                    out[i * ch + c] = Math.max(-32768, Math.min(32767, buffer.getChannelData(c)[i] * 32767));
-            
+            for (let i = 0; i < len; i++) for (let c = 0; c < ch; c++) out[i * ch + c] = Math.max(-32768, Math.min(32767, buffer.getChannelData(c)[i] * 32767));
             return new Uint8Array([...new Uint8Array(header), ...new Uint8Array(out.buffer)]);
         }
         
-        // 播放打击音效
         function playHitSound() {
-            if (audioCtx && hitBuffer) {
-                const src = audioCtx.createBufferSource();
-                src.buffer = hitBuffer;
-                src.connect(audioCtx.destination);
-                src.start();
-            }
+            if (audioCtx && hitBuffer) { const src = audioCtx.createBufferSource(); src.buffer = hitBuffer; src.connect(audioCtx.destination); src.start(); }
         }
         
-        // 切换音乐
-        function toggleMusic() {
-            const m = document.getElementById('bgMusic');
-            const b = document.getElementById('musicBtn');
-            if (state.musicOn) {
-                m.pause();
-                b.textContent = '🔇 音乐';
-                state.musicOn = false;
-            } else {
-                m.currentTime = 0;
-                m.play().then(() => {
-                    b.textContent = '🔊 音乐';
-                    state.musicOn = true;
-                }).catch(() => {});
-            }
-        }
-        
-        // 创建怪物
         function createMonster() {
             if (state.monsters.length >= config.maxMonsters) return;
-            
             const type = Math.random() > 0.5 ? 'zombie' : 'skeleton';
             const monster = document.createElement('div');
             monster.className = `monster ${type}`;
-            monster.style.width = '45px';
-            monster.style.height = '58px';
-            
-            // 随机位置（避免太靠近玩家）
+            monster.style.width = '45px'; monster.style.height = '58px';
             let x, y;
-            do {
-                x = 50 + Math.random() * (config.containerWidth - 150);
-                y = 80 + Math.random() * (config.containerHeight - 180);
-            } while (Math.hypot(x - state.playerX, y - state.playerY) < 200);
+            do { x = 50 + Math.random() * (config.containerWidth - 150); y = 80 + Math.random() * (config.containerHeight - 180); } while (Math.hypot(x - state.playerX, y - state.playerY) < 200);
+            monster.style.left = x + 'px'; monster.style.top = y + 'px';
+            const monsterData = { element: monster, x: x, y: y, hp: config.monsterHP, type: type, dirX: Math.random() > 0.5 ? 1 : -1, dirY: Math.random() > 0.5 ? 1 : -1, moveTimer: 0 };
             
-            monster.style.left = x + 'px';
-            monster.style.top = y + 'px';
-            
-            const monsterData = {
-                element: monster,
-                x: x,
-                y: y,
-                hp: config.monsterHP,
-                type: type,
-                dirX: Math.random() > 0.5 ? 1 : -1,
-                dirY: Math.random() > 0.5 ? 1 : -1,
-                moveTimer: 0
-            };
-            
-            // 创建怪物身体HTML
             if (type === 'zombie') {
-                monster.innerHTML = `
-                    <div class="health-bar"><div class="health-fill" style="width: ${(monsterData.hp / config.monsterHP) * 100}%"></div></div>
-                    <div class="monster-body">
-                        <div class="monster-head">
-                            <div class="monster-eyes">
-                                <div class="monster-eye"></div>
-                                <div class="monster-eye"></div>
-                            </div>
-                            <div class="monster-mouth">
-                                <div class="monster-teeth"></div>
-                                <div class="monster-teeth"></div>
-                            </div>
-                        </div>
-                        <div class="monster-torso"></div>
-                        <div class="monster-arms">
-                            <div class="monster-arm left"></div>
-                            <div class="monster-arm right"></div>
-                        </div>
-                        <div class="monster-legs">
-                            <div class="monster-leg"></div>
-                            <div class="monster-leg"></div>
-                        </div>
-                    </div>
-                `;
+                monster.innerHTML = `<div class="health-bar"><div class="health-fill" style="width:100%"></div></div><div class="monster-body"><div class="monster-head"><div class="monster-eyes"><div class="monster-eye"></div><div class="monster-eye"></div></div><div class="monster-mouth"><div class="monster-teeth"></div><div class="monster-teeth"></div></div></div><div class="monster-torso"></div><div class="monster-arms"><div class="monster-arm left"></div><div class="monster-arm right"></div></div><div class="monster-legs"><div class="monster-leg"></div><div class="monster-leg"></div></div></div>`;
             } else {
-                monster.innerHTML = `
-                    <div class="health-bar"><div class="health-fill" style="width: ${(monsterData.hp / config.monsterHP) * 100}%"></div></div>
-                    <div class="monster-body">
-                        <div class="monster-head">
-                            <div class="monster-eyes">
-                                <div class="monster-eye"></div>
-                                <div class="monster-eye"></div>
-                            </div>
-                            <div class="monster-nose"></div>
-                            <div class="monster-mouth">
-                                <div class="monster-teeth"></div>
-                                <div class="monster-teeth"></div>
-                                <div class="monster-teeth"></div>
-                            </div>
-                        </div>
-                        <div class="monster-torso">
-                            <div class="monster-ribs"></div>
-                        </div>
-                        <div class="monster-legs">
-                            <div class="monster-leg"></div>
-                            <div class="monster-leg"></div>
-                        </div>
-                    </div>
-                `;
+                monster.innerHTML = `<div class="health-bar"><div class="health-fill" style="width:100%"></div></div><div class="monster-body"><div class="monster-head"><div class="monster-eyes"><div class="monster-eye"></div><div class="monster-eye"></div></div><div class="monster-nose"></div><div class="monster-mouth"><div class="monster-teeth"></div><div class="monster-teeth"></div><div class="monster-teeth"></div></div></div><div class="monster-torso"><div class="monster-ribs"></div></div><div class="monster-legs"><div class="monster-leg"></div><div class="monster-leg"></div></div></div>`;
             }
-            
-            monster.addEventListener('click', (e) => {
-                e.stopPropagation();
-                attackMonster(monsterData);
-            });
-            
+            monster.addEventListener('click', (e) => { e.stopPropagation(); attackMonster(monsterData); });
             container.appendChild(monster);
             state.monsters.push(monsterData);
         }
         
-        // 攻击怪物
-        function attackMonster(monster) {
-            state.currentTarget = monster;
-            state.isAttacking = true;
-            player.classList.add('attacking');
-        }
+        function attackMonster(monster) { state.currentTarget = monster; state.isAttacking = true; player.classList.add('attacking'); }
         
-        // 处理攻击
         let lastAttackTime = 0;
         function processAttack() {
             if (!state.isAttacking || !state.currentTarget) return;
-            
             const now = Date.now();
             if (now - lastAttackTime < config.attackInterval) return;
-            
             const monster = state.currentTarget;
             const dist = Math.hypot(monster.x - state.playerX, monster.y - state.playerY);
-            
-            // 如果还在攻击范围外，走过去
-            if (dist > config.attackRange) {
-                state.targetX = monster.x + 30;
-                state.targetY = monster.y + 30;
-                state.isMoving = true;
-                return;
-            }
-            
-            // 攻击
+            if (dist > config.attackRange) { state.targetX = monster.x + 30; state.targetY = monster.y + 30; state.isMoving = true; return; }
             lastAttackTime = now;
             playHitSound();
-            
-            // 显示打击特效
             showHitEffect(monster.x + 22, monster.y + 20);
-            
-            // 怪物受伤
             monster.hp--;
             monster.element.classList.add('hurt');
             setTimeout(() => monster.element.classList.remove('hurt'), 300);
-            
-            // 更新血条
-            const healthFill = monster.element.querySelector('.health-fill');
-            healthFill.style.width = (monster.hp / config.monsterHP) * 100 + '%';
-            
-            // 怪物死亡
+            monster.element.querySelector('.health-fill').style.width = (monster.hp / config.monsterHP) * 100 + '%';
             if (monster.hp <= 0) {
                 monster.element.classList.add('dying');
                 showScorePopup(monster.x + 22, monster.y);
-                
-                setTimeout(() => {
-                    monster.element.remove();
-                    const idx = state.monsters.indexOf(monster);
-                    if (idx > -1) state.monsters.splice(idx, 1);
-                }, 500);
-                
-                state.score++;
-                scoreEl.textContent = state.score;
-                state.isAttacking = false;
-                state.currentTarget = null;
+                setTimeout(() => { monster.element.remove(); const idx = state.monsters.indexOf(monster); if (idx > -1) state.monsters.splice(idx, 1); }, 500);
+                state.score++; scoreEl.textContent = state.score;
+                state.isAttacking = false; state.currentTarget = null;
                 player.classList.remove('attacking');
             }
         }
         
-        // 显示打击特效
-        function showHitEffect(x, y) {
-            const effect = document.createElement('div');
-            effect.className = 'hit-effect';
-            effect.textContent = '💥';
-            effect.style.left = x + 'px';
-            effect.style.top = y + 'px';
-            container.appendChild(effect);
-            setTimeout(() => effect.remove(), 400);
-        }
+        function showHitEffect(x, y) { const e = document.createElement('div'); e.className = 'hit-effect'; e.textContent = '💥'; e.style.left = x + 'px'; e.style.top = y + 'px'; container.appendChild(e); setTimeout(() => e.remove(), 400); }
+        function showScorePopup(x, y) { const p = document.createElement('div'); p.className = 'score-popup'; p.textContent = '+1'; p.style.left = x + 'px'; p.style.top = y + 'px'; container.appendChild(p); setTimeout(() => p.remove(), 1000); }
         
-        // 显示得分弹出
-        function showScorePopup(x, y) {
-            const popup = document.createElement('div');
-            popup.className = 'score-popup';
-            popup.textContent = '+1';
-            popup.style.left = x + 'px';
-            popup.style.top = y + 'px';
-            container.appendChild(popup);
-            setTimeout(() => popup.remove(), 1000);
-        }
-        
-        // 更新玩家位置
         function updatePlayer() {
-            const dx = state.targetX - state.playerX;
-            const dy = state.targetY - state.playerY;
-            const dist = Math.hypot(dx, dy);
-            
+            const dx = state.targetX - state.playerX, dy = state.targetY - state.playerY, dist = Math.hypot(dx, dy);
             if (dist > 5) {
                 state.isMoving = true;
                 state.playerX += (dx / dist) * config.playerSpeed;
                 state.playerY += (dy / dist) * config.playerSpeed;
                 player.classList.add('walking');
-                
-                // 面向方向
-                if (dx < 0) {
-                    player.style.transform = 'scaleX(-1)';
-                } else {
-                    player.style.transform = 'scaleX(1)';
-                }
+                player.style.transform = dx < 0 ? 'scaleX(-1)' : 'scaleX(1)';
             } else {
                 state.isMoving = false;
                 player.classList.remove('walking');
-                
-                // 攻击状态下停止移动
-                if (state.isAttacking && state.currentTarget) {
-                    const targetDist = Math.hypot(
-                        state.currentTarget.x - state.playerX,
-                        state.currentTarget.y - state.playerY
-                    );
-                    if (targetDist <= config.attackRange) {
-                        // 在攻击范围内，不需要移动
-                    }
-                }
             }
-            
             player.style.left = state.playerX + 'px';
             player.style.top = state.playerY + 'px';
         }
         
-        // 更新怪物
         function updateMonsters() {
             state.monsters.forEach(monster => {
-                // 随机移动
                 monster.moveTimer++;
-                if (monster.moveTimer > 30) {
-                    monster.moveTimer = 0;
-                    if (Math.random() > 0.6) {
-                        monster.dirX = Math.random() > 0.5 ? 1 : -1;
-                        monster.dirY = Math.random() > 0.5 ? 1 : -1;
-                    }
-                }
-                
-                // 移动
+                if (monster.moveTimer > 30) { monster.moveTimer = 0; if (Math.random() > 0.6) { monster.dirX = Math.random() > 0.5 ? 1 : -1; monster.dirY = Math.random() > 0.5 ? 1 : -1; } }
                 monster.x += monster.dirX * config.monsterSpeed;
                 monster.y += monster.dirY * config.monsterSpeed;
-                
-                // 边界反弹
-                if (monster.x < 20 || monster.x > config.containerWidth - 70) {
-                    monster.dirX *= -1;
-                    monster.x = Math.max(20, Math.min(config.containerWidth - 70, monster.x));
-                }
-                if (monster.y < 60 || monster.y > config.containerHeight - 80) {
-                    monster.dirY *= -1;
-                    monster.y = Math.max(60, Math.min(config.containerHeight - 80, monster.y));
-                }
-                
+                if (monster.x < 20 || monster.x > config.containerWidth - 70) { monster.dirX *= -1; monster.x = Math.max(20, Math.min(config.containerWidth - 70, monster.x)); }
+                if (monster.y < 60 || monster.y > config.containerHeight - 80) { monster.dirY *= -1; monster.y = Math.max(60, Math.min(config.containerHeight - 80, monster.y)); }
                 monster.element.style.left = monster.x + 'px';
                 monster.element.style.top = monster.y + 'px';
             });
         }
         
-        // 游戏主循环
-        function gameLoop() {
-            updatePlayer();
-            updateMonsters();
-            processAttack();
-            requestAnimationFrame(gameLoop);
-        }
+        function gameLoop() { updatePlayer(); updateMonsters(); processAttack(); requestAnimationFrame(gameLoop); }
         
-        // 点击事件
         container.addEventListener('click', (e) => {
             if (e.target.closest('.monster')) return;
-            
             const rect = container.getBoundingClientRect();
-            const x = e.clientX - rect.left - 25;
-            const y = e.clientY - rect.top - 35;
-            
+            const x = e.clientX - rect.left - 25, y = e.clientY - rect.top - 35;
             state.targetX = Math.max(0, Math.min(config.containerWidth - 50, x));
             state.targetY = Math.max(50, Math.min(config.containerHeight - 70, y));
             state.isMoving = true;
-            state.isAttacking = false;
-            state.currentTarget = null;
+            state.isAttacking = false; state.currentTarget = null;
             player.classList.remove('attacking');
         });
         
-        // 创建草地装饰
         function createGrassTufts() {
             for (let i = 0; i < 30; i++) {
                 const tuft = document.createElement('div');
@@ -1027,36 +340,22 @@
             }
         }
         
-        // 初始化
         function init() {
             initAudio();
             createGrassTufts();
-            
-            // 初始位置
-            state.playerX = 450;
-            state.playerY = 325;
+            state.playerX = 450; state.playerY = 325;
             player.style.left = state.playerX + 'px';
             player.style.top = state.playerY + 'px';
-            
-            // 创建初始怪物
-            for (let i = 0; i < config.initialMonsters; i++) {
-                setTimeout(() => createMonster(), i * 500);
-            }
-            
-            // 定时生成怪物
+            for (let i = 0; i < config.initialMonsters; i++) setTimeout(() => createMonster(), i * 500);
             setInterval(createMonster, config.spawnInterval);
-            
-            // 开始游戏循环
             gameLoop();
-            
-            // 自动播放音乐
-            setTimeout(() => {
+            // Auto play music on first user interaction
+            const startMusic = () => {
                 const m = document.getElementById('bgMusic');
-                m.play().then(() => {
-                    state.musicOn = true;
-                    document.getElementById('musicBtn').textContent = '🔊 音乐';
-                }).catch(() => {});
-            }, 1000);
+                m.play().catch(() => {});
+                document.removeEventListener('click', startMusic);
+            };
+            document.addEventListener('click', startMusic, { once: true });
         }
         
         window.onload = init;
