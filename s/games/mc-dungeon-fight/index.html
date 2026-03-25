@@ -6,95 +6,30 @@
     <title>方块战士 - 我的世界地下城风格</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
-            font-family: 'Microsoft YaHei', sans-serif;
-            overflow: hidden;
-        }
-        
-        #gameContainer {
-            position: relative;
-            width: 900px;
-            height: 650px;
-            background: 
-                repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(0,0,0,0.05) 30px, rgba(0,0,0,0.05) 32px),
-                repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(0,0,0,0.05) 30px, rgba(0,0,0,0.05) 32px),
-                linear-gradient(180deg, #5D8B37 0%, #4A7B2D 20%, #3D6B25 40%, #8B5A2B 60%, #7A4A1B 80%, #6A3A0B 100%);
-            border: 8px solid #8B4513;
-            overflow: hidden;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.3), 0 0 30px rgba(0,0,0,0.5);
-            cursor: crosshair;
-        }
-        
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%); font-family: 'Microsoft YaHei', sans-serif; overflow: hidden; }
+        #gameContainer { position: relative; width: 900px; height: 650px; background: repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(0,0,0,0.05) 30px, rgba(0,0,0,0.05) 32px), repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(0,0,0,0.05) 30px, rgba(0,0,0,0.05) 32px), linear-gradient(180deg, #5D8B37 0%, #4A7B2D 20%, #3D6B25 40%, #8B5A2B 60%, #7A4A1B 80%, #6A3A0B 100%); border: 8px solid #8B4513; overflow: hidden; box-shadow: inset 0 0 50px rgba(0,0,0,0.3), 0 0 30px rgba(0,0,0,0.5); cursor: crosshair; }
         .grass-tuft { position: absolute; font-size: 14px; color: #2D6B1D; pointer-events: none; }
-        
-        #title {
-            position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-            color: #FFD700; font-size: 28px; font-weight: bold;
-            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000; z-index: 100;
-            font-family: 'Courier New', monospace;
-        }
-        
-        #scoreBoard {
-            position: absolute; top: 10px; right: 15px;
-            background: rgba(139, 69, 19, 0.9); border: 4px solid #5D3A1A;
-            padding: 8px 15px; color: #FFD700; font-size: 20px; font-weight: bold;
-            z-index: 100; font-family: 'Courier New', monospace;
-        }
-        
-        #player { position: absolute; width: 50px; height: 70px; z-index: 50; transition: none; }
+        #title { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: #FFD700; font-size: 28px; font-weight: bold; text-shadow: 3px 3px 0 #000, -1px -1px 0 #000; z-index: 100; font-family: 'Courier New', monospace; }
+        #scoreBoard { position: absolute; top: 10px; right: 15px; background: rgba(139, 69, 19, 0.9); border: 4px solid #5D3A1A; padding: 8px 15px; color: #FFD700; font-size: 20px; font-weight: bold; z-index: 100; font-family: 'Courier New', monospace; }
+        #player { position: absolute; width: 50px; height: 70px; z-index: 50; }
         .player-body { position: relative; width: 100%; height: 100%; }
-        .player-head {
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 36px; height: 32px;
-            background: linear-gradient(135deg, #DEB887 0%, #D2B48C 50%, #C4A882 100%);
-            border: 3px solid #8B7355; display: flex; flex-wrap: wrap;
-            justify-content: center; align-items: center;
-        }
+        .player-head { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 36px; height: 32px; background: linear-gradient(135deg, #DEB887 0%, #D2B48C 50%, #C4A882 100%); border: 3px solid #8B7355; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; }
         .player-eye { width: 6px; height: 6px; background: #333; margin: 2px; }
-        .player-hat {
-            position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
-            width: 42px; height: 12px; background: linear-gradient(180deg, #FFD700 0%, #DAA520 100%);
-            border: 2px solid #B8860B;
-        }
+        .player-hat { position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 42px; height: 12px; background: linear-gradient(180deg, #FFD700 0%, #DAA520 100%); border: 2px solid #B8860B; }
         .player-hat::after { content: '⭕'; position: absolute; top: -8px; right: -10px; font-size: 14px; }
-        .player-torso {
-            position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
-            width: 32px; height: 24px; background: linear-gradient(180deg, #8B0000 0%, #DC143C 50%, #8B0000 100%);
-            border: 3px solid #5C0000;
-        }
-        .player-legs {
-            position: absolute; top: 52px; left: 50%; transform: translateX(-50%);
-            width: 30px; height: 18px; display: flex; justify-content: space-between;
-        }
+        .player-torso { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); width: 32px; height: 24px; background: linear-gradient(180deg, #8B0000 0%, #DC143C 50%, #8B0000 100%); border: 3px solid #5C0000; }
+        .player-legs { position: absolute; top: 52px; left: 50%; transform: translateX(-50%); width: 30px; height: 18px; display: flex; justify-content: space-between; }
         .player-leg { width: 12px; height: 18px; background: linear-gradient(180deg, #8B4513 0%, #654321 100%); border: 2px solid #4A3010; }
-        
         .walking .player-leg.left { animation: walkLeft 0.3s ease-in-out infinite; }
         .walking .player-leg.right { animation: walkRight 0.3s ease-in-out infinite; }
         @keyframes walkLeft { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-5px) rotate(5deg); } }
         @keyframes walkRight { 0%, 100% { transform: translateY(-5px) rotate(5deg); } 50% { transform: translateY(0) rotate(-5deg); } }
-        
-        .player-staff {
-            position: absolute; right: -8px; top: 15px; width: 8px; height: 50px;
-            background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
-            border-radius: 2px; transform-origin: bottom center; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-        }
+        .player-staff { position: absolute; right: -8px; top: 15px; width: 8px; height: 50px; background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%); border-radius: 2px; transform-origin: bottom center; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); }
         .attacking .player-staff { animation: attackSwing 0.3s ease-in-out infinite; }
         @keyframes attackSwing { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-45deg); } 75% { transform: rotate(45deg); } }
-        
         .monster { position: absolute; cursor: pointer; z-index: 40; }
         .monster-body { position: relative; width: 100%; height: 100%; }
-        
-        .zombie .monster-head {
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 36px; height: 32px; background: linear-gradient(135deg, #00AA00 0%, #008800 50%, #006600 100%);
-            border: 3px solid #004400; display: flex; justify-content: center; align-items: center;
-        }
+        .zombie .monster-head { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 36px; height: 32px; background: linear-gradient(135deg, #00AA00 0%, #008800 50%, #006600 100%); border: 3px solid #004400; display: flex; justify-content: center; align-items: center; }
         .zombie .monster-eyes { display: flex; gap: 8px; }
         .zombie .monster-eye { width: 8px; height: 8px; background: #FF0000; }
         .zombie .monster-mouth { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 16px; height: 6px; background: #003300; display: flex; gap: 2px; }
@@ -106,12 +41,7 @@
         .zombie .monster-arm.right { right: -5px; transform: rotate(-15deg); }
         .zombie .monster-legs { position: absolute; top: 48px; left: 50%; transform: translateX(-50%); width: 28px; display: flex; justify-content: space-between; }
         .zombie .monster-leg { width: 11px; height: 10px; background: #006600; border: 2px solid #004400; }
-        
-        .skeleton .monster-head {
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 36px; height: 32px; background: linear-gradient(135deg, #DDDDDD 0%, #CCCCCC 50%, #AAAAAA 100%);
-            border: 3px solid #666666; display: flex; flex-direction: column; justify-content: center; align-items: center;
-        }
+        .skeleton .monster-head { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 36px; height: 32px; background: linear-gradient(135deg, #DDDDDD 0%, #CCCCCC 50%, #AAAAAA 100%); border: 3px solid #666666; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .skeleton .monster-eyes { display: flex; gap: 10px; margin-bottom: 4px; }
         .skeleton .monster-eye { width: 8px; height: 8px; background: #000000; }
         .skeleton .monster-nose { width: 6px; height: 4px; background: #666666; }
@@ -121,24 +51,15 @@
         .skeleton .monster-ribs { position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 20px; height: 12px; background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, #666666 2px, #666666 4px); }
         .skeleton .monster-legs { position: absolute; top: 48px; left: 50%; transform: translateX(-50%); width: 26px; display: flex; justify-content: space-between; }
         .skeleton .monster-leg { width: 10px; height: 10px; background: #AAAAAA; border: 2px solid #666666; }
-        
         .monster.hurt { animation: hurtFlash 0.15s ease-in-out 2; }
         @keyframes hurtFlash { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(3) hue-rotate(30deg); } }
         .monster.dying { animation: die 0.5s ease-out forwards; }
         @keyframes die { 0% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(1.2) rotate(10deg); } 100% { transform: scale(0) rotate(45deg); opacity: 0; } }
-        
         .hit-effect { position: absolute; font-size: 24px; pointer-events: none; animation: hitPop 0.4s ease-out forwards; z-index: 200; }
         @keyframes hitPop { 0% { transform: scale(0.5); opacity: 1; } 50% { transform: scale(1.5); opacity: 1; } 100% { transform: scale(0.8) translateY(-20px); opacity: 0; } }
-        
         .score-popup { position: absolute; color: #FFD700; font-size: 28px; font-weight: bold; text-shadow: 2px 2px 0 #000; pointer-events: none; animation: scoreFloat 1s ease-out forwards; z-index: 200; font-family: 'Courier New', monospace; }
         @keyframes scoreFloat { 0% { transform: scale(0.5) translateY(0); opacity: 1; } 100% { transform: scale(1.2) translateY(-50px); opacity: 0; } }
-        
-        #hint {
-            position: absolute; bottom: 15px; left: 15px; padding: 8px 12px;
-            background: rgba(0, 0, 0, 0.8); color: #CCCCCC; border: 3px solid #666;
-            font-size: 13px; z-index: 100; font-family: 'Courier New', monospace;
-        }
-        
+        #hint { position: absolute; bottom: 15px; left: 15px; padding: 8px 12px; background: rgba(0, 0, 0, 0.8); color: #CCCCCC; border: 3px solid #666; font-size: 13px; z-index: 100; font-family: 'Courier New', monospace; }
         .health-bar { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 40px; height: 6px; background: #333; border: 2px solid #000; }
         .health-fill { height: 100%; background: #FF3333; transition: width 0.1s; }
     </style>
@@ -147,92 +68,182 @@
     <div id="gameContainer">
         <div id="title">⚔️ 方块战士 ⚔️</div>
         <div id="scoreBoard">💀 击杀: <span id="score">0</span></div>
-        
-        <div id="player">
-            <div class="player-body">
-                <div class="player-hat"></div>
-                <div class="player-head"><div class="player-eye"></div><div class="player-eye"></div></div>
-                <div class="player-torso"></div>
-                <div class="player-legs"><div class="player-leg left"></div><div class="player-leg right"></div></div>
-                <div class="player-staff"></div>
-            </div>
-        </div>
-        
-        <div id="hint">🎯 点击移动 | ⚔️ 点击怪物攻击</div>
-        <audio id="bgMusic" loop></audio>
+        <div id="player"><div class="player-body"><div class="player-hat"></div><div class="player-head"><div class="player-eye"></div><div class="player-eye"></div></div><div class="player-torso"></div><div class="player-legs"><div class="player-leg left"></div><div class="player-leg right"></div></div><div class="player-staff"></div></div></div>
+        <div id="hint">🎯 点击移动 | ⚔️ 点击怪物攻击 | 🎵 点击任意处播放音乐</div>
+        <audio id="bgMusic" loop preload="auto"></audio>
     </div>
     
     <script>
         const config = { containerWidth: 900, containerHeight: 650, playerSpeed: 2, monsterSpeed: 0.6, attackRange: 60, attackInterval: 300, monsterHP: 3, spawnInterval: 3000, maxMonsters: 6, initialMonsters: 2 };
-        const state = { playerX: 450, playerY: 325, targetX: 450, targetY: 325, isMoving: false, isAttacking: false, currentTarget: null, score: 0, monsters: [], musicOn: true };
+        const state = { playerX: 450, playerY: 325, targetX: 450, targetY: 325, isMoving: false, isAttacking: false, currentTarget: null, score: 0, monsters: [], audioCtx: null, bgMusicSrc: null };
+        const player = document.getElementById('player'), container = document.getElementById('gameContainer'), scoreEl = document.getElementById('score'), bgMusic = document.getElementById('bgMusic');
         
-        let audioCtx, hitBuffer;
-        const player = document.getElementById('player');
-        const container = document.getElementById('gameContainer');
-        const scoreEl = document.getElementById('score');
-        
-        function initAudio() {
+        // Generate Minecraft-style background music using Web Audio API
+        function generateBgMusic() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return null;
+            
             try {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const sr = audioCtx.sampleRate, dur = 0.12;
-                hitBuffer = audioCtx.createBuffer(1, sr * dur, sr);
-                const data = hitBuffer.getChannelData(0);
-                for (let i = 0; i < data.length; i++) {
-                    const t = i / sr;
-                    data[i] = Math.sin(2 * Math.PI * 150 * t) * Math.exp(-t * 30) * 0.8 + (Math.random() * 2 - 1) * Math.exp(-t * 50) * 0.3 + Math.sin(2 * Math.PI * 800 * t) * Math.exp(-t * 40) * 0.2;
+                const audioCtx = new AudioContext();
+                const sampleRate = audioCtx.sampleRate;
+                const duration = 8; // 8 second loop
+                const buffer = audioCtx.createBuffer(2, sampleRate * duration, sampleRate);
+                
+                // Pentatonic scale (Chinese style)
+                const notes = [262, 294, 330, 392, 440, 523, 587, 659]; // C4, D4, E4, G4, A4, C5, D5, E5
+                const melody = [0, 2, 4, 5, 4, 2, 0, 2, 4, 5, 7, 5, 4, 2, 4, 0, 2, 4, 5, 7, 5, 4, 2, 0, 4, 2, 0, 2, 4, 5, 4, 2];
+                const beatDuration = (sampleRate * duration) / melody.length;
+                
+                for (let channel = 0; channel < 2; channel++) {
+                    const data = buffer.getChannelData(channel);
+                    
+                    // Melody
+                    melody.forEach((noteIndex, i) => {
+                        const freq = notes[noteIndex] * (channel === 1 ? 0.5 : 1);
+                        const start = Math.floor(i * beatDuration);
+                        const end = Math.floor(start + beatDuration * 0.8);
+                        
+                        for (let j = start; j < end && j < data.length; j++) {
+                            const t = (j - start) / sampleRate;
+                            const envelope = Math.min(1, (end - j) / (sampleRate * 0.05));
+                            // Square wave for 8-bit sound
+                            const squareWave = Math.sign(Math.sin(2 * Math.PI * freq * t)) * 0.25;
+                            const sine = Math.sin(2 * Math.PI * freq * t) * 0.15;
+                            data[j] += (squareWave + sine) * envelope * (channel === 0 ? 0.5 : 0.3);
+                        }
+                    });
+                    
+                    // Bass drum
+                    for (let i = 0; i < 16; i++) {
+                        const start = Math.floor(i * beatDuration * 2);
+                        for (let j = start; j < start + sampleRate * 0.05 && j < data.length; j++) {
+                            const t = (j - start) / sampleRate;
+                            data[j] += Math.sin(2 * Math.PI * 80 * t) * Math.exp(-t * 40) * 0.5;
+                        }
+                    }
                 }
-                createBgMusic();
-            } catch (e) { /* Audio not supported */ }
+                
+                // Convert to WAV
+                const wavBlob = audioBufferToWav(buffer);
+                return URL.createObjectURL(wavBlob);
+            } catch (e) {
+                console.error('Failed to generate music:', e);
+                return null;
+            }
         }
         
-        function createBgMusic() {
-            const sr = audioCtx.sampleRate, dur = 8;
-            const buffer = audioCtx.createBuffer(2, sr * dur, sr);
-            const notes = [262, 294, 330, 392, 440, 523, 587, 659];
-            const pattern = [0, 2, 4, 5, 4, 2, 0, 2, 4, 5, 7, 5, 4, 2, 4, 0, 2, 4, 5, 7, 5, 4, 2, 0, 4, 2, 0, 2, 4, 5, 4, 2];
-            const beatDur = dur * sr / pattern.length;
+        function audioBufferToWav(buffer) {
+            const numChannels = buffer.numberOfChannels;
+            const sampleRate = buffer.sampleRate;
+            const format = 1; // PCM
+            const bitDepth = 16;
             
-            for (let ch = 0; ch < 2; ch++) {
-                const data = buffer.getChannelData(ch);
-                data.fill(0);
-                pattern.forEach((note, i) => {
-                    const freq = notes[note] * (ch === 1 ? 0.5 : 1);
-                    const start = Math.floor(i * beatDur), end = Math.floor(i * beatDur + beatDur * 0.7);
-                    for (let j = start; j < end && j < data.length; j++) {
-                        const t = (j - start) / sr, env = Math.min(1, (end - j) / (sr * 0.05));
-                        data[j] += (Math.sign(Math.sin(2 * Math.PI * freq * t)) * 0.3 + Math.sin(2 * Math.PI * freq * t) * 0.2) * env * (ch === 0 ? 0.4 : 0.25);
-                    }
-                });
-                for (let i = 0; i < 16; i++) {
-                    const start = Math.floor(i * beatDur * 2);
-                    for (let j = start; j < start + sr * 0.05 && j < data.length; j++) {
-                        const t = (j - start) / sr;
-                        data[j] += Math.sin(2 * Math.PI * 80 * t) * Math.exp(-t * 40) * 0.4;
-                    }
+            const bytesPerSample = bitDepth / 8;
+            const blockAlign = numChannels * bytesPerSample;
+            
+            const samples = buffer.length;
+            const dataSize = samples * blockAlign;
+            const bufferSize = 44 + dataSize;
+            
+            const arrayBuffer = new ArrayBuffer(bufferSize);
+            const view = new DataView(arrayBuffer);
+            
+            // RIFF header
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + dataSize, true);
+            writeString(view, 8, 'WAVE');
+            // fmt chunk
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, format, true);
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * blockAlign, true);
+            view.setUint16(32, blockAlign, true);
+            view.setUint16(34, bitDepth, true);
+            // data chunk
+            writeString(view, 36, 'data');
+            view.setUint32(40, dataSize, true);
+            
+            // Interleave channels and write samples
+            const channels = [];
+            for (let i = 0; i < numChannels; i++) {
+                channels.push(buffer.getChannelData(i));
+            }
+            
+            let offset = 44;
+            for (let i = 0; i < samples; i++) {
+                for (let ch = 0; ch < numChannels; ch++) {
+                    const sample = Math.max(-1, Math.min(1, channels[ch][i]));
+                    const intSample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+                    view.setInt16(offset, intSample, true);
+                    offset += 2;
                 }
             }
-            const m = document.getElementById('bgMusic');
-            const blob = new Blob([createWav(buffer)], { type: 'audio/wav' });
-            m.src = URL.createObjectURL(blob);
+            
+            return new Blob([arrayBuffer], { type: 'audio/wav' });
         }
         
-        function createWav(buffer) {
-            const sr = buffer.sampleRate, ch = buffer.numberOfChannels, len = buffer.length;
-            const header = new ArrayBuffer(44), v = new DataView(header);
-            const str = s => [...s].forEach((c, i) => v.setUint8(44 + i, c.charCodeAt(0)));
-            str('RIFF'); v.setUint32(4, 36 + len * 2, true);
-            str('WAVE'); str('fmt '); v.setUint32(16, 16, true);
-            v.setUint16(20, 1, true); v.setUint16(22, ch, true);
-            v.setUint32(24, sr, true); v.setUint32(28, sr * ch * 2, true);
-            v.setUint16(32, ch * 2, true); v.setUint16(34, 16, true);
-            str('data'); v.setUint32(40, len * 2, true);
-            const out = new Int16Array(len * ch);
-            for (let i = 0; i < len; i++) for (let c = 0; c < ch; c++) out[i * ch + c] = Math.max(-32768, Math.min(32767, buffer.getChannelData(c)[i] * 32767));
-            return new Uint8Array([...new Uint8Array(header), ...new Uint8Array(out.buffer)]);
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
         }
         
         function playHitSound() {
-            if (audioCtx && hitBuffer) { const src = audioCtx.createBufferSource(); src.buffer = hitBuffer; src.connect(audioCtx.destination); src.start(); }
+            if (!state.audioCtx) return;
+            try {
+                const ctx = state.audioCtx;
+                const oscillator = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(ctx.destination);
+                
+                oscillator.frequency.setValueAtTime(150, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.5, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+                
+                oscillator.start(ctx.currentTime);
+                oscillator.stop(ctx.currentTime + 0.12);
+                
+                // Add crunch
+                const noise = ctx.createOscillator();
+                const noiseGain = ctx.createGain();
+                noise.connect(noiseGain);
+                noiseGain.connect(ctx.destination);
+                noise.frequency.setValueAtTime(800, ctx.currentTime);
+                noise.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.05);
+                noiseGain.gain.setValueAtTime(0.2, ctx.currentTime);
+                noiseGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+                noise.start(ctx.currentTime);
+                noise.stop(ctx.currentTime + 0.05);
+            } catch (e) { /* Ignore audio errors */ }
+        }
+        
+        function initAudio() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                try {
+                    state.audioCtx = new AudioContext();
+                } catch (e) { /* Ignore */ }
+            }
+            
+            // Generate and set up music
+            const musicSrc = generateBgMusic();
+            if (musicSrc) {
+                state.bgMusicSrc = musicSrc;
+                bgMusic.src = musicSrc;
+            }
+        }
+        
+        function startMusic() {
+            if (state.audioCtx && state.audioCtx.state === 'suspended') {
+                state.audioCtx.resume();
+            }
+            bgMusic.play().catch(e => console.log('Music autoplay prevented'));
         }
         
         function createMonster() {
@@ -318,6 +329,7 @@
         function gameLoop() { updatePlayer(); updateMonsters(); processAttack(); requestAnimationFrame(gameLoop); }
         
         container.addEventListener('click', (e) => {
+            startMusic();
             if (e.target.closest('.monster')) return;
             const rect = container.getBoundingClientRect();
             const x = e.clientX - rect.left - 25, y = e.clientY - rect.top - 35;
@@ -349,13 +361,6 @@
             for (let i = 0; i < config.initialMonsters; i++) setTimeout(() => createMonster(), i * 500);
             setInterval(createMonster, config.spawnInterval);
             gameLoop();
-            // Auto play music on first user interaction
-            const startMusic = () => {
-                const m = document.getElementById('bgMusic');
-                m.play().catch(() => {});
-                document.removeEventListener('click', startMusic);
-            };
-            document.addEventListener('click', startMusic, { once: true });
         }
         
         window.onload = init;
