@@ -292,510 +292,602 @@
     <div id="gameContainer">
         <!-- Game message -->
         <div id="gameMsg">🎮 Click Li Tianwang to shoot tower, Nezha can fly to attack</div>
-        
+
         <!-- Info panel -->
         <div id="infoPanel">
             <div>Steps: <span id="stepCount">0</span></div>
         </div>
-        
-        <!-- Star background -->
-        <div class="bg-star" style="width:3px;height:3px;top:30px;left:50px;animation-delay:0s;"></div>
-        <div class="bg-star" style="width:2px;height:2px;top:60px;left:150px;animation-delay:0.5s;"></div>
-        <div class="bg-star" style="width:4px;height:4px;top:100px;left:300px;animation-delay:1s;"></div>
-        <div class="bg-star" style="width:2px;height:2px;top:80px;left:450px;animation-delay:1.5s;"></div>
-        <div class="bg-star" style="width:3px;height:3px;top:120px;left:550px;animation-delay:0.3s;"></div>
-        <div class="bg-star" style="width:2px;height:2px;top:50px;left:700px;animation-delay:0.8s;"></div>
-        <div class="bg-star" style="width:3px;height:3px;top:200px;left:100px;animation-delay:1.2s;"></div>
-        <div class="bg-star" style="width:2px;height:2px;top:250px;left:350px;animation-delay:0.7s;"></div>
-        <div class="bg-star" style="width:4px;height:4px;top:300px;left:500px;animation-delay:1.8s;"></div>
-        
-        <!-- Mist -->
-        <div class="mist" style="width:150px;height:80px;top:150px;left:50px;opacity:0.3;"></div>
-        <div class="mist" style="width:120px;height:60px;top:300px;left:400px;opacity:0.2;"></div>
-        
+
+        <!-- Star background container -->
+        <div id="starContainer"></div>
+
+        <!-- Mist container -->
+        <div id="mistContainer"></div>
+
         <!-- Road container -->
         <div id="roadSegments"></div>
-        
+
         <!-- Heavenly Palace -->
         <div id="tiangong"></div>
         <div class="palace-decor" style="top:15px;left:770px;">✨</div>
         <div class="palace-decor" style="top:35px;left:800px;">✨</div>
-        
+
         <!-- Li Tianwang -->
-        <div id="litianwang" class="character" onclick="shootTower()">
+        <div id="litianwang" class="character" onclick="JourneyToHeaven.shootTower()">
             <div class="character-icon">👨‍🦱</div>
             <div class="character-label">Li Tianwang</div>
         </div>
-        
+
         <!-- Nezha -->
-        <div id="nezha" class="character" onclick="nezhaAttack()">
+        <div id="nezha" class="character" onclick="JourneyToHeaven.nezhaAttack()">
             <div class="character-icon">🦁</div>
             <div class="character-label">Nezha</div>
         </div>
-        
+
         <!-- Sun Wukong -->
         <div id="wukong" class="character">
             <div class="character-icon">🐵</div>
             <div class="character-label">Sun Wukong</div>
         </div>
-        
+
         <!-- Nezha flying state -->
         <div id="nezhaFlying">🦁</div>
-        
+
         <!-- Start button -->
-        <button id="startBtn" onclick="startGame()">🎮 Start Game</button>
-        
+        <button id="startBtn" onclick="JourneyToHeaven.startGame()">🎮 Start Game</button>
+
         <!-- Restart button -->
-        <button id="restartBtn" onclick="restartGame()">🔄 Play Again</button>
-        
+        <button id="restartBtn" onclick="JourneyToHeaven.restartGame()">🔄 Play Again</button>
+
         <!-- Music control -->
-        <button id="musicBtn" onclick="toggleMusic()">🔇 Music</button>
-        
-        <!-- Background music -->
-        <audio id="bgMusic" loop preload="auto">
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
+        <button id="musicBtn" onclick="JourneyToHeaven.toggleMusic()">🔇 Music</button>
     </div>
 
+    <!-- 大闹天宫背景音乐 -->
+    <script src="music.js"></script>
+
     <script>
-        // Game configuration
-        const config = {
+    (function() {
+        'use strict';
+
+        // ==================== Constants ====================
+        const CONFIG = {
             containerWidth: 900,
             containerHeight: 700,
             roadWidth: 60,
             wukongSpeed: 2.5,
             towerSpeed: 10,
-            nezhaSpeed: 6
+            nezhaSpeed: 6,
+
+            // Character positions (unified)
+            liTianwang: { x: 150, y: 420 },
+            nezha: { x: 600, y: 550 },
+            wukongStart: { x: 30, y: 620 },
+
+            // Attack positions
+            towerStart: { x: 190, y: 450 },
+            nezhaStart: { x: 630, y: 580 },
+            nezhaTargetY: 100,
+
+            // Collision radii
+            towerCollisionRadius: 35,
+            nezhaCollisionRadius: 40,
+            wukongCollisionOffset: 20,
+
+            // Distances
+            winDistance: 70,
+            towerMaxDistance: 550,
+
+            // Animation
+            blinkCount: 8,
+            blinkInterval: 150,
+            stepCountInterval: 30,
+
+            // Visual
+            starCount: 9,
+            mistCount: 2,
+
+            // Palace
+            palace: { x: 720, y: 20 },
+            palaceWinCenter: { x: 795, y: 85 }
         };
-        
-        // Road path points - zigzag from bottom-left to top-right
-        const roadPath = [
-            { x: 0, y: 650 },      // Start (bottom-left)
-            { x: 250, y: 650 },    // Go right
-            { x: 250, y: 480 },    // Go up
-            { x: 500, y: 480 },    // Go right
-            { x: 500, y: 300 },    // Go up
-            { x: 700, y: 300 },    // Go right
-            { x: 700, y: 150 },    // Go up
-            { x: 780, y: 150 }     // End (palace position)
-        ];
-        
-        // Game state
-        let gameState = {
-            isRunning: false,
-            wukongPathIndex: 0,
-            wukongProgress: 0,
-            stepCount: 0,
-            wukongStartPos: { x: 30, y: 620 },
-            wukongPos: { x: 30, y: 620 },
-            towerFlying: false,
-            nezhaFlying: false
-        };
-        
-        // Animation ID
-        let animationId = null;
-        let isMusicPlaying = false;
-        
-        // Toggle music
-        function toggleMusic() {
-            const music = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicBtn');
-            
-            if (isMusicPlaying) {
-                music.pause();
-                btn.textContent = '🔇 Music';
-                isMusicPlaying = false;
-            } else {
-                music.currentTime = 0;
-                music.play().then(() => {
+
+        // ==================== Game Object ====================
+        window.JourneyToHeaven = {
+            // Game state
+            state: {
+                isRunning: false,
+                wukongPathIndex: 0,
+                wukongProgress: 0,
+                stepCount: 0,
+                wukongPos: { x: 30, y: 620 },
+                towerFlying: false,
+                nezhaFlying: false
+            },
+
+            // Animation tracking
+            animationId: null,
+            towerAnimationId: null,
+            nezhaAnimationId: null,
+
+            // Music state
+            isMusicPlaying: false,
+
+            // Road path
+            roadPath: [
+                { x: 0, y: 650 },
+                { x: 250, y: 650 },
+                { x: 250, y: 480 },
+                { x: 500, y: 480 },
+                { x: 500, y: 300 },
+                { x: 700, y: 300 },
+                { x: 700, y: 150 },
+                { x: 780, y: 150 }
+            ],
+
+            // ==================== Music (大闹天宫背景音乐) ====================
+            musicPlayer: null,
+
+            toggleMusic() {
+                const btn = document.getElementById('musicBtn');
+
+                if (this.isMusicPlaying) {
+                    if (this.musicPlayer) {
+                        this.musicPlayer.stop();
+                    }
+                    btn.textContent = '🔇 Music';
+                    this.isMusicPlaying = false;
+                } else {
+                    // 使用新的音乐模块播放完整60秒音乐
+                    this.musicPlayer = new HeavenlyPalaceMusic();
+                    this.musicPlayer.play();
                     btn.textContent = '🔊 Music';
-                    isMusicPlaying = true;
-                }).catch(e => {
-                    console.log('Music play failed:', e);
-                    btn.textContent = '❌ No Music';
+                    this.isMusicPlaying = true;
+                }
+            },
+
+            // ==================== Initialization ====================
+            createStars() {
+                const container = document.getElementById('starContainer');
+                container.innerHTML = '';
+
+                const positions = [
+                    { left: 50, top: 30, size: 3, delay: 0 },
+                    { left: 150, top: 60, size: 2, delay: 0.5 },
+                    { left: 300, top: 100, size: 4, delay: 1 },
+                    { left: 450, top: 80, size: 2, delay: 1.5 },
+                    { left: 550, top: 120, size: 3, delay: 0.3 },
+                    { left: 700, top: 50, size: 2, delay: 0.8 },
+                    { left: 100, top: 200, size: 3, delay: 1.2 },
+                    { left: 350, top: 250, size: 2, delay: 0.7 },
+                    { left: 500, top: 300, size: 4, delay: 1.8 }
+                ];
+
+                positions.forEach(pos => {
+                    const star = document.createElement('div');
+                    star.className = 'bg-star';
+                    star.style.width = pos.size + 'px';
+                    star.style.height = pos.size + 'px';
+                    star.style.left = pos.left + 'px';
+                    star.style.top = pos.top + 'px';
+                    star.style.animationDelay = pos.delay + 's';
+                    container.appendChild(star);
                 });
-            }
-        }
-        
-        // Initialize road
-        function initRoad() {
-            const segmentsContainer = document.getElementById('roadSegments');
-            segmentsContainer.innerHTML = '';
-            
-            for (let i = 0; i < roadPath.length - 1; i++) {
-                const start = roadPath[i];
-                const end = roadPath[i + 1];
-                
-                const segment = document.createElement('div');
-                segment.className = 'road';
-                
-                if (start.x === end.x) {
-                    // Vertical road
-                    const top = Math.min(start.y, end.y);
-                    const height = Math.abs(end.y - start.y);
-                    segment.style.left = (start.x - config.roadWidth / 2) + 'px';
-                    segment.style.top = top + 'px';
-                    segment.style.width = config.roadWidth + 'px';
-                    segment.style.height = height + 'px';
-                    segment.style.background = 'linear-gradient(90deg, #e8e8e8 0%, #f5f5f5 50%, #e8e8e8 100%)';
-                } else {
-                    // Horizontal road
-                    const left = Math.min(start.x, end.x);
-                    const width = Math.abs(end.x - start.x);
-                    segment.style.left = left + 'px';
-                    segment.style.top = (start.y - config.roadWidth / 2) + 'px';
-                    segment.style.width = width + 'px';
-                    segment.style.height = config.roadWidth + 'px';
-                }
-                
-                segmentsContainer.appendChild(segment);
-            }
-            
-            // Position Heavenly Palace
-            const tiangong = document.getElementById('tiangong');
-            tiangong.style.left = '720px';
-            tiangong.style.top = '20px';
-            
-            // Position Li Tianwang
-            const litianwang = document.getElementById('litianwang');
-            litianwang.style.left = '150px';
-            litianwang.style.top = '420px';
-            
-            // Position Nezha
-            const nezha = document.getElementById('nezha');
-            nezha.style.left = '600px';
-            nezha.style.top = '550px';
-        }
-        
-        // Start game
-        function startGame() {
-            document.getElementById('startBtn').style.display = 'none';
-            gameState.isRunning = true;
-            gameState.wukongPathIndex = 0;
-            gameState.wukongProgress = 0;
-            gameState.stepCount = 0;
-            document.getElementById('stepCount').textContent = '0';
-            
-            resetWukong();
-            gameLoop();
-        }
-        
-        // Reset Sun Wukong
-        function resetWukong() {
-            gameState.wukongPathIndex = 0;
-            gameState.wukongProgress = 0;
-            const wukong = document.getElementById('wukong');
-            wukong.style.left = gameState.wukongStartPos.x + 'px';
-            wukong.style.top = gameState.wukongStartPos.y + 'px';
-            wukong.style.opacity = '1';
-            gameState.wukongPos = { ...gameState.wukongStartPos };
-        }
-        
-        // Game main loop
-        function gameLoop() {
-            if (!gameState.isRunning) return;
-            
-            moveWukong();
-            animationId = requestAnimationFrame(gameLoop);
-        }
-        
-        // Move Sun Wukong
-        function moveWukong() {
-            if (gameState.wukongPathIndex >= roadPath.length - 1) {
-                winGame();
-                return;
-            }
-            
-            const currentPoint = roadPath[gameState.wukongPathIndex];
-            const nextPoint = roadPath[gameState.wukongPathIndex + 1];
-            
-            const dx = nextPoint.x - currentPoint.x;
-            const dy = nextPoint.y - currentPoint.y;
-            const segmentLength = Math.sqrt(dx * dx + dy * dy);
-            
-            gameState.wukongProgress += config.wukongSpeed;
-            
-            if (gameState.wukongProgress >= segmentLength) {
-                gameState.wukongProgress = 0;
-                gameState.wukongPathIndex++;
-                
-                if (gameState.wukongPathIndex >= roadPath.length - 1) {
-                    winGame();
-                    return;
-                }
-            }
-            
-            const ratio = gameState.wukongProgress / segmentLength;
-            const newX = currentPoint.x + dx * ratio - 20;
-            const newY = currentPoint.y + dy * ratio - 20;
-            
-            gameState.wukongPos.x = newX;
-            gameState.wukongPos.y = newY;
-            
-            const wukong = document.getElementById('wukong');
-            wukong.style.left = newX + 'px';
-            wukong.style.top = newY + 'px';
-            
-            gameState.stepCount++;
-            if (gameState.stepCount % 30 === 0) {
-                document.getElementById('stepCount').textContent = Math.floor(gameState.stepCount / 30);
-            }
-            
-            checkWinCondition(newX, newY);
-        }
-        
-        // Check win condition
-        function checkWinCondition(x, y) {
-            const tiangongX = 795;
-            const tiangongY = 85;
-            
-            const distance = Math.sqrt(Math.pow(x - tiangongX, 2) + Math.pow(y - tiangongY, 2));
-            
-            if (distance < 70) {
-                winGame();
-            }
-        }
-        
-        // Win
-        function winGame() {
-            gameState.isRunning = false;
-            cancelAnimationFrame(animationId);
-            
-            const msg = document.getElementById('gameMsg');
-            msg.textContent = '🎉 Congratulations! Storming the Heavenly Palace Success!';
-            msg.style.color = '#00ff00';
-            
-            // Show effect
-            showEffect(document.getElementById('wukong'), '🎊');
-            
-            document.getElementById('restartBtn').style.display = 'block';
-        }
-        
-        // Show floating effect
-        function showEffect(element, text) {
-            const rect = element.getBoundingClientRect();
-            const container = document.getElementById('gameContainer');
-            const containerRect = container.getBoundingClientRect();
-            
-            const effect = document.createElement('div');
-            effect.className = 'effect-hint';
-            effect.textContent = text;
-            effect.style.left = (rect.left - containerRect.left + rect.width/2 - 20) + 'px';
-            effect.style.top = (rect.top - containerRect.top - 20) + 'px';
-            container.appendChild(effect);
-            
-            setTimeout(() => effect.remove(), 1000);
-        }
-        
-        // Show hit effect
-        function showHitEffect(x, y) {
-            const container = document.getElementById('gameContainer');
-            const effect = document.createElement('div');
-            effect.className = 'hit-effect';
-            effect.style.left = (x - 30) + 'px';
-            effect.style.top = (y - 30) + 'px';
-            container.appendChild(effect);
-            
-            setTimeout(() => effect.remove(), 500);
-        }
-        
-        // Li Tianwang shoots tower - flies right, returns at road end
-        function shootTower() {
-            if (!gameState.isRunning || gameState.towerFlying) return;
-            
-            const container = document.getElementById('gameContainer');
-            
-            // Start position
-            const startX = 190;
-            const startY = 450;
-            
-            // Create tower
-            const tower = document.createElement('div');
-            tower.className = 'tower';
-            tower.textContent = '🗼';
-            tower.style.left = startX + 'px';
-            tower.style.top = startY + 'px';
-            container.appendChild(tower);
-            
-            gameState.towerFlying = true;
-            showEffect(document.getElementById('litianwang'), 'Shoot!');
-            
-            let towerX = startX;
-            let towerY = startY;
-            const maxDistance = 550;
-            
-            function animateTower() {
-                towerX += config.towerSpeed;
-                tower.style.left = towerX + 'px';
-                
-                // Check collision
-                const towerDist = Math.sqrt(
-                    Math.pow(towerX - (gameState.wukongPos.x + 20), 2) +
-                    Math.pow(towerY - (gameState.wukongPos.y + 20), 2)
-                );
-                
-                if (towerDist < 35) {
-                    tower.remove();
-                    gameState.towerFlying = false;
-                    showHitEffect(gameState.wukongPos.x + 20, gameState.wukongPos.y + 20);
-                    wukongHit();
-                    return;
-                }
-                
-                // Return at road end
-                if (towerX > startX + maxDistance) {
-                    let returnScale = 1;
-                    let returnOpacity = 1;
-                    const returnInterval = setInterval(() => {
-                        returnScale -= 0.1;
-                        returnOpacity -= 0.1;
-                        tower.style.transform = `scale(${Math.max(0, returnScale)})`;
-                        tower.style.opacity = Math.max(0, returnOpacity);
-                        
-                        if (returnScale <= 0) {
-                            clearInterval(returnInterval);
-                            tower.remove();
-                            gameState.towerFlying = false;
-                        }
-                    }, 30);
-                    return;
-                }
-                
-                requestAnimationFrame(animateTower);
-            }
-            
-            animateTower();
-        }
-        
-        // Nezha attacks - flies up, returns to original position
-        function nezhaAttack() {
-            if (!gameState.isRunning || gameState.nezhaFlying) return;
-            
-            const nezhaFlying = document.getElementById('nezhaFlying');
-            const nezha = document.getElementById('nezha');
-            
-            // Original position
-            const startX = 630;
-            const startY = 580;
-            
-            // Target - fly up
-            const targetY = 100;
-            
-            nezhaFlying.style.left = startX + 'px';
-            nezhaFlying.style.top = startY + 'px';
-            nezhaFlying.style.display = 'block';
-            nezha.style.opacity = '0.3';
-            
-            gameState.nezhaFlying = true;
-            showEffect(nezha, 'Take off!');
-            
-            let currentX = startX;
-            let currentY = startY;
-            let phase = 'up';
-            
-            function animateNezha() {
-                if (phase === 'up') {
-                    currentY -= config.nezhaSpeed;
-                    nezhaFlying.style.top = currentY + 'px';
-                    
-                    // Check collision
-                    const dist = Math.sqrt(
-                        Math.pow(currentX - (gameState.wukongPos.x + 20), 2) +
-                        Math.pow(currentY - (gameState.wukongPos.y + 20), 2)
-                    );
-                    
-                    if (dist < 40) {
-                        nezhaFlying.style.display = 'none';
-                        nezha.style.opacity = '1';
-                        gameState.nezhaFlying = false;
-                        showHitEffect(gameState.wukongPos.x + 20, gameState.wukongPos.y + 20);
-                        wukongHit();
-                        return;
-                    }
-                    
-                    // Fly to top
-                    if (currentY <= targetY) {
-                        phase = 'back';
+            },
+
+            createMists() {
+                const container = document.getElementById('mistContainer');
+                container.innerHTML = '';
+
+                const mists = [
+                    { left: 50, top: 150, width: 150, height: 80, opacity: 0.3 },
+                    { left: 400, top: 300, width: 120, height: 60, opacity: 0.2 }
+                ];
+
+                mists.forEach(mist => {
+                    const el = document.createElement('div');
+                    el.className = 'mist';
+                    el.style.left = mist.left + 'px';
+                    el.style.top = mist.top + 'px';
+                    el.style.width = mist.width + 'px';
+                    el.style.height = mist.height + 'px';
+                    el.style.opacity = mist.opacity;
+                    container.appendChild(el);
+                });
+            },
+
+            initRoad() {
+                const segmentsContainer = document.getElementById('roadSegments');
+                segmentsContainer.innerHTML = '';
+
+                for (let i = 0; i < this.roadPath.length - 1; i++) {
+                    const start = this.roadPath[i];
+                    const end = this.roadPath[i + 1];
+
+                    const segment = document.createElement('div');
+                    segment.className = 'road';
+
+                    if (start.x === end.x) {
+                        const top = Math.min(start.y, end.y);
+                        const height = Math.abs(end.y - start.y);
+                        segment.style.left = (start.x - CONFIG.roadWidth / 2) + 'px';
+                        segment.style.top = top + 'px';
+                        segment.style.width = CONFIG.roadWidth + 'px';
+                        segment.style.height = height + 'px';
+                        segment.style.background = 'linear-gradient(90deg, #e8e8e8 0%, #f5f5f5 50%, #e8e8e8 100%)';
                     } else {
-                        requestAnimationFrame(animateNezha);
+                        const left = Math.min(start.x, end.x);
+                        const width = Math.abs(end.x - start.x);
+                        segment.style.left = left + 'px';
+                        segment.style.top = (start.y - CONFIG.roadWidth / 2) + 'px';
+                        segment.style.width = width + 'px';
+                        segment.style.height = CONFIG.roadWidth + 'px';
                     }
-                } else {
-                    // Return to original position
-                    const dx = startX - currentX;
-                    const dy = startY - currentY;
-                    const distToHome = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distToHome < config.nezhaSpeed) {
-                        nezhaFlying.style.display = 'none';
-                        nezha.style.opacity = '1';
-                        gameState.nezhaFlying = false;
+
+                    segmentsContainer.appendChild(segment);
+                }
+
+                // Position Heavenly Palace
+                const tiangong = document.getElementById('tiangong');
+                tiangong.style.left = CONFIG.palace.x + 'px';
+                tiangong.style.top = CONFIG.palace.y + 'px';
+
+                // Position Li Tianwang
+                const litianwang = document.getElementById('litianwang');
+                litianwang.style.left = CONFIG.liTianwang.x + 'px';
+                litianwang.style.top = CONFIG.liTianwang.y + 'px';
+
+                // Position Nezha
+                const nezha = document.getElementById('nezha');
+                nezha.style.left = CONFIG.nezha.x + 'px';
+                nezha.style.top = CONFIG.nezha.y + 'px';
+            },
+
+            init() {
+                this.createStars();
+                this.createMists();
+                this.initRoad();
+            },
+
+            // ==================== Game Flow ====================
+            startGame() {
+                document.getElementById('startBtn').style.display = 'none';
+                this.state.isRunning = true;
+                this.state.wukongPathIndex = 0;
+                this.state.wukongProgress = 0;
+                this.state.stepCount = 0;
+                document.getElementById('stepCount').textContent = '0';
+
+                this.resetWukong();
+                this.gameLoop();
+            },
+
+            resetWukong() {
+                this.state.wukongPathIndex = 0;
+                this.state.wukongProgress = 0;
+                const wukong = document.getElementById('wukong');
+                wukong.style.left = CONFIG.wukongStart.x + 'px';
+                wukong.style.top = CONFIG.wukongStart.y + 'px';
+                wukong.style.opacity = '1';
+                this.state.wukongPos = { ...CONFIG.wukongStart };
+            },
+
+            gameLoop() {
+                if (!this.state.isRunning) return;
+
+                this.moveWukong();
+                this.animationId = requestAnimationFrame(() => this.gameLoop());
+            },
+
+            // ==================== Movement ====================
+            hasReachedDestination() {
+                return this.state.wukongPathIndex >= this.roadPath.length - 1;
+            },
+
+            moveWukong() {
+                if (this.hasReachedDestination()) {
+                    this.winGame();
+                    return;
+                }
+
+                const currentPoint = this.roadPath[this.state.wukongPathIndex];
+                const nextPoint = this.roadPath[this.state.wukongPathIndex + 1];
+
+                const dx = nextPoint.x - currentPoint.x;
+                const dy = nextPoint.y - currentPoint.y;
+                const segmentLength = Math.sqrt(dx * dx + dy * dy);
+
+                this.state.wukongProgress += CONFIG.wukongSpeed;
+
+                if (this.state.wukongProgress >= segmentLength) {
+                    this.state.wukongProgress = 0;
+                    this.state.wukongPathIndex++;
+
+                    if (this.hasReachedDestination()) {
+                        this.winGame();
                         return;
                     }
-                    
-                    currentX += dx * config.nezhaSpeed / distToHome;
-                    currentY += dy * config.nezhaSpeed / distToHome;
-                    nezhaFlying.style.left = currentX + 'px';
-                    nezhaFlying.style.top = currentY + 'px';
-                    
-                    requestAnimationFrame(animateNezha);
                 }
-            }
-            
-            animateNezha();
-        }
-        
-        // Sun Wukong gets hit
-        function wukongHit() {
-            const msg = document.getElementById('gameMsg');
-            msg.textContent = '💥 Sun Wukong hit! Restarting...';
-            msg.style.color = '#ff6b6b';
-            
-            cancelAnimationFrame(animationId);
-            
-            const wukong = document.getElementById('wukong');
-            let blinkCount = 0;
-            
-            function blink() {
-                blinkCount++;
-                wukong.style.opacity = blinkCount % 2 === 0 ? '1' : '0.3';
-                
-                if (blinkCount < 8) {
-                    setTimeout(blink, 150);
-                } else {
-                    resetWukong();
-                    msg.textContent = '🎮 Click Li Tianwang to shoot tower, Nezha can fly to attack';
-                    msg.style.color = '#FFD700';
-                    gameLoop();
+
+                const ratio = this.state.wukongProgress / segmentLength;
+                const newX = currentPoint.x + dx * ratio - CONFIG.wukongCollisionOffset;
+                const newY = currentPoint.y + dy * ratio - CONFIG.wukongCollisionOffset;
+
+                this.state.wukongPos.x = newX;
+                this.state.wukongPos.y = newY;
+
+                const wukong = document.getElementById('wukong');
+                wukong.style.left = newX + 'px';
+                wukong.style.top = newY + 'px';
+
+                this.state.stepCount++;
+                if (this.state.stepCount % CONFIG.stepCountInterval === 0) {
+                    document.getElementById('stepCount').textContent = Math.floor(this.state.stepCount / CONFIG.stepCountInterval);
                 }
+
+                this.checkWinCondition(newX, newY);
+            },
+
+            checkWinCondition(x, y) {
+                const palace = CONFIG.palaceWinCenter;
+                const distance = Math.sqrt(
+                    Math.pow(x - palace.x, 2) + Math.pow(y - palace.y, 2)
+                );
+
+                if (distance < CONFIG.winDistance) {
+                    this.winGame();
+                }
+            },
+
+            // ==================== Win/Lose ====================
+            winGame() {
+                this.state.isRunning = false;
+                this.stopAllAnimations();
+
+                const msg = document.getElementById('gameMsg');
+                msg.textContent = '🎉 Congratulations! Storming the Heavenly Palace Success!';
+                msg.style.color = '#00ff00';
+
+                this.showEffect(document.getElementById('wukong'), '🎊');
+
+                document.getElementById('restartBtn').style.display = 'block';
+            },
+
+            wukongHit() {
+                const msg = document.getElementById('gameMsg');
+                msg.textContent = '💥 Sun Wukong hit! Restarting...';
+                msg.style.color = '#ff6b6b';
+
+                this.stopAllAnimations();
+
+                const wukong = document.getElementById('wukong');
+                let blinkCount = 0;
+
+                const blink = () => {
+                    blinkCount++;
+                    wukong.style.opacity = blinkCount % 2 === 0 ? '1' : '0.3';
+
+                    if (blinkCount < CONFIG.blinkCount) {
+                        setTimeout(blink, CONFIG.blinkInterval);
+                    } else {
+                        this.resetWukong();
+                        msg.textContent = '🎮 Click Li Tianwang to shoot tower, Nezha can fly to attack';
+                        msg.style.color = '#FFD700';
+                        this.gameLoop();
+                    }
+                };
+
+                blink();
+            },
+
+            restartGame() {
+                document.getElementById('restartBtn').style.display = 'none';
+
+                const msg = document.getElementById('gameMsg');
+                msg.textContent = '🎮 Click Li Tianwang to shoot tower, Nezha can fly to attack';
+                msg.style.color = '#FFD700';
+
+                this.state.wukongPathIndex = 0;
+                this.state.wukongProgress = 0;
+                this.state.stepCount = 0;
+                this.state.towerFlying = false;
+                this.state.nezhaFlying = false;
+                document.getElementById('stepCount').textContent = '0';
+
+                this.resetWukong();
+                this.state.isRunning = true;
+                this.gameLoop();
+            },
+
+            // ==================== Animation Management ====================
+            stopAllAnimations() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                    this.animationId = null;
+                }
+                if (this.towerAnimationId) {
+                    cancelAnimationFrame(this.towerAnimationId);
+                    this.towerAnimationId = null;
+                }
+                if (this.nezhaAnimationId) {
+                    cancelAnimationFrame(this.nezhaAnimationId);
+                    this.nezhaAnimationId = null;
+                }
+            },
+
+            // ==================== Effects ====================
+            showEffect(element, text) {
+                const rect = element.getBoundingClientRect();
+                const container = document.getElementById('gameContainer');
+                const containerRect = container.getBoundingClientRect();
+
+                const effect = document.createElement('div');
+                effect.className = 'effect-hint';
+                effect.textContent = text;
+                effect.style.left = (rect.left - containerRect.left + rect.width / 2 - 20) + 'px';
+                effect.style.top = (rect.top - containerRect.top - 20) + 'px';
+                container.appendChild(effect);
+
+                setTimeout(() => effect.remove(), 1000);
+            },
+
+            showHitEffect(x, y) {
+                const container = document.getElementById('gameContainer');
+                const effect = document.createElement('div');
+                effect.className = 'hit-effect';
+                effect.style.left = (x - 30) + 'px';
+                effect.style.top = (y - 30) + 'px';
+                container.appendChild(effect);
+
+                setTimeout(() => effect.remove(), 500);
+            },
+
+            // ==================== Attacks ====================
+            shootTower() {
+                if (!this.state.isRunning || this.state.towerFlying) return;
+
+                const container = document.getElementById('gameContainer');
+                const tower = document.createElement('div');
+                tower.className = 'tower';
+                tower.textContent = '🗼';
+                tower.style.left = CONFIG.towerStart.x + 'px';
+                tower.style.top = CONFIG.towerStart.y + 'px';
+                container.appendChild(tower);
+
+                this.state.towerFlying = true;
+                this.showEffect(document.getElementById('litianwang'), 'Shoot!');
+
+                let towerX = CONFIG.towerStart.x;
+                let towerY = CONFIG.towerStart.y;
+
+                const animateTower = () => {
+                    towerX += CONFIG.towerSpeed;
+                    tower.style.left = towerX + 'px';
+
+                    // Check collision
+                    const wukongX = this.state.wukongPos.x + CONFIG.wukongCollisionOffset;
+                    const wukongY = this.state.wukongPos.y + CONFIG.wukongCollisionOffset;
+                    const towerDist = Math.sqrt(
+                        Math.pow(towerX - wukongX, 2) +
+                        Math.pow(towerY - wukongY, 2)
+                    );
+
+                    if (towerDist < CONFIG.towerCollisionRadius) {
+                        tower.remove();
+                        this.state.towerFlying = false;
+                        this.showHitEffect(wukongX, wukongY);
+                        this.wukongHit();
+                        return;
+                    }
+
+                    // Return at road end
+                    if (towerX > CONFIG.towerStart.x + CONFIG.towerMaxDistance) {
+                        const returnDuration = 300;
+                        const startTime = performance.now();
+
+                        const returnAnimate = (currentTime) => {
+                            const elapsed = currentTime - startTime;
+                            const progress = Math.min(elapsed / returnDuration, 1);
+                            const scale = 1 - progress;
+                            const opacity = 1 - progress;
+
+                            tower.style.transform = `scale(${scale})`;
+                            tower.style.opacity = opacity;
+
+                            if (progress < 1) {
+                                this.towerAnimationId = requestAnimationFrame(returnAnimate);
+                            } else {
+                                tower.remove();
+                                this.state.towerFlying = false;
+                            }
+                        };
+
+                        this.towerAnimationId = requestAnimationFrame(returnAnimate);
+                        return;
+                    }
+
+                    this.towerAnimationId = requestAnimationFrame(animateTower);
+                };
+
+                this.towerAnimationId = requestAnimationFrame(animateTower);
+            },
+
+            nezhaAttack() {
+                if (!this.state.isRunning || this.state.nezhaFlying) return;
+
+                const nezhaFlyingEl = document.getElementById('nezhaFlying');
+                const nezhaEl = document.getElementById('nezha');
+
+                nezhaFlyingEl.style.left = CONFIG.nezhaStart.x + 'px';
+                nezhaFlyingEl.style.top = CONFIG.nezhaStart.y + 'px';
+                nezhaFlyingEl.style.display = 'block';
+                nezhaEl.style.opacity = '0.3';
+
+                this.state.nezhaFlying = true;
+                this.showEffect(nezhaEl, 'Take off!');
+
+                let currentX = CONFIG.nezhaStart.x;
+                let currentY = CONFIG.nezhaStart.y;
+                let phase = 'up';
+
+                const animateNezha = () => {
+                    if (phase === 'up') {
+                        currentY -= CONFIG.nezhaSpeed;
+                        nezhaFlyingEl.style.top = currentY + 'px';
+
+                        // Check collision
+                        const wukongX = this.state.wukongPos.x + CONFIG.wukongCollisionOffset;
+                        const wukongY = this.state.wukongPos.y + CONFIG.wukongCollisionOffset;
+                        const dist = Math.sqrt(
+                            Math.pow(currentX - wukongX, 2) +
+                            Math.pow(currentY - wukongY, 2)
+                        );
+
+                        if (dist < CONFIG.nezhaCollisionRadius) {
+                            nezhaFlyingEl.style.display = 'none';
+                            nezhaEl.style.opacity = '1';
+                            this.state.nezhaFlying = false;
+                            this.showHitEffect(wukongX, wukongY);
+                            this.wukongHit();
+                            return;
+                        }
+
+                        if (currentY <= CONFIG.nezhaTargetY) {
+                            phase = 'back';
+                        }
+
+                        this.nezhaAnimationId = requestAnimationFrame(animateNezha);
+                    } else {
+                        // Return to original position
+                        const dx = CONFIG.nezhaStart.x - currentX;
+                        const dy = CONFIG.nezhaStart.y - currentY;
+                        const distToHome = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distToHome < CONFIG.nezhaSpeed) {
+                            nezhaFlyingEl.style.display = 'none';
+                            nezhaEl.style.opacity = '1';
+                            this.state.nezhaFlying = false;
+                            return;
+                        }
+
+                        currentX += dx * CONFIG.nezhaSpeed / distToHome;
+                        currentY += dy * CONFIG.nezhaSpeed / distToHome;
+                        nezhaFlyingEl.style.left = currentX + 'px';
+                        nezhaFlyingEl.style.top = currentY + 'px';
+
+                        this.nezhaAnimationId = requestAnimationFrame(animateNezha);
+                    }
+                };
+
+                this.nezhaAnimationId = requestAnimationFrame(animateNezha);
             }
-            
-            blink();
-        }
-        
-        // Restart game
-        function restartGame() {
-            document.getElementById('restartBtn').style.display = 'none';
-            
-            const msg = document.getElementById('gameMsg');
-            msg.textContent = '🎮 Click Li Tianwang to shoot tower, Nezha can fly to attack';
-            msg.style.color = '#FFD700';
-            
-            gameState.wukongPathIndex = 0;
-            gameState.wukongProgress = 0;
-            gameState.stepCount = 0;
-            gameState.towerFlying = false;
-            gameState.nezhaFlying = false;
-            document.getElementById('stepCount').textContent = '0';
-            
-            resetWukong();
-            gameState.isRunning = true;
-            gameLoop();
-        }
-        
+        };
+
         // Initialize on page load
         window.onload = function() {
-            initRoad();
+            JourneyToHeaven.init();
         };
+    })();
     </script>
 </body>
 </html>
